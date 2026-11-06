@@ -8,7 +8,7 @@ const A={ // artists
  popp:{name:"Simon Popp",bc:"https://simonpopp.bandcamp.com",sp:"https://open.spotify.com/artist/3g6w2ATRPWhtFCUtkDIdcp",ig:"https://www.instagram.com/simon.popp/"},
  funke:{name:"Sascha Funke",bc:"https://saschafunke.bandcamp.com",sp:"https://open.spotify.com/artist/1dDTkRz9WVOQr63enjJ1Yd",sc:"https://soundcloud.com/saschafunkeofficial",ig:"https://www.instagram.com/saschafunke_music/"},
  ame:{name:"Âme",bc:"https://ame-engoli.bandcamp.com",sp:"https://open.spotify.com/artist/5muFO8VqYRCRW13EkvX564"},
- ksky:{name:"Ksky",sp:"https://open.spotify.com/artist/2YnhtgANdlYYjGrJwo4Z9u"},
+ ksky:{name:"Ksky",sp:"https://open.spotify.com/artist/2YnhtgANdlYYjGrJwo4Z9u",ig:"https://www.instagram.com/pavel_korzhenskij/"},
  hammar:{name:"Per Hammar",bc:"https://perhammar.bandcamp.com",sp:"https://open.spotify.com/artist/64ro37ZAxFkXIJ2pxOdqCX",sc:"https://soundcloud.com/per-hammar",ig:"https://www.instagram.com/perhammar2000"},
  lex:{name:"Lex (Athens)",bc:"https://lexathens.bandcamp.com",sp:"https://open.spotify.com/artist/07xgHn84Dp2AVF5tEsmGOh"},
  mytron:{name:"Mytron",bc:"https://mytron.bandcamp.com",sp:"https://open.spotify.com/artist/5yS2elNWR9wp0TDlb566QJ"},
@@ -20,7 +20,7 @@ const L={ // labels
  squama:{name:"Squama",bc:"https://squamarecordings.bandcamp.com"},
  kompakt:{name:"Kompakt",bc:"https://kompakt.bandcamp.com"},
  innervisions:{name:"Innervisions",bc:"https://innervisionsmusic.bandcamp.com"},
- runningback:{name:"Running Back",bc:"https://runningbackrecords.bandcamp.com"},
+ runningback:{name:"Running Back",bc:"https://runningbackrecords.bandcamp.com",ig:"https://www.instagram.com/runningbackrecords/"},
  dirtyhands:{name:"Dirty Hands",bc:"https://dirtyhandsrec.bandcamp.com"},
  dog:{name:"Delusions of Grandeur",bc:"https://delusionsofgrandeurrec.bandcamp.com"},
  multiculti:{name:"Multi Culti",bc:"https://multiculti.bandcamp.com",sc:"https://soundcloud.com/multiculti"},
@@ -43,20 +43,20 @@ const SETS= // Fruitful Friday · Nov 6, 2026
   blurb:"To be honest, I didn't connect with this on my first listen. Most people I know love Innervisions, so I wanted to make sure you knew this came out today. It's just not for me.",
   tracks:[],bc:"https://ame-engoli.bandcamp.com/album/love-is-the-dance-lp",sp:"https://open.spotify.com/album/3GMbNTMjPI2gJULzw5RaK5"},
  {title:"Collected Works",releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["ksky"],label:"runningback",type:"ALBUM",count:10,img:"collected-works-cover.jpg",
-  blurb:"",tracks:[],bc:"https://runningbackrecords.bandcamp.com/album/collected-works",sp:"https://open.spotify.com/album/3DCc8tUSaFjfIP7dbNbvJH"}
+  blurb:"I'm not familiar with Ksky, but the single for this album came out last week and I really connected with it: \"Bad Philly.\" Looking forward to taking this one for a walk and an intentional listen. Honestly, that could take days or weeks from now.",tracks:["Bad Philly"],bc:"https://runningbackrecords.bandcamp.com/album/collected-works",sp:"https://open.spotify.com/album/3DCc8tUSaFjfIP7dbNbvJH"}
  ],
  other:[
  {title:"Ontario EP",releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["hammar"],label:"dirtyhands",type:"EP",count:4,img:"ontario-ep-cover.jpg",
   blurb:"Straight-up slam dancer bangers with tasteful elements, builds, twists and turns. I connected with 3 of the 4 tracks on first listen, which is a staggeringly high rate for me. This dude is something special.",
   tracks:["Ontario","Off Disk","Oops All Sixes"],bc:"https://dirtyhandsrec.bandcamp.com/album/ontario-ep"},
  {title:"Lab 94' EP",releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["lex"],label:"dog",type:"EP",count:4,img:"lab-94-cover.jpg",
-  blurb:"",tracks:[],bc:"https://lexathens.bandcamp.com/album/lab-94-ep",sp:"https://open.spotify.com/album/1LZ3IQkJP9RFpDqkNMSTT3"},
+  blurb:"Delusions of Grandeur has become a favorite label of mine as of late. The releases often feature guitar and semi-jazzy sounds. Honestly, I don't know what I'm talking about, so don't take my write-ups about genres and sounds too seriously. I'm just speaking from the heart. I'm sometimes musically ignorant, but I know what I like and what moves me. I haven't fully listened outside of snippets, but there are some cool-sounding tunes on here.",tracks:[],bc:"https://lexathens.bandcamp.com/album/lab-94-ep",sp:"https://open.spotify.com/album/1LZ3IQkJP9RFpDqkNMSTT3"},
  {title:"Ascorbic",releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["mytron"],label:"multiculti",type:"EP",count:4,img:"ascorbic-cover.jpg",
-  blurb:"",tracks:[],bc:"https://mytron.bandcamp.com/album/ascorbic",sp:"https://open.spotify.com/album/3dlAvqjzJtCdqwgNNkxL35"},
+  blurb:"Multi Culti, what a great label. Always unique and weird. I appreciate the weirdness of this label, and this project delivers on that front. I haven't fully listened, but I went through the snippets and there's some cool shit on here.",tracks:[],bc:"https://mytron.bandcamp.com/album/ascorbic",sp:"https://open.spotify.com/album/3dlAvqjzJtCdqwgNNkxL35"},
  {title:"The Earthly Pleasures EP",releaseDate:"2026-11-26",dateAdded:"2026-11-06",artists:["abacus"],label:"phonogramme",type:"EP · REISSUE",count:3,img:"earthly-pleasures-cover.jpg",
-  blurb:"",tracks:[],bc:"https://deepcutsvinyl.bandcamp.com/album/the-earthly-pleasures-ep-reissue-pre-orders",sp:"https://open.spotify.com/album/6ouWiSVUcrbyGxPOwvqvFh"},
+  blurb:"I think this may be a re-release of this project, I can't say for sure. Either way, super tasteful jazzy jammers. Groovers with a touch of soul. Highly recommend.",tracks:[],bc:"https://deepcutsvinyl.bandcamp.com/album/the-earthly-pleasures-ep-reissue-pre-orders",sp:"https://open.spotify.com/album/6ouWiSVUcrbyGxPOwvqvFh"},
  {title:"Urban CC: Remixed",releaseDate:"2026-11-05",dateAdded:"2026-11-06",artists:["urbancc"],label:"berg",type:"REMIX EP",count:4,img:"urban-cc-remixed-cover.jpg",
   sub:"Remixes by Priku, Andrew Azara, Mihai Popoviciu & Jon Sable",
-  blurb:"",tracks:[],bc:"https://bergaudio.bandcamp.com/album/urban-cc-remixed-priku-andrew-azara-mihai-popoviciu-jon-sable",
+  blurb:"Berg Audio is consistently delivering quality projects. I haven't listened to this one yet, but the snippets were promising and I love the label. It's a remix album, so be sure to check out the original projects if you're feeling the sound.",tracks:[],bc:"https://bergaudio.bandcamp.com/album/urban-cc-remixed-priku-andrew-azara-mihai-popoviciu-jon-sable",
   originals:[["The Introduction, Part I","https://bergaudio.bandcamp.com/album/urban-cc-the-introduction-part-i"],["The Introduction, Part II","https://bergaudio.bandcamp.com/album/urban-cc-the-introduction-part-ii"]]}
  ]};
