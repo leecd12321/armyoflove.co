@@ -123,7 +123,7 @@ footer{font-family:var(--type);font-size:15px;border-top:1px solid var(--rule);p
     <p class="lede">Tons of new music out today! Let's start with a focus on five albums to get on your radar. In addition to the albums, there's a bunch of other notable releases. My personal favorite project so far is the <a href="https://dirtyhandsrec.bandcamp.com/album/ontario-ep" target="_blank" rel="noopener">Per Hammar EP</a>.</p>
   </header>
 
-  <section class="pl pl-top" aria-label="New Releases playlist">
+  <section class="pl" aria-label="New Releases playlist">
     <a class="pl-art" href="https://open.spotify.com/playlist/4XHIWAkY2OPglDJkUmSBRC" target="_blank" rel="noopener">
       <img src="new-releases-playlist.jpg" alt="Army of Love New Releases playlist artwork">
       <span class="pl-cta">click to listen ↗</span>
@@ -148,7 +148,7 @@ footer{font-family:var(--type);font-size:15px;border-top:1px solid var(--rule);p
     <section class="detail" data-detail="other" hidden aria-live="polite"></section>
   </section>
 
-  <section class="pl" aria-label="New Releases playlist">
+  <section class="pl" id="pl-bottom" hidden aria-label="New Releases playlist">
     <a class="pl-art" href="https://open.spotify.com/playlist/4XHIWAkY2OPglDJkUmSBRC" target="_blank" rel="noopener">
       <img src="new-releases-playlist.jpg" alt="Army of Love New Releases playlist artwork">
       <span class="pl-cta">click to listen ↗</span>
@@ -180,7 +180,7 @@ Object.keys(SETS).forEach(key=>{
     <img src="${r.img}" alt="${esc(r.title)} cover art">
     <span class="n">${esc(L[r.label].name.toUpperCase())}</span>
     <span class="t">${esc(r.title)}</span><span class="a">${esc(names(r))}</span></button>`).join("");
-  const sync=()=>g.querySelectorAll(".tile").forEach((t,i)=>t.setAttribute("aria-expanded",i===cur));
+  const sync=()=>{g.querySelectorAll(".tile").forEach((t,i)=>t.setAttribute("aria-expanded",i===cur));const pb=document.getElementById("pl-bottom");if(pb)pb.hidden=!document.querySelector(".detail:not([hidden])")};
   const hide=()=>{d.hidden=true;cur=-1;sync()};
   function show(i,scroll){
     if(i===cur){hide();return}
