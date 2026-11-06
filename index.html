@@ -101,7 +101,7 @@ h1{margin:0;font-size:clamp(40px,8vw,68px);font-weight:700;letter-spacing:-.03em
 .vid-play{width:64px;height:64px;border-radius:50%;background:rgba(0,0,0,.55);color:#f1ece3;display:flex;align-items:center;justify-content:center;transition:opacity .25s}
 .vid.playing .vid-play{opacity:0}
 .vid-play::before{content:"";display:block;width:0;height:0;border-style:solid;border-width:11px 0 11px 18px;border-color:transparent transparent transparent #f1ece3;margin-left:4px}
-@media (hover:hover){.vid.playing .vid-hit:hover .vid-play{opacity:.85}}
+
 @media (hover:none){.vid-hit{pointer-events:none}.vid-fs{opacity:1;pointer-events:auto}}
 .vid-fs{all:unset;position:absolute;right:10px;bottom:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#f1ece3;background:rgba(0,0,0,.45);font-size:18px;opacity:0;transition:opacity .2s}
 .vid:hover .vid-fs,.vid-fs:focus-visible{opacity:1}
