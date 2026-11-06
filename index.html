@@ -91,9 +91,9 @@ h1{margin:0;font-size:clamp(40px,8vw,68px);font-weight:700;letter-spacing:-.03em
 .pl-text h2{margin:0;font-size:28px;letter-spacing:-.02em;line-height:1.1}
 .pl-text p{margin:0;font-size:15.5px}
 .feat{max-width:760px;width:100%;margin:0 auto}
-.feat .vid{position:relative;aspect-ratio:16/9;background:#111;border:1px solid var(--ink)}
+.vid{position:relative;aspect-ratio:16/9;max-width:100%;background:#111;border:1px solid var(--ink);margin:4px 0 6px}
 .feat .vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.feat .vid #yt,.feat .vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vid .yt,.vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .vid-hit{all:unset;position:absolute;inset:0;cursor:pointer;display:flex;align-items:center;justify-content:center;background:transparent}
 .vid-play{width:64px;height:64px;border-radius:50%;background:rgba(0,0,0,.55);color:#f1ece3;display:flex;align-items:center;justify-content:center;font-size:24px;padding-left:4px;transition:opacity .25s}
 .vid.playing .vid-play{opacity:0}
@@ -117,19 +117,6 @@ footer{font-family:var(--type);font-size:15px;border-top:1px solid var(--rule);p
     <h1>Fruitful Friday</h1>
     <p class="lede">Tons of new music out today! Let's start with a focus on five albums to get on your radar. In addition to the albums, there's a bunch of other notable releases. My personal favorite project so far is the <a href="https://dirtyhandsrec.bandcamp.com/album/ontario-ep" target="_blank" rel="noopener">Per Hammar EP</a>.</p>
   </header>
-
-  <section class="feat" aria-labelledby="feat-h">
-    <div class="glance-head"><h2 id="feat-h">FAV TRACK SO FAR</h2></div>
-    <div class="vid" id="vid">
-      <div id="yt"></div>
-      <button class="vid-hit" type="button" aria-label="Play or pause video"><span class="vid-play" aria-hidden="true">▶</span></button>
-      <button class="vid-fs" type="button" aria-label="Full screen">⤢</button>
-    </div>
-    <div class="feat-cap">
-      <div><span class="t">Ontario</span> <span class="a">Per Hammar · Ontario EP · Dirty Hands</span></div>
-      <button class="feat-more" type="button" data-open="other:0">MORE ON THE EP ↓</button>
-    </div>
-  </section>
 
   <section class="pl pl-top" aria-label="New Releases playlist">
     <a class="pl-art" href="https://open.spotify.com/playlist/4XHIWAkY2OPglDJkUmSBRC" target="_blank" rel="noopener">
@@ -198,6 +185,7 @@ Object.keys(SETS).forEach(key=>{
     <div class="info">
       <div class="meta">${esc(r.type)} · ${r.count} TRACKS · ${esc(L[r.label].name.toUpperCase())} · ${fmtDate(r.releaseDate)}</div>
       <h3>${esc(r.title)}</h3><p class="by">${esc(names(r))}${r.sub?`<br><span class="sub">${esc(r.sub)}</span>`:""}</p>
+      ${r.video?`<div class="vid"><div class="yt"></div><button class="vid-hit" type="button" aria-label="Play or pause video"><span class="vid-play" aria-hidden="true">▶</span></button><button class="vid-fs" type="button" aria-label="Full screen">⤢</button></div>`:""}
       ${r.blurb?r.blurb.split(/\n\s*\n/).map(p=>`<p class="blurb">${esc(p.trim()).replace(/\n/g,"<br>")}</p>`).join(""):""}
       ${r.originals?`<p class="blurb">${r.originals.map(o=>`<a href="${o[1]}" target="_blank" rel="noopener">${esc(o[0])} ↗</a>`).join("<br>")}</p>`:""}
       ${r.tracks.length?`<p class="tracks"><b>ADDED TO DATABASS:</b> ${r.tracks.map(esc).join(" · ")}</p>`:""}
@@ -206,6 +194,7 @@ Object.keys(SETS).forEach(key=>{
       <div class="pager"><button data-step="-1">← PREV</button><button data-step="1">NEXT →</button></div>
     </div>`;
     d.hidden=false;sync();
+    const vb=d.querySelector(".vid");if(vb)mountVideo(vb,r.video);
     if(scroll)d.scrollIntoView({behavior:reduce?"auto":"smooth",block:"nearest"});
   }
   g.addEventListener("click",e=>{const t=e.target.closest(".tile");if(t)show(+t.dataset.i,true)});
@@ -214,20 +203,21 @@ Object.keys(SETS).forEach(key=>{
     const s=e.target.closest("[data-step]");if(s){const n=(cur+ +s.dataset.step+R.length)%R.length;cur=-2;show(n,false)}
   });
 });
-document.querySelectorAll("[data-open]").forEach(b=>b.addEventListener("click",()=>{const [s,i]=b.dataset.open.split(":");const tile=document.querySelector(`[data-set="${s}"] .tile[data-i="${i}"]`);if(tile&&tile.getAttribute("aria-expanded")!=="true")tile.click();else if(tile)document.querySelector(`[data-detail="${s}"]`).scrollIntoView({behavior:"smooth",block:"nearest"})}));
 
-// Featured video: YouTube player with its own controls hidden, so the title bar and timeline don't hang over the video
-(function(){
-  const box=document.getElementById("vid");if(!box)return;
-  let player;
-  const s=document.createElement("script");s.src="https://www.youtube.com/iframe_api";document.head.appendChild(s);
-  window.onYouTubeIframeAPIReady=()=>{player=new YT.Player("yt",{host:"https://www.youtube-nocookie.com",videoId:"rKuTxzf5Zdo",
+// Release videos: YouTube player with its own controls hidden (no title bar or timeline over the video), captions off
+const YTQ=[];let ytLoading=false;
+function withYT(cb){if(window.YT&&YT.Player)return cb();YTQ.push(cb);if(ytLoading)return;ytLoading=true;
+  window.onYouTubeIframeAPIReady=()=>YTQ.splice(0).forEach(f=>f());
+  const s=document.createElement("script");s.src="https://www.youtube.com/iframe_api";document.head.appendChild(s)}
+function mountVideo(box,id){
+  const host=box.querySelector(".yt");let player;
+  const noCC=()=>{try{player.unloadModule("captions");player.unloadModule("cc")}catch(_){}};
+  withYT(()=>{if(!host.isConnected)return;player=new YT.Player(host,{host:"https://www.youtube-nocookie.com",videoId:id,
     playerVars:{controls:0,rel:0,playsinline:1,iv_load_policy:3,disablekb:1,fs:0,cc_load_policy:0,cc_lang_pref:"none"},
-    events:{onReady:()=>noCC(),onStateChange:e=>{box.classList.toggle("playing",e.data===1);if(e.data===1)noCC()}}})};
-  const noCC=()=>{try{player.unloadModule("captions");player.unloadModule("cc");player.setOption("captions","track",{})}catch(_){}};
+    events:{onReady:noCC,onStateChange:e=>{box.classList.toggle("playing",e.data===1);if(e.data===1)noCC()}}})});
   box.querySelector(".vid-hit").addEventListener("click",()=>{if(!player||!player.getPlayerState)return;player.getPlayerState()===1?player.pauseVideo():player.playVideo()});
   box.querySelector(".vid-fs").addEventListener("click",()=>{(box.requestFullscreen||box.webkitRequestFullscreen||(()=>{})).call(box)});
-})();
+}
 </script>
 </body>
 </html>
