@@ -16,7 +16,7 @@
 .vignette{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(120% 90% at 50% 40%, transparent 55%, rgba(60,50,38,.16) 100%)}
 @media (prefers-reduced-motion:reduce){.flow{animation:none}}
 </style>
-<title>Apiformes · The Radar</title>
+<title>Apiformes ¬∑ The Radar</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap">
 <style>
 /* Layout: paper page with grain; cover left / post right on desktop, cover on top on phones. Single light paper look by choice. */
@@ -105,20 +105,36 @@ a.track[href]:hover{border-color:var(--ink);color:var(--ink)}
 .sign{margin:0}
 @media (prefers-reduced-motion:reduce){.grain,.b .dot.pulse{animation:none}}
 
-/* Video cards: hover (or tap) to enlarge and play */
+/* Video cards: clean frame (YouTube chrome cropped away) */
 .vids{display:flex;flex-direction:column;gap:14px}
-.vid{position:relative;border:1px solid var(--rule);background:var(--card);border-radius:10px;overflow:hidden;transition:transform .35s ease,box-shadow .35s ease;transform-origin:center}
-.vid.on{transform:scale(1.04);box-shadow:0 18px 40px rgba(28,27,25,.22);z-index:2}
-.vid .frame{position:relative;aspect-ratio:16/9;background:#161616}
-.vid .frame img,.vid .frame iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0;display:block}
-.vid .play{all:unset;cursor:pointer;position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-.vid .play span{width:54px;height:54px;border-radius:50%;background:rgba(241,236,227,.92);display:flex;align-items:center;justify-content:center}
-.vid .play span::before{content:"";margin-left:4px;border-left:15px solid var(--ink);border-top:9px solid transparent;border-bottom:9px solid transparent}
-.vid .play:focus-visible span{outline:2px solid var(--paper);outline-offset:3px}
+.vid{position:relative;border:1px solid var(--rule);background:var(--card);border-radius:10px;overflow:hidden;transition:transform .35s ease,box-shadow .35s ease}
+.vid.on{transform:scale(1.03);box-shadow:0 18px 40px rgba(28,27,25,.22);z-index:2}
+.vid .frame{position:relative;aspect-ratio:16/9;background:#161616;overflow:hidden}
+.vid .crop{position:absolute;inset:0;overflow:hidden}
+.vid .crop iframe{position:absolute;left:0;top:0;width:1920px;height:1080px;border:0;pointer-events:none;transform-origin:0 0}
+.vid .thumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:opacity .6s ease .5s}
+.vid.loaded .thumb{opacity:0}
+.vid.loaded:not(.playing) .thumb{opacity:1;transition-delay:0s}
+.vid .hit{all:unset;cursor:pointer;position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.vid .pp{width:46px;height:46px;border-radius:50%;background:rgba(241,236,227,.9);display:flex;align-items:center;justify-content:center;transition:opacity .3s}
+.vid .pp::before{content:"";margin-left:4px;border-left:13px solid var(--ink);border-top:8px solid transparent;border-bottom:8px solid transparent}
+.vid.playing .pp{opacity:0}
+.vid .hit:focus-visible .pp{opacity:1;outline:2px solid var(--paper);outline-offset:3px}
 .vid .cap{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 15px;font-size:17px;font-weight:500}
 .vid .cap small{font-family:var(--mono);font-size:10.5px;font-weight:700;color:var(--muted)}
 .vid .sound{all:unset;cursor:pointer;font-family:var(--mono);font-size:10.5px;font-weight:700;border:1px solid var(--ink);padding:4px 7px}
-.vid .sound:hover{background:var(--ink);color:var(--paper)}
+.vid .sound[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+
+/* Style B: caption on the video, round sound button */
+.vid{border:0;background:transparent;border-radius:6px}
+.vid .frame{border-radius:6px}
+.vid .shade{position:absolute;left:0;right:0;bottom:0;height:45%;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.55));pointer-events:none}
+.vid .ttl{position:absolute;left:14px;right:60px;bottom:12px;color:#f1ece3;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;line-height:1.4;pointer-events:none}
+.vid .sound{position:absolute;right:12px;top:12px;width:34px;height:34px;border-radius:50%;background:rgba(241,236,227,.9);border:0;padding:0;display:flex;align-items:center;justify-content:center;color:var(--ink);z-index:2}
+.vid .sound[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.vid .sound svg{width:15px;height:15px}
+.vid .sound .x{display:inline}.vid .sound .w{display:none}
+.vid .sound[aria-pressed="true"] .x{display:none}.vid .sound[aria-pressed="true"] .w{display:inline}
 @media (prefers-reduced-motion:reduce){.vid{transition:none}.vid.on{transform:none}}
 </style>
 </head>
@@ -137,9 +153,9 @@ a.track[href]:hover{border-color:var(--ink);color:var(--ink)}
 
     <div class="body">
       <header>
-        <div class="eyebrow">THE RADAR · NOV 5, 2026</div>
+        <div class="eyebrow">THE RADAR ¬∑ NOV 5, 2026</div>
         <h1>Apiformes</h1>
-        <p class="by">Polygonia &amp; Simon Popp · Squama</p>
+        <p class="by">Polygonia &amp; Simon Popp ¬∑ Squama</p>
       </header>
 
       <div>
@@ -154,7 +170,7 @@ a.track[href]:hover{border-color:var(--ink);color:var(--ink)}
       <section class="legend" id="legend" hidden aria-label="Badge key">
         <h2>BADGE KEY</h2>
         <div>
-          <div class="sub">RELEASE · counts down, then fades</div>
+          <div class="sub">RELEASE ¬∑ counts down, then fades</div>
           <div class="row" id="lifeRow" style="margin-top:8px"></div>
         </div>
         <div>
@@ -178,16 +194,16 @@ a.track[href]:hover{border-color:var(--ink);color:var(--ink)}
       </div>
 
       <div class="vids" aria-label="Tracks that caught me">
-        <div class="vid" data-id="rev6YEpKLNI" data-title="Honeydrop" data-no="04"></div>
-        <div class="vid" data-id="66RA0nC82J0" data-title="Nectar Flow" data-no="06"></div>
-        <div class="vid" data-id="CxhSDdVOpWk" data-title="Hive Mind" data-no="08"></div>
-        <div class="vid" data-id="R_osLnp6fKA" data-title="Pollination Beats" data-no="10"></div>
+        <div class="vid" data-id="rev6YEpKLNI" data-title="Polygonia ‚Äì Honeydrop [Squama]" data-no="04"></div>
+        <div class="vid" data-id="66RA0nC82J0" data-title="Polygonia ‚Äì Nectar Flow [Squama]" data-no="06"></div>
+        <div class="vid" data-id="CxhSDdVOpWk" data-title="Polygonia ‚Äì Hive Mind [Squama]" data-no="08"></div>
+        <div class="vid" data-id="R_osLnp6fKA" data-title="Polygonia ‚Äì Pollination Beats [Squama]" data-no="10"></div>
       </div>
       <p class="also">11 tracks on the album</p>
 
       <div class="out">
-        <a href="https://polygonia.bandcamp.com/album/apiformes" target="_blank" rel="noopener">Bandcamp →</a>
-        <a id="yt" target="_blank" rel="noopener">YouTube →</a>
+        <a href="https://polygonia.bandcamp.com/album/apiformes" target="_blank" rel="noopener">Bandcamp ‚Üí</a>
+        <a id="yt" target="_blank" rel="noopener">YouTube ‚Üí</a>
       </div>
       <p class="sign">Sending you love,<br>Leefer</p>
     </div>
@@ -280,33 +296,51 @@ legend.querySelectorAll('button[data-k]').forEach(b=>{
   ['mouseenter','focus','click'].forEach(ev=>b.addEventListener(ev, e=>{ e.stopPropagation(); explainFor(b.dataset.k); }));
 });
 
-// Video cards
+// Video cards: clean frame, hover to play muted, our own sound button
 (function(){
   const canHover = window.matchMedia('(hover: hover)').matches;
   const cards = [...document.querySelectorAll('.vid')];
-  function cmd(card, func){ const f = card.querySelector('iframe'); if(f) f.contentWindow.postMessage(JSON.stringify({event:'command',func,args:[]}), '*'); }
-  function load(card, muted){
-    const fr = card.querySelector('.frame');
-    if(card.querySelector('iframe')){ cmd(card, muted ? 'mute' : 'unMute'); cmd(card,'playVideo'); return; }
-    const p = new URLSearchParams({autoplay:1, mute: muted?1:0, playsinline:1, rel:0, modestbranding:1, enablejsapi:1, origin: location.origin});
+  function cmd(card, func){ const f = card.querySelector('iframe'); if(f && f.contentWindow) f.contentWindow.postMessage(JSON.stringify({event:'command',func,args:[]}), '*'); }
+  function load(card){
+    if(card.querySelector('iframe')) { cmd(card,'playVideo'); return; }
+    const id = card.dataset.id;
+    const p = new URLSearchParams({autoplay:1, mute: soundOK() ? 0 : 1, controls:0, disablekb:1, fs:0, rel:0, modestbranding:1, iv_load_policy:3, cc_load_policy:0, playsinline:1, loop:1, vq:'hd1080', playlist:id, enablejsapi:1, origin: location.origin});
     const f = document.createElement('iframe');
-    f.src = `https://www.youtube-nocookie.com/embed/${card.dataset.id}?${p}`;
+    f.src = `https://www.youtube-nocookie.com/embed/${id}?${p}`;
     f.title = card.dataset.title + ' (video)';
-    f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
-    f.allowFullscreen = true;
-    fr.appendChild(f);
-    card.querySelector('.play').hidden = true;
+    f.allow = 'autoplay; encrypted-media';
+    f.tabIndex = -1;
+    card.querySelector('.crop').appendChild(f);
+    // YouTube picks quality from the player's size, so the player is laid out at full HD and scaled down to fit (zoomed 28% to crop YouTube's title bar and logo)
+    const fit = () => { const fr = card.querySelector('.frame'), k = (fr.clientHeight * 1.28) / 1080; f.style.transform = `translate(${-0.14 * fr.clientWidth}px, ${-0.14 * fr.clientHeight}px) scale(${k})`; };
+    fit(); if (window.ResizeObserver) new ResizeObserver(fit).observe(card.querySelector('.frame'));
+    f.addEventListener('load', () => { setTimeout(() => cmd(card, 'setPlaybackQuality'), 0); });
+    card.classList.add('loaded');
   }
+  // Browsers only allow sound after the visitor has clicked or tapped somewhere on the page
+  const soundOK = () => !!(navigator.userActivation && navigator.userActivation.hasBeenActive);
+  function setSound(card,on){
+    const s = card.querySelector('.sound'); s.setAttribute('aria-pressed', String(on)); 
+    if(on){ setTimeout(()=>{ cmd(card,'unMute'); cmd(card,'playVideo'); }, card.dataset.ready ? 0 : 1200); } else cmd(card,'mute');
+  }
+  function play(card){
+    cards.forEach(c=>{ if(c!==card){ cmd(c,'pauseVideo'); c.classList.remove('on','playing','locked'); const s=c.querySelector('.sound'); if(s){ s.setAttribute('aria-pressed','false'); } cmd(c,'mute'); } });
+    card.classList.add('on','playing'); load(card);
+    setTimeout(()=>{ card.dataset.ready='1'; }, 1200);
+  }
+  function pause(card){ card.classList.remove('playing'); cmd(card,'pauseVideo'); }
   cards.forEach(card=>{
     const id = card.dataset.id;
-    card.innerHTML = `<div class="frame"><img src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" loading="lazy"><button class="play" type="button" aria-label="Play ${card.dataset.title}"><span></span></button></div>
-      <div class="cap"><span>${card.dataset.title} <small>&nbsp;${card.dataset.no}</small></span><button class="sound" type="button">SOUND ON</button></div>`;
+    card.innerHTML = `<div class="frame"><div class="crop"></div><img class="thumb" src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" loading="lazy"><div class="shade"></div><button class="hit" type="button" aria-label="Play or pause ${card.dataset.title}"><span class="pp" aria-hidden="true"></span></button><div class="ttl">${card.dataset.title}</div><button class="sound" type="button" aria-pressed="false" aria-label="Sound"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><g class="w"><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></g><g class="x"><path d="m16 9 6 6"/><path d="m22 9-6 6"/></g></svg></button></div>`;
     const sound = card.querySelector('.sound');
-    sound.addEventListener('click', ()=>{ cards.forEach(c=>{ if(c!==card){ cmd(c,'pauseVideo'); c.classList.remove('on'); } }); card.classList.add('on'); load(card,false); cmd(card,'unMute'); cmd(card,'playVideo'); });
-    card.querySelector('.play').addEventListener('click', ()=>{ cards.forEach(c=>{ if(c!==card){ cmd(c,'pauseVideo'); c.classList.remove('on'); } }); card.classList.add('on'); load(card,false); });
+    card.querySelector('.hit').addEventListener('click', ()=>{
+      if(card.classList.contains('locked')){ card.classList.remove('locked'); setSound(card,false); pause(card); return; }
+      card.classList.add('locked'); play(card); setSound(card,true);
+    });
+    sound.addEventListener('click', ()=>{ const on = sound.getAttribute('aria-pressed') !== 'true'; if(on){ card.classList.add('locked'); play(card); } setSound(card,on); });
     if(canHover){
-      card.addEventListener('mouseenter', ()=>{ card.classList.add('on'); load(card,true); });
-      card.addEventListener('mouseleave', ()=>{ card.classList.remove('on'); cmd(card,'pauseVideo'); });
+      card.addEventListener('mouseenter', ()=>{ if(!document.querySelector('.vid.locked')){ play(card); if(soundOK()) setSound(card,true); } else card.classList.add('on'); });
+      card.addEventListener('mouseleave', ()=>{ card.classList.remove('on'); if(!card.classList.contains('locked')){ pause(card); setSound(card,false); } });
     }
   });
 })();
