@@ -1,0 +1,62 @@
+// Army of Love · Radar archive data
+// One entry per release. Artists (A) and labels (L) are shared, so each is written once
+// and reused across posts. Fields per release: title, artists, label, type, track count,
+// releaseDate, dateAdded, Leefer's note (blurb), tracks that caught him, links.
+const A={ // artists
+ amtrac:{name:"Amtrac",bc:"https://amtrac.bandcamp.com",sp:"https://open.spotify.com/artist/3ifxHfYz2pqHku0bwx8H5J",sc:"https://soundcloud.com/amtrac"},
+ polygonia:{name:"Polygonia",bc:"https://polygonia.bandcamp.com",sp:"https://open.spotify.com/artist/1bvMkEwyURFPl2eDGZieUm",sc:"https://soundcloud.com/polygonia",ig:"https://www.instagram.com/_polygonia_"},
+ popp:{name:"Simon Popp",bc:"https://simonpopp.bandcamp.com",sp:"https://open.spotify.com/artist/3g6w2ATRPWhtFCUtkDIdcp",ig:"https://www.instagram.com/simon.popp/"},
+ funke:{name:"Sascha Funke",bc:"https://saschafunke.bandcamp.com",sp:"https://open.spotify.com/artist/1dDTkRz9WVOQr63enjJ1Yd",sc:"https://soundcloud.com/saschafunkeofficial",ig:"https://www.instagram.com/saschafunke_music/"},
+ ame:{name:"Âme",bc:"https://ame-engoli.bandcamp.com",sp:"https://open.spotify.com/artist/5muFO8VqYRCRW13EkvX564"},
+ ksky:{name:"Ksky",sp:"https://open.spotify.com/artist/2YnhtgANdlYYjGrJwo4Z9u"},
+ hammar:{name:"Per Hammar",bc:"https://perhammar.bandcamp.com",sp:"https://open.spotify.com/artist/64ro37ZAxFkXIJ2pxOdqCX",sc:"https://soundcloud.com/per-hammar",ig:"https://www.instagram.com/perhammar2000"},
+ lex:{name:"Lex (Athens)",bc:"https://lexathens.bandcamp.com",sp:"https://open.spotify.com/artist/07xgHn84Dp2AVF5tEsmGOh"},
+ mytron:{name:"Mytron",bc:"https://mytron.bandcamp.com",sp:"https://open.spotify.com/artist/5yS2elNWR9wp0TDlb566QJ"},
+ abacus:{name:"Abacus",sp:"https://open.spotify.com/artist/6NLqTCFXDOWYXrZV6WyVO6"},
+ urbancc:{name:"URBAN CC",sp:"https://open.spotify.com/artist/1beunTtJdnQMKxmCQJ0VMh"}
+};
+const L={ // labels
+ openers:{name:"Openers",bc:"https://openers.bandcamp.com"},
+ squama:{name:"Squama",bc:"https://squamarecordings.bandcamp.com"},
+ kompakt:{name:"Kompakt",bc:"https://kompakt.bandcamp.com"},
+ innervisions:{name:"Innervisions",bc:"https://innervisionsmusic.bandcamp.com"},
+ runningback:{name:"Running Back",bc:"https://runningbackrecords.bandcamp.com"},
+ dirtyhands:{name:"Dirty Hands",bc:"https://dirtyhandsrec.bandcamp.com"},
+ dog:{name:"Delusions of Grandeur",bc:"https://delusionsofgrandeurrec.bandcamp.com"},
+ multiculti:{name:"Multi Culti",bc:"https://multiculti.bandcamp.com",sc:"https://soundcloud.com/multiculti"},
+ phonogramme:{name:"Phonogramme"},
+ berg:{name:"Berg Audio",bc:"https://bergaudio.bandcamp.com"}
+};
+const SETS= // Fruitful Friday · Nov 6, 2026
+{
+ albums:[
+ {title:"Dream",releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["amtrac"],label:"openers",type:"ALBUM",count:14,img:"dream-cover.jpg",
+  blurb:"One of my favorite producers since I discovered him this year. Insanely clean productions, real depth, and just the right amount of good cheese. I'm saving the full listen for the right moment, but wanted you to know it's out.",
+  tracks:["Ricardo's Last Dance"],bc:"https://amtrac.bandcamp.com/album/dream",sp:"https://open.spotify.com/album/3oNraxn7bql4vFjqiBfCgG"},
+ {title:"Apiformes",releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["polygonia","popp"],label:"squama",type:"ALBUM",count:11,img:"apiformes-cover.jpg",
+  blurb:"Techno jazz alien. Polygonia's music challenges my listening muscles and I deeply appreciate it. Sounds and rhythms from another planet. It's not for everyone, but if the tasters grab you, dive into the full album.",
+  tracks:["Honeydrop","Nectar Flow","Hive Mind","Pollination Beats"],bc:"https://polygonia.bandcamp.com/album/apiformes",sp:"https://open.spotify.com/album/31z5z1c3dDB1kkbK1LXTY5"},
+ {title:"Planes In Reverse",releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["funke"],label:"kompakt",type:"ALBUM",count:10,img:"planes-in-reverse-cover.jpg",
+  blurb:"Any time a full LP comes out on Kompakt, you have my attention. I haven't had the time or space to fully listen to this yet, but it's on my list. I've been listening to albums on my morning walks, and this will be one of those.",
+  tracks:[],bc:"https://saschafunke.bandcamp.com/album/planes-in-reverse",sp:"https://open.spotify.com/album/4HPOqRWymj064S8zOSAJH7"},
+ {title:"Love Is The Dance",releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["ame"],label:"innervisions",type:"ALBUM",count:13,img:"love-is-the-dance-cover.jpg",
+  blurb:"To be honest, I didn't connect with this on my first listen. Most people I know love Innervisions, so I wanted to make sure you knew this came out today. It's just not for me.",
+  tracks:[],bc:"https://ame-engoli.bandcamp.com/album/love-is-the-dance-lp",sp:"https://open.spotify.com/album/3GMbNTMjPI2gJULzw5RaK5"},
+ {title:"Collected Works",releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["ksky"],label:"runningback",type:"ALBUM",count:10,img:"collected-works-cover.jpg",
+  blurb:"",tracks:[],bc:"https://runningbackrecords.bandcamp.com/album/collected-works",sp:"https://open.spotify.com/album/3DCc8tUSaFjfIP7dbNbvJH"}
+ ],
+ other:[
+ {title:"Ontario EP",releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["hammar"],label:"dirtyhands",type:"EP",count:4,img:"ontario-ep-cover.jpg",
+  blurb:"Straight-up slam dancer bangers with tasteful elements, builds, twists and turns. I connected with 3 of the 4 tracks on first listen, which is a staggeringly high rate for me. This dude is something special.",
+  tracks:["Ontario","Off Disk","Oops All Sixes"],bc:"https://dirtyhandsrec.bandcamp.com/album/ontario-ep"},
+ {title:"Lab 94' EP",releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["lex"],label:"dog",type:"EP",count:4,img:"lab-94-cover.jpg",
+  blurb:"",tracks:[],bc:"https://lexathens.bandcamp.com/album/lab-94-ep",sp:"https://open.spotify.com/album/1LZ3IQkJP9RFpDqkNMSTT3"},
+ {title:"Ascorbic",releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["mytron"],label:"multiculti",type:"EP",count:4,img:"ascorbic-cover.jpg",
+  blurb:"",tracks:[],bc:"https://mytron.bandcamp.com/album/ascorbic",sp:"https://open.spotify.com/album/3dlAvqjzJtCdqwgNNkxL35"},
+ {title:"The Earthly Pleasures EP",releaseDate:"2026-11-26",dateAdded:"2026-11-06",artists:["abacus"],label:"phonogramme",type:"EP · REISSUE",count:3,img:"earthly-pleasures-cover.jpg",
+  blurb:"",tracks:[],bc:"https://deepcutsvinyl.bandcamp.com/album/the-earthly-pleasures-ep-reissue-pre-orders",sp:"https://open.spotify.com/album/6ouWiSVUcrbyGxPOwvqvFh"},
+ {title:"Urban CC: Remixed",releaseDate:"2026-11-05",dateAdded:"2026-11-06",artists:["urbancc"],label:"berg",type:"REMIX EP",count:4,img:"urban-cc-remixed-cover.jpg",
+  sub:"Remixes by Priku, Andrew Azara, Mihai Popoviciu & Jon Sable",
+  blurb:"",tracks:[],bc:"https://bergaudio.bandcamp.com/album/urban-cc-remixed-priku-andrew-azara-mihai-popoviciu-jon-sable",
+  originals:[["The Introduction, Part I","https://bergaudio.bandcamp.com/album/urban-cc-the-introduction-part-i"],["The Introduction, Part II","https://bergaudio.bandcamp.com/album/urban-cc-the-introduction-part-ii"]]}
+ ]};
