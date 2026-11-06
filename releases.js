@@ -30,7 +30,7 @@ const L={ // labels
 const SETS= // Fruitful Friday · Nov 6, 2026
 {
  albums:[
- {title:"Dream",releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["amtrac"],label:"openers",type:"ALBUM",count:14,img:"dream-cover.jpg",
+ {title:"Dream",video:"3BCLIhSUMQU",releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["amtrac"],label:"openers",type:"ALBUM",count:14,img:"dream-cover.jpg",
   blurb:"One of my favorite producers since I discovered him this year. Insanely clean productions, real depth, and just the right amount of good cheese.\n\nI'm saving the full listen for the right moment, but wanted you to know it's out.",
   tracks:["Ricardo's Last Dance"],bc:"https://amtrac.bandcamp.com/album/dream",sp:"https://open.spotify.com/album/3oNraxn7bql4vFjqiBfCgG"},
  {title:"Apiformes",video:"CxhSDdVOpWk",releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["polygonia","popp"],label:"squama",type:"ALBUM",count:11,img:"apiformes-cover.jpg",
