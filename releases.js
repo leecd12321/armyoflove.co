@@ -24,7 +24,7 @@ const L={ // labels
  dirtyhands:{name:"Dirty Hands",bc:"https://dirtyhandsrec.bandcamp.com"},
  dog:{name:"Delusions of Grandeur",bc:"https://delusionsofgrandeurrec.bandcamp.com"},
  multiculti:{name:"Multi Culti",bc:"https://multiculti.bandcamp.com",sc:"https://soundcloud.com/multiculti"},
- phonogramme:{name:"Phonogramme"},
+ phonogramme:{name:"Phonogramme",bc:"https://phonogramme.bandcamp.com"},
  berg:{name:"Berg Audio",bc:"https://bergaudio.bandcamp.com"}
 };
 const SETS= // Fruitful Friday · Nov 6, 2026

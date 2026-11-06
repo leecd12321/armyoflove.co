@@ -90,6 +90,14 @@ h1{margin:0;font-size:clamp(40px,8vw,68px);font-weight:700;letter-spacing:-.03em
 .pl-text{display:flex;flex-direction:column;gap:6px;min-width:0}
 .pl-text h2{margin:0;font-size:28px;letter-spacing:-.02em;line-height:1.1}
 .pl-text p{margin:0;font-size:15.5px}
+.feat{max-width:760px}
+.feat .vid{position:relative;aspect-ratio:16/9;background:#111;border:1px solid var(--ink)}
+.feat .vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.feat-cap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px 16px;margin-top:12px}
+.feat-cap .t{font-weight:700;font-size:20px;letter-spacing:-.01em}
+.feat-cap .a{font-size:14.5px;color:var(--muted)}
+.feat-more{all:unset;cursor:pointer;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.05em;text-decoration:underline;text-underline-offset:4px}
+.feat-more:hover,.feat-more:focus-visible{color:var(--muted)}
 footer{font-family:var(--type);font-size:15px;border-top:1px solid var(--rule);padding-top:24px}
 </style>
 </head>
@@ -102,6 +110,15 @@ footer{font-family:var(--type);font-size:15px;border-top:1px solid var(--rule);p
     <h1>Fruitful Friday</h1>
     <p class="lede">Tons of new music out today! Let's start with a focus on five albums to get on your radar. In addition to the albums, there's a bunch of other notable releases. My personal favorite project so far is the <a href="https://dirtyhandsrec.bandcamp.com/album/ontario-ep" target="_blank" rel="noopener">Per Hammar EP</a>.</p>
   </header>
+
+  <section class="feat" aria-labelledby="feat-h">
+    <div class="glance-head"><h2 id="feat-h">FEATURED TRACK</h2></div>
+    <div class="vid"><iframe src="https://www.youtube-nocookie.com/embed/rKuTxzf5Zdo?rel=0" title="Per Hammar - Ontario [Dirty Hands]" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+    <div class="feat-cap">
+      <div><span class="t">Ontario</span> <span class="a">Per Hammar · Ontario EP · Dirty Hands</span></div>
+      <button class="feat-more" type="button" data-open="other:0">MORE ON THE EP ↓</button>
+    </div>
+  </section>
 
   <section class="pl pl-top" aria-label="New Releases playlist">
     <a class="pl-art" href="https://open.spotify.com/playlist/4XHIWAkY2OPglDJkUmSBRC" target="_blank" rel="noopener">
@@ -186,6 +203,7 @@ Object.keys(SETS).forEach(key=>{
     const s=e.target.closest("[data-step]");if(s){const n=(cur+ +s.dataset.step+R.length)%R.length;cur=-2;show(n,false)}
   });
 });
+document.querySelectorAll("[data-open]").forEach(b=>b.addEventListener("click",()=>{const [s,i]=b.dataset.open.split(":");const tile=document.querySelector(`[data-set="${s}"] .tile[data-i="${i}"]`);if(tile&&tile.getAttribute("aria-expanded")!=="true")tile.click();else if(tile)document.querySelector(`[data-detail="${s}"]`).scrollIntoView({behavior:"smooth",block:"nearest"})}));
 </script>
 </body>
 </html>
