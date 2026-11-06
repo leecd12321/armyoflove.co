@@ -16,16 +16,16 @@ const A={ // artists
  urbancc:{name:"URBAN CC",sp:"https://open.spotify.com/artist/1beunTtJdnQMKxmCQJ0VMh"}
 };
 const L={ // labels
- openers:{name:"Openers",bc:"https://openers.bandcamp.com"},
- squama:{name:"Squama",bc:"https://squamarecordings.bandcamp.com"},
- kompakt:{name:"Kompakt",bc:"https://kompakt.bandcamp.com"},
- innervisions:{name:"Innervisions",bc:"https://innervisionsmusic.bandcamp.com"},
+ openers:{name:"Openers",bc:"https://openers.bandcamp.com",ig:"https://www.instagram.com/openersrecs/"},
+ squama:{name:"Squama",bc:"https://squamarecordings.bandcamp.com",ig:"https://www.instagram.com/squama.rec/"},
+ kompakt:{name:"Kompakt",bc:"https://kompakt.bandcamp.com",ig:"https://www.instagram.com/kompaktrecords/"},
+ innervisions:{name:"Innervisions",bc:"https://innervisionsmusic.bandcamp.com",ig:"https://www.instagram.com/innervisions_official/"},
  runningback:{name:"Running Back",bc:"https://runningbackrecords.bandcamp.com",ig:"https://www.instagram.com/runningbackrecords/"},
- dirtyhands:{name:"Dirty Hands",bc:"https://dirtyhandsrec.bandcamp.com"},
- dog:{name:"Delusions of Grandeur",bc:"https://delusionsofgrandeurrec.bandcamp.com"},
- multiculti:{name:"Multi Culti",bc:"https://multiculti.bandcamp.com",sc:"https://soundcloud.com/multiculti"},
+ dirtyhands:{name:"Dirty Hands",bc:"https://dirtyhandsrec.bandcamp.com",ig:"https://www.instagram.com/dirtyhandsrec/"},
+ dog:{name:"Delusions of Grandeur",bc:"https://delusionsofgrandeurrec.bandcamp.com",ig:"https://www.instagram.com/delusionsofgrandeurrecords/"},
+ multiculti:{name:"Multi Culti",bc:"https://multiculti.bandcamp.com",sc:"https://soundcloud.com/multiculti",ig:"https://www.instagram.com/multicultifamily/"},
  phonogramme:{name:"Phonogramme",bc:"https://phonogramme.bandcamp.com"},
- berg:{name:"Berg Audio",bc:"https://bergaudio.bandcamp.com"}
+ berg:{name:"Berg Audio",bc:"https://bergaudio.bandcamp.com",ig:"https://www.instagram.com/berg_audio/"}
 };
 const SETS= // Fruitful Friday · Nov 6, 2026
 {
@@ -43,7 +43,7 @@ const SETS= // Fruitful Friday · Nov 6, 2026
   blurb:"To be honest, I didn't connect with this on my first listen.\nMost people I know love Innervisions, so I wanted to make sure you knew this came out today.\n\nIt's just not for me.",
   tracks:[],bc:"https://ame-engoli.bandcamp.com/album/love-is-the-dance-lp",sp:"https://open.spotify.com/album/3GMbNTMjPI2gJULzw5RaK5"},
  {title:"Collected Works",releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["ksky"],label:"runningback",type:"ALBUM",count:10,img:"collected-works-cover.jpg",
-  blurb:"I'm not familiar with Ksky, but the single for this album came out last week and I really connected with it: \"Bad Philly.\"\n\nLooking forward to taking this one for a walk and an intentional listen.\nHonestly, that could take days or weeks from now.",tracks:["Bad Philly"],bc:"https://runningbackrecords.bandcamp.com/album/collected-works",sp:"https://open.spotify.com/album/3DCc8tUSaFjfIP7dbNbvJH"}
+  blurb:"I'm not familiar with Ksky, but the single for this album came out last week and I really connected with it: \"Bad Philly.\"\n\nLooking forward to taking this one for a walk and an intentional listen.\nHonestly, that could take days or weeks from now.",tracks:["Bad Philly","Weirdub"],bc:"https://runningbackrecords.bandcamp.com/album/collected-works",sp:"https://open.spotify.com/album/3DCc8tUSaFjfIP7dbNbvJH"}
  ],
  other:[
  {title:"Ontario EP",releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["hammar"],label:"dirtyhands",type:"EP",count:4,img:"ontario-ep-cover.jpg",
