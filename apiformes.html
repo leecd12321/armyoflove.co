@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>*,*::before,*::after{box-sizing:border-box}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+/* Living paper: drifting light + vignette under the grain */
+.flow{position:fixed;inset:-25%;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(38% 32% at 22% 28%, rgba(205,178,135,.42), transparent 70%),
+    radial-gradient(34% 40% at 78% 68%, rgba(160,148,124,.32), transparent 70%),
+    radial-gradient(28% 26% at 62% 18%, rgba(222,200,165,.38), transparent 70%),
+    radial-gradient(30% 34% at 35% 82%, rgba(176,160,132,.28), transparent 70%);
+  filter:blur(28px);animation:flow 46s ease-in-out infinite alternate}
+@keyframes flow{0%{transform:translate(0,0) rotate(0deg) scale(1)}33%{transform:translate(5%,-4%) rotate(7deg) scale(1.05)}66%{transform:translate(-4%,3%) rotate(-5deg) scale(.98)}100%{transform:translate(3%,5%) rotate(4deg) scale(1.04)}}
+.vignette{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(120% 90% at 50% 40%, transparent 55%, rgba(60,50,38,.16) 100%)}
+@media (prefers-reduced-motion:reduce){.flow{animation:none}}
+</style>
+<title>Apiformes · The Radar</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: paper page with grain; cover left / post right on desktop, cover on top on phones. Single light paper look by choice. */
+:root{
+  --paper:#f1ece3; --card:#faf7f1; --ink:#1c1b19; --muted:#5f5a51; --rule:#d8d0c2;
+  --sans:"Hanken Grotesk","Helvetica Neue",Arial,sans-serif;
+  --mono:"Space Mono","Courier New",monospace;
+  color-scheme:light;
+}
+html,body{background:var(--paper)}
+body{color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;position:relative;overflow-x:hidden}
+.grain{position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;mix-blend-mode:multiply;opacity:.7;z-index:0;animation:grain 1.2s steps(6) infinite}
+@keyframes grain{0%,100%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-4%,-1%)}80%{transform:translate(3%,3%)}}
+a{color:var(--ink);text-underline-offset:4px;text-decoration-thickness:1px}
+a:hover{color:var(--muted)}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+
+.page{position:relative;z-index:1;max-width:1120px;margin:0 auto;
+  padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));padding-block:24px 72px;
+  display:flex;flex-direction:column;gap:40px}
+nav{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:12px;font-weight:500;letter-spacing:.08em}
+nav a{text-decoration:none}
+nav .home{font-weight:700}
+nav .links{display:flex;gap:20px}
+nav .links a:not([aria-current]){color:var(--muted)}
+
+.post{display:grid;grid-template-columns:minmax(0,1fr);gap:24px}
+.cover{width:100%;max-width:520px;aspect-ratio:1/1;object-fit:cover;display:block;background:#161616}
+.body{display:flex;flex-direction:column;gap:20px;min-width:0;max-width:540px}
+@media (min-width:860px){
+  .post{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:start}
+  .cover{position:sticky;top:24px}
+  .page{gap:56px;padding-block:28px 96px}
+}
+@media (max-width:540px){
+  .cover{width:calc(100% + 2*max(20px,env(safe-area-inset-left,0px)));max-width:none;margin-left:calc(-1*max(20px,env(safe-area-inset-left,0px)))}
+}
+
+.eyebrow{font-size:12px;font-weight:500;letter-spacing:.07em;color:var(--muted)}
+h1{margin:4px 0 0;font-size:clamp(34px,6vw,52px);font-weight:700;letter-spacing:-.025em;line-height:1}
+.by{font-size:19px;color:#4a463f;margin:4px 0 0}
+
+/* Badges */
+.badges{display:flex;flex-wrap:wrap;align-items:center;gap:8px;position:relative}
+.b{all:unset;box-sizing:border-box;cursor:help;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.04em;line-height:1;
+  display:inline-flex;align-items:center;gap:6px;padding:4px 7px;border:1px solid var(--ink);white-space:nowrap}
+.b.fill{background:var(--ink);color:var(--paper)}
+.b.dash{border-style:dashed;color:#4a463f;border-color:#6b665d}
+.b.fade{border-color:#8a847a;color:var(--muted)}
+.b .dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+.b .dot.pulse{animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.2}}
+.seal{all:unset;box-sizing:border-box;cursor:help;width:26px;height:26px;border:1px solid var(--ink);border-radius:50%;display:inline-flex;align-items:center;justify-content:center}
+.seal span{width:20px;height:20px;box-sizing:border-box;border:1px solid var(--ink);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-family:var(--sans);font-size:11px;font-weight:700}
+.b:focus-visible,.seal:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.keybtn{all:unset;cursor:pointer;font-size:11px;font-weight:500;letter-spacing:.06em;color:var(--muted);text-decoration:underline;text-underline-offset:3px;padding:6px 2px}
+.keybtn:hover{color:var(--ink)}
+
+.tip{position:absolute;left:0;top:calc(100% + 8px);z-index:5;max-width:min(320px,100%);background:var(--ink);color:var(--paper);
+  font-size:13px;line-height:1.45;padding:10px 12px;box-shadow:0 6px 18px rgba(28,27,25,.18)}
+.tip b{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;display:block;margin-bottom:3px}
+
+/* Legend */
+.legend{border:1px solid var(--rule);background:var(--card);padding:16px;display:flex;flex-direction:column;gap:14px}
+.legend h2{margin:0;font-size:12px;font-weight:700;letter-spacing:.08em}
+.legend .row{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.legend .sub{font-size:11px;font-weight:500;letter-spacing:.06em;color:var(--muted)}
+.legend .explain{font-size:14px;line-height:1.5;min-height:3em;border-top:1px solid var(--rule);padding-top:12px}
+.legend .explain strong{font-family:var(--mono);font-size:11px;letter-spacing:.05em;display:block;margin-bottom:2px}
+
+.note{display:flex;flex-direction:column;gap:14px;font-family:"Courier Prime","Courier New",monospace;font-size:15.5px;line-height:1.65}
+.note p{margin:0}
+.artist{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-start;gap:6px;margin-top:2px;font-size:inherit;letter-spacing:normal}
+.artist-lbl{font-size:11px;font-weight:500;letter-spacing:.07em;color:var(--muted);margin-right:4px}
+.artist a{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.04em;line-height:1;text-decoration:none;border:1px solid var(--ink);padding:6px 8px}
+.artist a:hover{background:var(--ink);color:var(--paper)}
+.note .draft{color:var(--muted)}
+.tracks{display:flex;flex-direction:column;gap:8px}
+.track{display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--card);border:1px solid var(--rule);border-radius:10px;
+  padding:13px 15px;text-decoration:none;font-size:17px;font-weight:500;color:var(--ink)}
+.track.pending{color:var(--muted);border-style:dashed;background:transparent}
+.track span{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+a.track[href]:hover{border-color:var(--ink);color:var(--ink)}
+.also{font-size:14px;color:var(--muted);margin:0}
+.out{display:flex;flex-wrap:wrap;gap:22px;font-size:15px;font-weight:500}
+.sign{margin:0}
+@media (prefers-reduced-motion:reduce){.grain,.b .dot.pulse{animation:none}}
+
+/* Video cards: hover (or tap) to enlarge and play */
+.vids{display:flex;flex-direction:column;gap:14px}
+.vid{position:relative;border:1px solid var(--rule);background:var(--card);border-radius:10px;overflow:hidden;transition:transform .35s ease,box-shadow .35s ease;transform-origin:center}
+.vid.on{transform:scale(1.04);box-shadow:0 18px 40px rgba(28,27,25,.22);z-index:2}
+.vid .frame{position:relative;aspect-ratio:16/9;background:#161616}
+.vid .frame img,.vid .frame iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0;display:block}
+.vid .play{all:unset;cursor:pointer;position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.vid .play span{width:54px;height:54px;border-radius:50%;background:rgba(241,236,227,.92);display:flex;align-items:center;justify-content:center}
+.vid .play span::before{content:"";margin-left:4px;border-left:15px solid var(--ink);border-top:9px solid transparent;border-bottom:9px solid transparent}
+.vid .play:focus-visible span{outline:2px solid var(--paper);outline-offset:3px}
+.vid .cap{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 15px;font-size:17px;font-weight:500}
+.vid .cap small{font-family:var(--mono);font-size:10.5px;font-weight:700;color:var(--muted)}
+.vid .sound{all:unset;cursor:pointer;font-family:var(--mono);font-size:10.5px;font-weight:700;border:1px solid var(--ink);padding:4px 7px}
+.vid .sound:hover{background:var(--ink);color:var(--paper)}
+@media (prefers-reduced-motion:reduce){.vid{transition:none}.vid.on{transform:none}}
+</style>
+</head>
+<body>
+<div class="flow" aria-hidden="true"></div>
+<div class="vignette" aria-hidden="true"></div>
+<svg class="grain" aria-hidden="true"><filter id="g"><feTurbulence type="fractalNoise" baseFrequency="0.78" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="matrix" values="0 0 0 0 0.30  0 0 0 0 0.27  0 0 0 0 0.22  0 0 0 0.62 0"/></filter><rect width="100%" height="100%" filter="url(#g)"/></svg>
+
+<div class="page">
+  <nav aria-label="Site">
+    <a class="home" href="index.html">ARMY OF LOVE</a>
+  </nav>
+
+  <article class="post">
+    <img class="cover" id="cover" alt="Apiformes cover: bee-colony photographs and scans on white, with the track names printed around them">
+
+    <div class="body">
+      <header>
+        <div class="eyebrow">THE RADAR · NOV 5, 2026</div>
+        <h1>Apiformes</h1>
+        <p class="by">Polygonia &amp; Simon Popp · Squama</p>
+      </header>
+
+      <div>
+        <div class="badges" id="badges">
+          <button class="b" id="life" type="button" aria-describedby="tip">OUT NOV 6</button>
+          <button class="seal" id="count" type="button" aria-label="3 tracks caught me" aria-describedby="tip"><span>3</span></button>
+          <button class="keybtn" id="keybtn" type="button" aria-expanded="false" aria-controls="legend">Badge key</button>
+          <div class="tip" id="tip" role="tooltip" hidden></div>
+        </div>
+      </div>
+
+      <section class="legend" id="legend" hidden aria-label="Badge key">
+        <h2>BADGE KEY</h2>
+        <div>
+          <div class="sub">RELEASE · counts down, then fades</div>
+          <div class="row" id="lifeRow" style="margin-top:8px"></div>
+        </div>
+        <div>
+          <div class="sub">TRACKS THAT CAUGHT ME</div>
+          <div class="row" style="margin-top:8px"><button class="seal" type="button" data-k="count"><span>3</span></button></div>
+        </div>
+        <div class="explain" id="explain" aria-live="polite">Hover or tap a badge to see what it means.</div>
+      </section>
+
+      <div class="note">
+        <p>Techno jazz alien.</p>
+        <p>Polygonia's music challenges my listening muscles and I deeply appreciate it. Sounds and rhythms coming from another planet, that's for sure.</p>
+        <p>The brand new album with Simon Popp, "Apiformes," is out now. It's not for everyone, but if you like the sound in the tasters, be sure to dive in and listen to the full album.</p>
+        <nav class="artist" aria-label="Polygonia elsewhere">
+          <span class="artist-lbl">POLYGONIA</span>
+          <a href="https://polygonia.bandcamp.com" target="_blank" rel="noopener">BANDCAMP</a>
+          <a href="https://soundcloud.com/polygonia" target="_blank" rel="noopener">SOUNDCLOUD</a>
+          <a href="https://open.spotify.com/artist/1bvMkEwyURFPl2eDGZieUm" target="_blank" rel="noopener">SPOTIFY</a>
+          <a href="https://www.instagram.com/_polygonia_" target="_blank" rel="noopener">INSTAGRAM</a>
+        </nav>
+      </div>
+
+      <div class="vids" aria-label="Tracks that caught me">
+        <div class="vid" data-id="rev6YEpKLNI" data-title="Honeydrop" data-no="04"></div>
+        <div class="vid" data-id="66RA0nC82J0" data-title="Nectar Flow" data-no="06"></div>
+        <div class="vid" data-id="CxhSDdVOpWk" data-title="Hive Mind" data-no="08"></div>
+        <div class="vid" data-id="R_osLnp6fKA" data-title="Pollination Beats" data-no="10"></div>
+      </div>
+      <p class="also">11 tracks on the album</p>
+
+      <div class="out">
+        <a href="https://polygonia.bandcamp.com/album/apiformes" target="_blank" rel="noopener">Bandcamp →</a>
+        <a id="yt" target="_blank" rel="noopener">YouTube →</a>
+      </div>
+      <p class="sign">Sending you love,<br>Leefer</p>
+    </div>
+  </article>
+</div>
+
+<script>
+// Paste the unlisted video's ID here (the part after youtu.be/)
+const VIDEO_ID = "";
+const RELEASE = new Date(2026, 10, 6); // Fri Nov 6, 2026
+const COUNT = 4;
+
+// Cover: a local copy published next to this page
+document.getElementById('cover').src = 'apiformes-cover.jpg';
+if(!COUNT) document.getElementById('count').remove();
+
+// Video links
+(function(){
+  const yt = document.getElementById('yt');
+  if(!VIDEO_ID){ yt.remove(); return; }
+  document.querySelectorAll('.track[data-t]').forEach(a=>{ a.href=`https://youtu.be/${VIDEO_ID}?t=${a.dataset.t}`; a.target="_blank"; a.rel="noopener"; });
+  yt.href = `https://youtu.be/${VIDEO_ID}`;
+})();
+
+// The release stages, used for the live badge and the key
+const STAGES = {
+  far:   {cls:'dash', label:'IN 9 DAYS',  title:'Coming soon', text:'Not out yet. The number counts down the days to release.'},
+  near:  {cls:'',     label:'OUT TOMORROW', title:'Coming soon', text:'Out within the week. Members can tap Remind me to get an email on release day.'},
+  today: {cls:'fill', label:'OUT TODAY',  dot:true, title:'Out today', text:'Release day. The only badge that pulses.'},
+  new:   {cls:'fill', label:'NEW 4D',     title:'Brand new', text:'Out for 1 to 7 days. The number is days since release.'},
+  fresh: {cls:'',     label:'FRESH 19D',  title:'Fresh', text:'Out for 8 to 30 days.'},
+  fade:  {cls:'fade', label:'38D',        title:'Fading', text:'Out for 31 to 60 days. It fades a little each day, then the badge disappears and only the release date stays.'},
+};
+const COUNT_INFO = {title:'Tracks that caught me', text:`How many tracks on this release caught me. Here it's ${COUNT} of the 11, and each one has its own video below.`};
+
+function paint(el, s, label){
+  el.className = 'b' + (s.cls ? ' ' + s.cls : '');
+  el.innerHTML = (s.dot ? '<i class="dot pulse"></i>' : '') + (label || s.label);
+}
+
+// Live badge from today's date
+const life = document.getElementById('life');
+let lifeInfo;
+(function(){
+  const n = new Date(); const today = new Date(n.getFullYear(), n.getMonth(), n.getDate());
+  const d = Math.round((RELEASE - today) / 864e5);
+  let key, label;
+  if(d >= 8){ key='far'; label=`IN ${d} DAYS`; }
+  else if(d >= 2){ key='near'; label=`IN ${d} DAYS`; }
+  else if(d === 1){ key='near'; label='OUT TOMORROW'; }
+  else if(d === 0){ key='today'; }
+  else { const a=-d;
+    if(a<=7){ key='new'; label=`NEW ${a}D`; }
+    else if(a<=30){ key='fresh'; label=`FRESH ${a}D`; }
+    else if(a<=60){ key='fade'; label=`${a}D`; life.style.opacity=(1-(a-30)/60).toFixed(2); }
+  }
+  if(!key){ life.remove(); return; }
+  paint(life, STAGES[key], label);
+  lifeInfo = STAGES[key];
+})();
+
+// Tooltips on the post's own badges (hover, keyboard focus, or tap)
+const tip = document.getElementById('tip');
+function showTip(btn, info){
+  tip.innerHTML = `<b>${info.title.toUpperCase()}</b>${info.text}`;
+  tip.style.left = Math.min(btn.offsetLeft, Math.max(0, btn.parentElement.clientWidth - 320)) + 'px';
+  tip.hidden = false;
+}
+function hideTip(){ tip.hidden = true; }
+[[life, ()=>lifeInfo], [document.getElementById('count'), ()=>COUNT_INFO]].forEach(([btn, get])=>{
+  if(!btn || !btn.isConnected) return;
+  btn.addEventListener('mouseenter', ()=>showTip(btn, get()));
+  btn.addEventListener('mouseleave', hideTip);
+  btn.addEventListener('focus', ()=>showTip(btn, get()));
+  btn.addEventListener('blur', hideTip);
+  btn.addEventListener('click', e=>{ e.stopPropagation(); tip.hidden ? showTip(btn, get()) : hideTip(); });
+});
+document.addEventListener('click', hideTip);
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') hideTip(); });
+
+// Badge key
+const legend = document.getElementById('legend'), keybtn = document.getElementById('keybtn'), explain = document.getElementById('explain');
+keybtn.addEventListener('click', e=>{ e.stopPropagation(); legend.hidden = !legend.hidden; keybtn.setAttribute('aria-expanded', String(!legend.hidden)); });
+const row = document.getElementById('lifeRow');
+Object.entries(STAGES).forEach(([k,s])=>{
+  const b = document.createElement('button'); b.type='button'; b.dataset.k=k; paint(b,s); row.appendChild(b);
+});
+function explainFor(k){ const s = k==='count' ? COUNT_INFO : STAGES[k]; explain.innerHTML = `<strong>${s.title.toUpperCase()}</strong>${s.text}`; }
+legend.querySelectorAll('button[data-k]').forEach(b=>{
+  ['mouseenter','focus','click'].forEach(ev=>b.addEventListener(ev, e=>{ e.stopPropagation(); explainFor(b.dataset.k); }));
+});
+
+// Video cards
+(function(){
+  const canHover = window.matchMedia('(hover: hover)').matches;
+  const cards = [...document.querySelectorAll('.vid')];
+  function cmd(card, func){ const f = card.querySelector('iframe'); if(f) f.contentWindow.postMessage(JSON.stringify({event:'command',func,args:[]}), '*'); }
+  function load(card, muted){
+    const fr = card.querySelector('.frame');
+    if(card.querySelector('iframe')){ cmd(card, muted ? 'mute' : 'unMute'); cmd(card,'playVideo'); return; }
+    const p = new URLSearchParams({autoplay:1, mute: muted?1:0, playsinline:1, rel:0, modestbranding:1, enablejsapi:1, origin: location.origin});
+    const f = document.createElement('iframe');
+    f.src = `https://www.youtube-nocookie.com/embed/${card.dataset.id}?${p}`;
+    f.title = card.dataset.title + ' (video)';
+    f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    f.allowFullscreen = true;
+    fr.appendChild(f);
+    card.querySelector('.play').hidden = true;
+  }
+  cards.forEach(card=>{
+    const id = card.dataset.id;
+    card.innerHTML = `<div class="frame"><img src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" loading="lazy"><button class="play" type="button" aria-label="Play ${card.dataset.title}"><span></span></button></div>
+      <div class="cap"><span>${card.dataset.title} <small>&nbsp;${card.dataset.no}</small></span><button class="sound" type="button">SOUND ON</button></div>`;
+    const sound = card.querySelector('.sound');
+    sound.addEventListener('click', ()=>{ cards.forEach(c=>{ if(c!==card){ cmd(c,'pauseVideo'); c.classList.remove('on'); } }); card.classList.add('on'); load(card,false); cmd(card,'unMute'); cmd(card,'playVideo'); });
+    card.querySelector('.play').addEventListener('click', ()=>{ cards.forEach(c=>{ if(c!==card){ cmd(c,'pauseVideo'); c.classList.remove('on'); } }); card.classList.add('on'); load(card,false); });
+    if(canHover){
+      card.addEventListener('mouseenter', ()=>{ card.classList.add('on'); load(card,true); });
+      card.addEventListener('mouseleave', ()=>{ card.classList.remove('on'); cmd(card,'pauseVideo'); });
+    }
+  });
+})();
+</script>
+</body>
+</html>
