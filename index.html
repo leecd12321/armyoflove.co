@@ -51,6 +51,7 @@ h1{margin:0;font-size:clamp(40px,8vw,68px);font-weight:700;letter-spacing:-.03em
 .meta{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.05em;color:var(--muted)}
 .detail h3{margin:0;font-size:32px;letter-spacing:-.02em;line-height:1.05}
 .by{margin:0;font-size:15.5px;color:var(--muted)}
+.blurb + .blurb{margin-top:10px}
 .blurb{margin:4px 0 0;font-family:var(--type);font-size:15.5px;line-height:1.65}
 .tracks{margin:0;font-size:14px}
 .tracks b{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em}
@@ -111,7 +112,7 @@ footer{font-family:var(--type);font-size:15px;border-top:1px solid var(--rule);p
       <div class="meta">SPOTIFY PLAYLIST · UPDATED DAILY</div>
       <h2>New Releases</h2>
       <a class="pl-link" href="https://open.spotify.com/playlist/4XHIWAkY2OPglDJkUmSBRC" target="_blank" rel="noopener">click to listen ↗</a>
-      <p><b>All of this week's releases and more</b> are featured here. Sort by recently added.</p>
+      <p><b>All of this week's releases and more</b> are featured here.<br>Sort by recently added.</p>
     </div>
   </section>
 
@@ -136,7 +137,7 @@ footer{font-family:var(--type);font-size:15px;border-top:1px solid var(--rule);p
       <div class="meta">SPOTIFY PLAYLIST · UPDATED DAILY</div>
       <h2>New Releases</h2>
       <a class="pl-link" href="https://open.spotify.com/playlist/4XHIWAkY2OPglDJkUmSBRC" target="_blank" rel="noopener">click to listen ↗</a>
-      <p><b>All of this week's releases and more</b> are featured here. Sort by recently added.</p>
+      <p><b>All of this week's releases and more</b> are featured here.<br>Sort by recently added.</p>
     </div>
   </section>
 
@@ -169,10 +170,11 @@ Object.keys(SETS).forEach(key=>{
     <div class="info">
       <div class="meta">${esc(r.type)} · ${r.count} TRACKS · ${esc(L[r.label].name.toUpperCase())} · ${fmtDate(r.releaseDate)}</div>
       <h3>${esc(r.title)}</h3><p class="by">${esc(names(r))}${r.sub?`<br><span class="sub">${esc(r.sub)}</span>`:""}</p>
-      ${r.blurb?`<p class="blurb">${esc(r.blurb)}</p>`:""}
-      ${r.tracks.length?`<p class="tracks"><b>CAUGHT ME:</b> ${r.tracks.map(esc).join(" · ")}</p>`:""}
+      ${r.blurb?r.blurb.split(/\n\s*\n/).map(p=>`<p class="blurb">${esc(p.trim()).replace(/\n/g,"<br>")}</p>`).join(""):""}
+      ${r.originals?`<p class="blurb">${r.originals.map(o=>`<a href="${o[1]}" target="_blank" rel="noopener">${esc(o[0])} ↗</a>`).join("<br>")}</p>`:""}
+      ${r.tracks.length?`<p class="tracks"><b>ADDED TO DATABASS:</b> ${r.tracks.map(esc).join(" · ")}</p>`:""}
       <div class="links">${[["BANDCAMP",r.bc],["SPOTIFY",r.sp]].filter(l=>l[1]).map((l,k)=>`<a class="btn${k?" ghost":""}" href="${l[1]}" target="_blank" rel="noopener">${l[0]} ↗</a>`).join("")}</div>
-      <div class="follow">${r.artists.map(k=>row(A[k])).join("")}${row(L[r.label],true)}${r.originals?`<p><b>ORIGINAL</b>${r.originals.map(o=>`<a href="${o[1]}" target="_blank" rel="noopener">${esc(o[0])}</a>`).join("")}</p>`:""}</div>
+      <div class="follow">${r.artists.map(k=>row(A[k])).join("")}${row(L[r.label],true)}</div>
       <div class="pager"><button data-step="-1">← PREV</button><button data-step="1">NEXT →</button></div>
     </div>`;
     d.hidden=false;sync();
