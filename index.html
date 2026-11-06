@@ -110,6 +110,10 @@ h1{margin:0;font-size:clamp(40px,8vw,68px);font-weight:700;letter-spacing:-.03em
 .feat-cap .a{font-size:14.5px;color:var(--muted)}
 .feat-more{all:unset;cursor:pointer;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.05em;text-decoration:underline;text-underline-offset:4px}
 .feat-more:hover,.feat-more:focus-visible{color:var(--muted)}
+.pl-count{align-self:flex-start;margin-top:4px;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  color:transparent;background:linear-gradient(100deg,var(--muted) 0%,var(--muted) 40%,var(--ink) 50%,var(--muted) 60%,var(--muted) 100%);background-size:250% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;animation:sweep 4.5s ease-in-out infinite}
+@keyframes sweep{0%,55%{background-position:100% 0}100%{background-position:0 0}}
+@media (prefers-reduced-motion:reduce){.pl-count{animation:none;color:var(--muted);background:none}}
 footer{font-family:var(--type);font-size:15px;border-top:1px solid var(--rule);padding-top:24px}
 </style>
 </head>
@@ -133,6 +137,7 @@ footer{font-family:var(--type);font-size:15px;border-top:1px solid var(--rule);p
       <h2>New Releases</h2>
       <a class="pl-link" href="https://open.spotify.com/playlist/4XHIWAkY2OPglDJkUmSBRC" target="_blank" rel="noopener">click to listen ↗</a>
       <p><b>All of this week's releases and more</b> are featured here.<br>Sort by recently added.</p>
+      <div class="pl-count">119 tracks added today</div>
     </div>
   </section>
 
@@ -158,6 +163,7 @@ footer{font-family:var(--type);font-size:15px;border-top:1px solid var(--rule);p
       <h2>New Releases</h2>
       <a class="pl-link" href="https://open.spotify.com/playlist/4XHIWAkY2OPglDJkUmSBRC" target="_blank" rel="noopener">click to listen ↗</a>
       <p><b>All of this week's releases and more</b> are featured here.<br>Sort by recently added.</p>
+      <div class="pl-count">119 tracks added today</div>
     </div>
   </section>
 
