@@ -17,6 +17,9 @@ a{color:var(--ink)}
 .page{max-width:1040px;margin:0 auto;padding:28px 20px 96px;display:flex;flex-direction:column;gap:40px}
 nav{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:700;letter-spacing:.08em}
 nav a{text-decoration:none}
+.logo{display:block;line-height:0}
+.logo img{height:30px;width:auto;display:block}
+@media (max-width:560px){.logo img{height:24px}}
 nav span{color:var(--muted);font-weight:500}
 .intro{display:flex;flex-direction:column;gap:10px;max-width:640px}
 .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.07em;color:var(--muted)}
@@ -110,7 +113,7 @@ footer{font-family:var(--type);font-size:15px;border-top:1px solid var(--rule);p
 </head>
 <body>
 <div class="page">
-  <nav><a href="index.html">ARMY OF LOVE</a><span>THE RADAR</span></nav>
+  <nav><a class="logo" href="index.html" aria-label="Army of Love home"><img src="army-of-love-wordmark.png" alt="Army of Love" width="640" height="135"></a><span>THE RADAR</span></nav>
 
   <header class="intro">
     <div class="eyebrow">FRIDAY · NOV 6, 2026</div>
