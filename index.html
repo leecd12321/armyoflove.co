@@ -90,9 +90,16 @@ h1{margin:0;font-size:clamp(40px,8vw,68px);font-weight:700;letter-spacing:-.03em
 .pl-text{display:flex;flex-direction:column;gap:6px;min-width:0}
 .pl-text h2{margin:0;font-size:28px;letter-spacing:-.02em;line-height:1.1}
 .pl-text p{margin:0;font-size:15.5px}
-.feat{max-width:760px}
+.feat{max-width:760px;width:100%;margin:0 auto}
 .feat .vid{position:relative;aspect-ratio:16/9;background:#111;border:1px solid var(--ink)}
 .feat .vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.feat .vid #yt,.feat .vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vid-hit{all:unset;position:absolute;inset:0;cursor:pointer;display:flex;align-items:center;justify-content:center;background:transparent}
+.vid-play{width:64px;height:64px;border-radius:50%;background:rgba(0,0,0,.55);color:#f1ece3;display:flex;align-items:center;justify-content:center;font-size:24px;padding-left:4px;transition:opacity .25s}
+.vid.playing .vid-play{opacity:0}
+.vid.playing .vid-hit:hover .vid-play{opacity:.85}
+.vid-fs{all:unset;position:absolute;right:10px;bottom:10px;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#f1ece3;background:rgba(0,0,0,.45);font-size:18px;opacity:0;transition:opacity .2s}
+.vid:hover .vid-fs,.vid-fs:focus-visible{opacity:1}
 .feat-cap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px 16px;margin-top:12px}
 .feat-cap .t{font-weight:700;font-size:20px;letter-spacing:-.01em}
 .feat-cap .a{font-size:14.5px;color:var(--muted)}
@@ -112,8 +119,12 @@ footer{font-family:var(--type);font-size:15px;border-top:1px solid var(--rule);p
   </header>
 
   <section class="feat" aria-labelledby="feat-h">
-    <div class="glance-head"><h2 id="feat-h">FEATURED TRACK</h2></div>
-    <div class="vid"><iframe src="https://www.youtube-nocookie.com/embed/rKuTxzf5Zdo?rel=0" title="Per Hammar - Ontario [Dirty Hands]" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+    <div class="glance-head"><h2 id="feat-h">FAV TRACK SO FAR</h2></div>
+    <div class="vid" id="vid">
+      <div id="yt"></div>
+      <button class="vid-hit" type="button" aria-label="Play or pause video"><span class="vid-play" aria-hidden="true">▶</span></button>
+      <button class="vid-fs" type="button" aria-label="Full screen">⤢</button>
+    </div>
     <div class="feat-cap">
       <div><span class="t">Ontario</span> <span class="a">Per Hammar · Ontario EP · Dirty Hands</span></div>
       <button class="feat-more" type="button" data-open="other:0">MORE ON THE EP ↓</button>
@@ -204,6 +215,19 @@ Object.keys(SETS).forEach(key=>{
   });
 });
 document.querySelectorAll("[data-open]").forEach(b=>b.addEventListener("click",()=>{const [s,i]=b.dataset.open.split(":");const tile=document.querySelector(`[data-set="${s}"] .tile[data-i="${i}"]`);if(tile&&tile.getAttribute("aria-expanded")!=="true")tile.click();else if(tile)document.querySelector(`[data-detail="${s}"]`).scrollIntoView({behavior:"smooth",block:"nearest"})}));
+
+// Featured video: YouTube player with its own controls hidden, so the title bar and timeline don't hang over the video
+(function(){
+  const box=document.getElementById("vid");if(!box)return;
+  let player;
+  const s=document.createElement("script");s.src="https://www.youtube.com/iframe_api";document.head.appendChild(s);
+  window.onYouTubeIframeAPIReady=()=>{player=new YT.Player("yt",{host:"https://www.youtube-nocookie.com",videoId:"rKuTxzf5Zdo",
+    playerVars:{controls:0,rel:0,playsinline:1,iv_load_policy:3,disablekb:1,fs:0,cc_load_policy:0,cc_lang_pref:"none"},
+    events:{onReady:()=>noCC(),onStateChange:e=>{box.classList.toggle("playing",e.data===1);if(e.data===1)noCC()}}})};
+  const noCC=()=>{try{player.unloadModule("captions");player.unloadModule("cc");player.setOption("captions","track",{})}catch(_){}};
+  box.querySelector(".vid-hit").addEventListener("click",()=>{if(!player||!player.getPlayerState)return;player.getPlayerState()===1?player.pauseVideo():player.playVideo()});
+  box.querySelector(".vid-fs").addEventListener("click",()=>{(box.requestFullscreen||box.webkitRequestFullscreen||(()=>{})).call(box)});
+})();
 </script>
 </body>
 </html>
