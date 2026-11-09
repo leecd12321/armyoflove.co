@@ -3,9 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Fruitful Friday · Army of Love</title>
+<title>Army of Love</title>
 <meta name="description" content="Fruitful Friday, Nov 6, 2026: four albums out today.">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&family=Courier+Prime&display=swap">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#161616">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&family=Courier+Prime&family=EB+Garamond:ital@0;1&display=swap">
 <style>
 *,*::before,*::after{box-sizing:border-box}
 :root{--paper:#f1ece3;--card:#faf7f1;--ink:#1c1b19;--muted:#5f5a51;--rule:#d8d0c2;
@@ -115,11 +121,101 @@ h1{margin:0;font-size:clamp(40px,8vw,68px);font-weight:700;letter-spacing:-.03em
 @keyframes sweep{0%,55%{background-position:100% 0}100%{background-position:0 0}}
 @media (prefers-reduced-motion:reduce){.pl-count{animation:none;color:var(--muted);background:none}}
 footer{font-family:var(--type);font-size:15px;border-top:1px solid var(--rule);padding-top:24px}
+.shelf{background:#e8e1d5;color:#161616;padding:26px 24px 28px;display:flex;flex-direction:column;gap:16px}
+.shelf-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.shelf-head h2{margin:0;font-family:var(--mono);font-size:12px;letter-spacing:.07em;color:#343a20}
+.shelf-head a,.shelf .more{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.05em;color:#161616;text-underline-offset:4px}
+.shelf-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+@media (max-width:720px){.shelf-row{grid-template-columns:1fr 1fr}}
+@media (max-width:460px){.shelf-row{grid-template-columns:1fr}}
+.essay{display:flex;flex-direction:column;gap:6px;text-decoration:none;color:#161616;min-width:0}
+.essay-img{aspect-ratio:4/3;overflow:hidden;background:#afa89e}
+.essay-img img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.85);transition:transform .5s ease}
+.essay:hover .essay-img img{transform:scale(1.03)}
+.essay .d{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.05em;color:#5f5a51}
+.essay h3{margin:0;font-family:"EB Garamond",Garamond,Georgia,serif;font-weight:400;font-size:26px;line-height:1.08}
+.essay .sub{margin:0;font-family:"EB Garamond",Garamond,Georgia,serif;font-style:italic;font-size:18px;color:#5f5a51}
+.essay-sub{border:1px solid #161616;padding:18px;display:flex;flex-direction:column;justify-content:space-between;gap:14px;min-height:180px}
+.essay-sub p{margin:0;font-family:var(--type);font-size:15px;line-height:1.6}
+@media (prefers-reduced-motion:reduce){.essay-img img{transition:none}}
+
+/* coming soon announcement */
+.soon{border:1px solid var(--ink);background:var(--card);padding:22px;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:26px;align-items:start}
+.soon[hidden]{display:none}
+@media (max-width:760px){.soon{grid-template-columns:1fr;padding:16px;gap:16px}}
+.soon .vid{margin:0}
+.soon-info{display:flex;flex-direction:column;gap:10px;min-width:0}
+.soon h2{margin:0;font-size:clamp(34px,6vw,48px);letter-spacing:-.02em;line-height:1}
+.soon .by{font-size:17px}
+.badge{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;padding:5px 11px 5px 9px;border:1px dashed #6b728e;color:#6b728e;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.07em}
+.badge .num{font-family:"EB Garamond",Garamond,Georgia,serif;font-size:21px;font-weight:400;letter-spacing:0;line-height:1;color:var(--ink)}
+.badge.near{border-style:solid;border-color:#8a8378;color:var(--muted)}
+.badge.today{background:#343a20;border:1px solid #343a20;box-shadow:0 0 0 2px var(--card),0 0 0 3px #e8e1d5;color:#e8e1d5}
+.badge.today .dot{width:7px;height:7px;border-radius:50%;background:#e8e1d5;animation:pulse 1.6s ease-in-out infinite}
+.badge.new{background:#e8e1d5;border:1px solid #e8e1d5;color:var(--ink)}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+@media (prefers-reduced-motion:reduce){.badge.today .dot{animation:none}}
+.remind{display:flex;flex-direction:column;align-items:flex-start;margin-top:6px;width:100%}
+#remind-btn{transition:opacity .2s}
+.remind.open #remind-btn{opacity:.55}
+.remind-panel{display:grid;grid-template-rows:0fr;width:100%;max-width:440px;transition:grid-template-rows .45s cubic-bezier(.2,.8,.2,1),margin .45s}
+.remind.open .remind-panel{grid-template-rows:1fr;margin-top:12px}
+.r-inner{overflow:hidden;min-height:0}
+.r-card{background:#161616;color:#e8e1d5;padding:20px;opacity:0;transform:translateY(-6px);transition:opacity .35s .1s,transform .45s .05s cubic-bezier(.2,.8,.2,1)}
+.remind.open .r-card{opacity:1;transform:none}
+.r-ask{margin:0 0 14px;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.08em;color:#afa89e}
+.r-choices{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.r-choices[hidden],.r-form[hidden]{display:none}
+.r-opt{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:10px;padding:16px 14px 14px;border:1px solid #3a3a37;color:#e8e1d5;text-decoration:none;transition:border-color .2s,background .2s,transform .2s}
+.r-opt:hover,.r-opt:focus-visible{border-color:#e8e1d5;background:#1f1f1d;transform:translateY(-2px)}
+.r-opt svg{width:22px;height:22px;stroke:#e8e1d5;fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.r-opt .h{font-family:"EB Garamond",Garamond,Georgia,serif;font-size:22px;line-height:1.05}
+.r-opt small{font-size:12.5px;line-height:1.35;color:#afa89e}
+.r-form{display:flex;flex-direction:column;gap:12px}
+.r-form label{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.08em;color:#afa89e}
+.r-row{display:flex;align-items:center;border-bottom:1px solid #e8e1d5}
+.r-row input{flex:1;min-width:0;font:400 22px "EB Garamond",Garamond,Georgia,serif;padding:6px 0 8px;border:0;background:transparent;color:#e8e1d5;outline:none;border-radius:0}
+.r-row input::placeholder{color:#6f6a62}
+.r-go{all:unset;cursor:pointer;width:38px;height:38px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#e8e1d5;color:#161616;font-size:18px;transition:transform .2s,opacity .2s;flex:none}
+.r-go:hover,.r-go:focus-visible{transform:translateX(3px)}
+.r-go:disabled{opacity:.5;cursor:default}
+.r-msg{margin:0;font-size:13px;line-height:1.45;color:#afa89e}
+.r-msg.err{color:#e8a598}
+.r-done{font-family:"EB Garamond",Garamond,Georgia,serif;font-size:26px;line-height:1.1;color:#e8e1d5;display:block;margin-bottom:4px}
+.r-back{all:unset;cursor:pointer;align-self:flex-start;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.06em;color:#afa89e}
+.r-back:hover,.r-back:focus-visible{color:#e8e1d5}
+@media (max-width:420px){.r-choices{grid-template-columns:1fr}.r-opt{flex-direction:row;align-items:center;flex-wrap:wrap;gap:4px 12px}.r-opt small{flex-basis:100%;padding-left:34px}}
+@media (prefers-reduced-motion:reduce){.remind-panel,.r-card,.r-opt{transition:none}}
+.soon .vid{overflow:hidden;min-height:0}
+.vid-poster{position:absolute;inset:0;overflow:hidden;background:#111;pointer-events:none;transition:opacity .4s}
+.vid-poster .bg{position:absolute;inset:-30px;background-size:cover;background-position:center;filter:blur(24px) brightness(.55)}
+.vid-poster img{position:absolute;top:0;left:50%;height:100%;width:auto;aspect-ratio:1/1;transform:translateX(-50%);object-fit:cover;display:block}
+.vid.started .vid-poster{opacity:0}
+.soon .more-link{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.05em;text-underline-offset:4px}
 </style>
 </head>
 <body>
 <div class="page">
   <nav><a class="logo" href="index.html" aria-label="Army of Love home"><img src="army-of-love-wordmark.png" alt="Army of Love" width="640" height="135"></a><span>THE RADAR</span></nav>
+
+  <section class="shelf" aria-labelledby="essays-h">
+    <div class="shelf-head"><h2 id="essays-h">CASUAL HEALING · ESSAYS</h2><a href="https://casualhealing.substack.com/archive" target="_blank" rel="noopener">ALL ESSAYS →</a></div>
+    <div class="shelf-row">
+      <a class="essay" href="https://casualhealing.substack.com/p/a-wave-of-anxiety" target="_blank" rel="noopener">
+        <div class="essay-img"><img src="https://substackcdn.com/image/fetch/$s_!9pab!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F95e29903-4f69-4978-ab8e-9572bffee5b0_3840x5120.jpeg" alt="" loading="lazy"></div>
+        <div class="d">NEW · MON, NOV 9</div>
+        <h3>A wave of anxiety…</h3>
+        <p class="sub">Rumination.</p>
+      </a>
+      <!-- next essays go here: copy the <a class="essay"> block above -->
+      <div class="essay-sub">
+        <p>A new essay every week. Written for myself, shared with you.</p>
+        <a class="more" href="https://casualhealing.substack.com/subscribe" target="_blank" rel="noopener">SUBSCRIBE ON SUBSTACK →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="soon" id="soon" hidden aria-labelledby="soon-h"></section>
 
   <header class="intro">
     <div class="eyebrow">FRIDAY · NOV 6, 2026</div>
@@ -225,10 +321,86 @@ function mountVideo(box,id){
   const noCC=()=>{try{player.unloadModule("captions");player.unloadModule("cc")}catch(_){}};
   withYT(()=>{if(!host.isConnected)return;player=new YT.Player(host,{host:"https://www.youtube-nocookie.com",videoId:id,
     playerVars:{controls:0,rel:0,playsinline:1,iv_load_policy:3,disablekb:1,fs:0,cc_load_policy:0,cc_lang_pref:"none"},
-    events:{onReady:noCC,onStateChange:e=>{box.classList.toggle("playing",e.data===1);if(e.data===1)noCC()}}})});
+    events:{onReady:noCC,onStateChange:e=>{box.classList.toggle("playing",e.data===1);if(e.data===1)box.classList.add("started");if(e.data===1)noCC()}}})});
   box.querySelector(".vid-hit").addEventListener("click",()=>{if(!player||!player.getPlayerState)return;player.getPlayerState()===1?player.pauseVideo():player.playVideo()});
   box.querySelector(".vid-fs").addEventListener("click",()=>{(box.requestFullscreen||box.webkitRequestFullscreen||(()=>{})).call(box)});
 }
+
+// Where "Email me" reminders are sent (Formspree form endpoint, e.g. "https://formspree.io/f/abcdwxyz"). Empty = email option shows a "coming soon" note.
+const REMIND_FORM="";
+
+// Upcoming release announcement: countdown badge + Remind me (calendar) until release day
+(function(){
+  const box=document.getElementById("soon");if(!box||typeof UPCOMING==="undefined")return;
+  const day=d=>{const x=new Date(d+"T12:00:00");return x};
+  const today=new Date();today.setHours(12,0,0,0);
+  const r=UPCOMING.map(u=>({...u,diff:Math.round((day(u.releaseDate)-today)/864e5)})).filter(u=>u.diff>=-7).sort((a,b)=>a.diff-b.diff)[0];
+  if(!r)return;
+  const when=day(r.releaseDate).toLocaleDateString("en-US",{weekday:"long",month:"short",day:"numeric"}).toUpperCase();
+  let badge,eyebrow;
+  if(r.diff>0){badge=`<span class="badge${r.diff<=7?" near":""}">IN <span class="num">${r.diff}</span> DAY${r.diff>1?"S":""}</span>`;eyebrow=`COMING ${when}`}
+  else if(r.diff===0){badge=`<span class="badge today"><span class="dot"></span>OUT TODAY</span>`;eyebrow=`OUT TODAY · ${when}`}
+  else{badge=`<span class="badge new">NEW · <span class="num">${-r.diff}</span> DAY${r.diff<-1?"S":""}</span>`;eyebrow=`OUT NOW · RELEASED ${when}`}
+  box.innerHTML=`<div class="vid"><div class="yt"></div>${r.img?`<div class="vid-poster" aria-hidden="true"><div class="bg" style="background-image:url('${r.img}')"></div><img src="${r.img}" alt=""></div>`:""}<button class="vid-hit" type="button" aria-label="Play or pause video"><span class="vid-play" aria-hidden="true"></span></button><button class="vid-fs" type="button" aria-label="Full screen">⤢</button></div>
+    <div class="soon-info">
+      <div class="eyebrow">${eyebrow}</div>
+      ${badge}
+      <h2 id="soon-h">${esc(r.title)}</h2>
+      <p class="by">${esc(r.artist)} · <span class="sub">${esc(r.type.toLowerCase())} on ${esc(r.label)}</span></p>
+      ${((r.diff<=0&&r.blurbOut)||r.blurb).split(/\n\s*\n/).map(p=>`<p class="blurb">${esc(p.trim())}</p>`).join("")}
+      ${r.diff>0?`<div class="remind">
+        <button class="btn" type="button" id="remind-btn" aria-expanded="false" aria-controls="remind-panel">REMIND ME →</button>
+        <div class="remind-panel" id="remind-panel"><div class="r-inner"><div class="r-card">
+          <div class="r-choices">
+            <p class="r-ask" style="grid-column:1/-1">HOW SHOULD I REMIND YOU?</p>
+            <button class="r-opt" type="button" data-r="email" tabindex="-1">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="1"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg>
+              <span class="h">Email me</span><small>One email the morning it's out.</small></button>
+            ${r.sp?`<a class="r-opt" href="${r.sp}" target="_blank" rel="noopener" tabindex="-1">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>
+              <span class="h">Pre-save ↗</span><small>Lands in your Spotify library on release day.</small></a>`:""}
+          </div>
+          <form class="r-form" hidden novalidate>
+            <label for="r-email">YOUR EMAIL</label>
+            <div class="r-row"><input id="r-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required><button class="r-go" type="submit" aria-label="Remind me">→</button></div>
+            <p class="r-msg" aria-live="polite">One email the morning of ${esc(day(r.releaseDate).toLocaleDateString("en-US",{weekday:"long",month:"short",day:"numeric"}))}. Nothing else.</p>
+            <button class="r-back" type="button">← BACK</button>
+          </form>
+        </div></div></div></div>`:""}
+      ${r.sp&&r.diff<=0?`<div class="links"><a class="btn" href="${r.sp}" target="_blank" rel="noopener">LISTEN ON SPOTIFY ↗</a></div>`:""}
+      ${r.more?`<a class="more-link" href="${r.more}" target="_blank" rel="noopener">MORE ON ${esc(r.artist.toUpperCase())} ↗</a>`:""}
+    </div>`;
+  box.hidden=false;
+  mountVideo(box.querySelector(".vid"),r.video);
+  const rb=document.getElementById("remind-btn");
+  if(rb){
+    const wrap=box.querySelector(".remind"),choices=wrap.querySelector(".r-choices"),form=wrap.querySelector(".r-form"),
+      input=form.querySelector("input"),msg=form.querySelector(".r-msg"),go=form.querySelector(".r-go"),msg0=msg.textContent,
+      opts=[...wrap.querySelectorAll(".r-opt")];
+    const setOpen=o=>{wrap.classList.toggle("open",o);rb.setAttribute("aria-expanded",o);opts.forEach(x=>x.tabIndex=o?0:-1);if(!o)reset()};
+    const reset=()=>{if(form.dataset.done)return;choices.hidden=false;form.hidden=true;msg.className="r-msg";msg.textContent=msg0};
+    rb.addEventListener("click",()=>setOpen(!wrap.classList.contains("open")));
+    wrap.querySelector('[data-r="email"]').addEventListener("click",()=>{choices.hidden=true;form.hidden=false;setTimeout(()=>input.focus(),50)});
+    form.querySelector(".r-back").addEventListener("click",reset);
+    document.addEventListener("keydown",e=>{if(e.key==="Escape"&&wrap.classList.contains("open")){setOpen(false);rb.focus()}});
+    form.addEventListener("submit",async e=>{
+      e.preventDefault();const email=input.value.trim();
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){msg.className="r-msg err";msg.textContent="That email doesn't look right. Mind checking it?";input.focus();return}
+      if(!REMIND_FORM){msg.className="r-msg err";msg.textContent="Email reminders open very soon. For now, pre-save on Spotify.";return}
+      go.disabled=true;go.textContent="…";
+      try{
+        const res=await fetch(REMIND_FORM,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json"},
+          body:JSON.stringify({email,release:`${r.artist} – ${r.title}`,releaseDate:r.releaseDate,_subject:`Remind me: ${r.artist} – ${r.title}`})});
+        if(!res.ok)throw 0;
+        try{localStorage.setItem("aol-remind-"+r.releaseDate+r.title,"1")}catch(_){}
+        form.dataset.done="1";
+        form.innerHTML=`<p class="r-msg"><span class="r-done">You're on the list.</span>See you ${esc(day(r.releaseDate).toLocaleDateString("en-US",{weekday:"long"}))} morning. Sending you love.</p>`;
+        rb.textContent="REMINDER SET ✓";
+      }catch(_){go.disabled=false;go.textContent="→";msg.className="r-msg err";msg.textContent="Something went wrong. Try again in a moment?"}
+    });
+    try{if(localStorage.getItem("aol-remind-"+r.releaseDate+r.title))rb.textContent="REMINDER SET ✓"}catch(_){}
+  }
+})();
 </script>
 </body>
 </html>

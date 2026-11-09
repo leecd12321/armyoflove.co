@@ -60,3 +60,13 @@ const SETS= // Fruitful Friday · Nov 6, 2026
   blurb:"Berg Audio is consistently delivering quality projects. I haven't listened to this one yet, but the snippets were promising and I love the label.\n\nIt's a remix album, so be sure to check out the original projects if you're feeling the sound.",tracks:[],bc:"https://bergaudio.bandcamp.com/album/urban-cc-remixed-priku-andrew-azara-mihai-popoviciu-jon-sable",
   originals:[["Pt 1","https://bergaudio.bandcamp.com/album/urban-cc-the-introduction-part-i"],["Pt 2","https://bergaudio.bandcamp.com/album/urban-cc-the-introduction-part-ii"]]}
  ]};
+
+// Upcoming releases (announcements). Each shows a countdown + Remind me until release day,
+// switches to OUT TODAY on the day, then NEW for 7 days, then drops off the homepage.
+const UPCOMING=[
+ {title:"ARP",artist:"Felix Rösch",label:"Nettwerk",type:"ALBUM",releaseDate:"2026-11-13",dateAdded:"2026-11-09",video:"90SEUNfNPfo",
+  img:"https://i.scdn.co/image/ab67616d0000b2733ed385984f09e12241edf8e8",sp:"https://open.spotify.com/album/1NjOUiBBVueeLMIVZXkJUc",
+  blurb:"A new album from Felix Rösch lands this Friday. A deeply personal record of neo-classical composition, and the first piece of it, \"Für Lea\", is already out.\n\nSet a reminder and I'll see you on release day.",
+  blurbOut:"ARP is out today. A deeply personal record of neo-classical composition from Felix Rösch.",
+  more:"https://nettwerk.com/artist/felix-rosch"}
+];
