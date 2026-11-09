@@ -113,7 +113,13 @@ const UPCOMING=[
   links:[["CRATES","https://crates.co/release/fabric-presents-palms-trax/7641723"],["BANDCAMP","https://palmstrax.bandcamp.com/album/fabric-presents-palms-trax"]]},
  {mention:true,title:"I'm Failing To Lie",artist:"Dino Lenny",label:"Crosstown Rebels",type:"SINGLE",releaseDate:"2026-11-27",dateAdded:"2026-11-09",
   img:"https://www.horizonsmusic.co.uk/cdn/shop/files/1_40572c21-3796-4cc6-af3b-837d49652fb2.jpg",
-  links:[["CRATES","https://crates.co/release/im-failing-to-lie/7685302"],["VINYL","https://www.horizonsmusic.co.uk/products/dino-lenny-im-failing-to-lie"]]}
+  links:[["CRATES","https://crates.co/release/im-failing-to-lie/7685302"],["VINYL","https://www.horizonsmusic.co.uk/products/dino-lenny-im-failing-to-lie"]]},
+ {mention:true,title:"Tell It To The Mountain",artist:"Axel Boman & Superpitcher",label:"Blurry",type:"ALBUM",releaseDate:"2026-09-25",dateAdded:"2026-11-09",
+  img:"https://f4.bcbits.com/img/a0726252316_10.jpg",
+  links:[["BANDCAMP","https://axelboman.bandcamp.com/album/tell-it-to-the-mountain"]]},
+ {mention:true,title:"Home",artist:"Marsh",label:"Marshan Records",type:"ALBUM",releaseDate:"2026-07-21",dateAdded:"2026-11-09",
+  img:"https://f4.bcbits.com/img/a0121068038_10.jpg",
+  links:[["BANDCAMP","https://marshmusician.bandcamp.com/album/home"]]}
 ];
 
 // Daily posts (one track or release, scheduled by date). The newest post dated today or earlier
