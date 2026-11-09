@@ -374,6 +374,9 @@ const REMIND_FORM="https://app.kit.com/forms/10166878/subscriptions"; // Kit for
 const qsPreview=new URLSearchParams(location.search).get("preview");
 const TODAY=(()=>{const t=qsPreview?new Date(qsPreview+"T12:00:00"):new Date();t.setHours(12,0,0,0);return t})();
 const dayOf=d=>new Date(d+"T12:00:00");
+// Posts go live at the same moment worldwide: 6:45 AM Berlin time on their date (GO_LIVE).
+const GO_LIVE="06:45";
+const berlinAt=(d,t)=>{const g=new Date(d+"T"+t+":00Z");let o=1;try{const v=new Intl.DateTimeFormat("en-US",{timeZone:"Europe/Berlin",timeZoneName:"shortOffset"}).formatToParts(g).find(x=>x.type==="timeZoneName").value;const m=v.match(/GMT([+-]\d+)/);o=m?+m[1]:0}catch(_){}return new Date(g.getTime()-o*36e5)};
 const shortDate=d=>dayOf(d).toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"}).toUpperCase();
 const paras=t=>t.split(/\n\s*\n/).map(p=>`<p class="blurb">${esc(p.trim())}</p>`).join("");
 const videoBox=(img,wide)=>`<div class="vid"><div class="yt"></div>${img?`<div class="vid-poster${wide?" wide":""}" aria-hidden="true"><div class="bg" style="background-image:url('${img}')"></div><img src="${img}" alt=""></div>`:""}<button class="vid-hit" type="button" aria-label="Play or pause video"><span class="vid-play" aria-hidden="true"></span></button><button class="vid-fs" type="button" aria-label="Full screen">⤢</button></div>`;
@@ -390,7 +393,7 @@ function wireMore(art){
 // ---------- Techno Tuesday / daily track posts ----------
 (function(){
   const art=document.getElementById("techno-tuesday-holo");if(!art||typeof POSTS==="undefined")return;
-  const p=POSTS[0];if(!p||dayOf(p.date)>TODAY)return;
+  const p=POSTS[0];if(!p||(qsPreview?dayOf(p.date)>TODAY:new Date()<berlinAt(p.date,GO_LIVE)))return;
   const ps=p.body.split(/\n\s*\n/),pre=ps.slice(0,2).join("\n\n"),rest=ps.slice(2).join("\n\n"),P=p.playlist;
   art.innerHTML=`<div class="eyebrow"><b>${esc(p.kicker)}</b> · ${shortDate(p.date)}</div>
     <h2><a href="#${art.id}" data-open>${esc(p.artist)} – ${esc(p.title)}</a></h2>
