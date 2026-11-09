@@ -75,8 +75,8 @@ const UPCOMING=[
 // sits at the top of the homepage. "plays" = how many times Leefer has gone back to it (4+ badge).
 const POSTS=[
  {date:"2026-11-10",kicker:"TECHNO TUESDAY",title:"Does It Get Easier?",artist:"Holo",label:"Noire & Blanche",video:"dxGl-BoL-jw",plays:10,
-  img:"https://i.scdn.co/image/ab67616d0000b273bb4c9fc51deffd1281e7460d",
+  img:"techno-tuesday-holo.jpg",imgWide:true,
   sp:"https://open.spotify.com/track/1zmThgFg1hww3UqVouPNRl",artistSp:"https://open.spotify.com/artist/5PrWAhH8BO28ieKNfYYFEX",
   playlist:{title:"Techno Tuesday",url:"https://open.spotify.com/playlist/3QViRQw2MjLQAI98kmWNuk",img:"https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da846a5cc179cc2196842094ce52",line:"Only the top of the tippity top. Send it!",note:"Every Techno Tuesday track lives here."},
-  body:"Something new on the Radar today: the 4+.\n\nWhen a track earns a 4+, it means I've played it four or more times. Not because I scheduled it, not because I'm writing about it. I just kept going back. Something in it keeps pulling me in.\n\nThis one is way past that. \"Does It Get Easier?\" is at 10+ for me right now, and still climbing.\n\nAnd the title. I'm not even going to pretend I don't hear the question. Some days it does. Some days you just put the track on again.\n\nTurn it up, let it run all the way through, and see if it pulls you back too."}
+  body:"Happy Techno Tuesday!\n\nI'm going to start a series where I highlight tracks that I've listened to \"4 or more times\". I listen to a lot of music, and it's rare that I listen to a track more than 4 times. If I do, it's special to me, and I want to start sharing those here.\n\nHolo has become my favorite producer at the moment. I absolutely love a number of his productions, and will be highlighting a few over the next weeks and months. For now, I want to start with a track I've listened to at least 10 times. Holo – Does It Get Easier?\n\nWHAT A TUNE. Press play. Sit back and enjoy. No skipping."}
 ];

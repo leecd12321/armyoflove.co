@@ -191,6 +191,11 @@ footer{font-family:var(--type);font-size:15px;border-top:1px solid var(--rule);p
 .vid-poster .bg{position:absolute;inset:-30px;background-size:cover;background-position:center;filter:blur(24px) brightness(.55)}
 .vid-poster img{position:absolute;top:0;left:50%;height:100%;width:auto;aspect-ratio:1/1;transform:translateX(-50%);object-fit:cover;display:block}
 .vid.started .vid-poster{opacity:0}
+.trackline{margin:-2px 0 4px;font-family:var(--sans);font-size:15px;color:var(--muted)}
+.trackline b{color:var(--ink);font-weight:700}
+.trackline{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.trackline .tid{font-family:var(--mono);font-size:16px;font-weight:700;letter-spacing:.06em;line-height:1;color:var(--paper);background:var(--ink);padding:6px 9px 5px}
+.vid-poster.wide img{left:0;width:100%;aspect-ratio:auto;transform:none}
 .soon .more-link{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.05em;text-underline-offset:4px}
 
 /* daily post + 4+ badge */
@@ -371,7 +376,7 @@ const TODAY=(()=>{const t=qsPreview?new Date(qsPreview+"T12:00:00"):new Date();t
 const dayOf=d=>new Date(d+"T12:00:00");
 const shortDate=d=>dayOf(d).toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"}).toUpperCase();
 const paras=t=>t.split(/\n\s*\n/).map(p=>`<p class="blurb">${esc(p.trim())}</p>`).join("");
-const videoBox=(img)=>`<div class="vid"><div class="yt"></div>${img?`<div class="vid-poster" aria-hidden="true"><div class="bg" style="background-image:url('${img}')"></div><img src="${img}" alt=""></div>`:""}<button class="vid-hit" type="button" aria-label="Play or pause video"><span class="vid-play" aria-hidden="true"></span></button><button class="vid-fs" type="button" aria-label="Full screen">⤢</button></div>`;
+const videoBox=(img,wide)=>`<div class="vid"><div class="yt"></div>${img?`<div class="vid-poster${wide?" wide":""}" aria-hidden="true"><div class="bg" style="background-image:url('${img}')"></div><img src="${img}" alt=""></div>`:""}<button class="vid-hit" type="button" aria-label="Play or pause video"><span class="vid-play" aria-hidden="true"></span></button><button class="vid-fs" type="button" aria-label="Full screen">⤢</button></div>`;
 function wireMore(art){
   const body=art.querySelector(".more-body");if(!body)return;
   const btns=art.querySelectorAll("[data-more-toggle]"),label=art.querySelector(".readmore[data-more-toggle]");
@@ -391,7 +396,8 @@ function wireMore(art){
     <h2><a href="#${art.id}" data-open>${esc(p.artist)} – ${esc(p.title)}</a></h2>
     <p class="by">${esc(p.label||"")}</p>
     ${p.plays>=4?`<span class="plays" title="I've gone back to this ${p.plays}+ times"><span class="ring">${p.plays}+</span><span class="cap">PLAYS<br>AND COUNTING</span></span>`:""}
-    <div class="media">${videoBox(p.img)}</div>
+    <div class="media">${videoBox(p.img,p.imgWide)}</div>
+    <p class="trackline"><span class="tid">TRACK ID:</span> <b>${esc(p.artist)} – ${esc(p.title)}</b>${p.label?` [${esc(p.label)}]`:""}</p>
     ${paras(pre)}
     <div class="more-body" hidden>
       ${paras(rest)}
