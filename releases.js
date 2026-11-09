@@ -100,7 +100,7 @@ const UPCOMING=[
   img:"https://f4.bcbits.com/img/a4074034011_10.jpg",
   links:[["CRATES","https://crates.co/release/my-own-shadow-album/7552811"],["BANDCAMP","https://marceldettmann.bandcamp.com/album/my-own-shadow"]]},
  {mention:true,va:true,title:"Global Underground: Nubreed 13",artist:"Spencer Brown",label:"Global Underground",type:"COMPILATION",releaseDate:"2026-12-04",dateAdded:"2026-11-09",
-  img:"https://gubucket1.s3.eu-west-2.amazonaws.com/wp-content/uploads/2026/07/Nubreed-13-Spencer-Brown-cover-NEW-FINAL.jpeg",
+  img:"nubreed-13-cover.jpg",
   links:[["CRATES","https://crates.co/release/global-underground-nubreed-13/7699859"],["GU STORE","https://www.globalunderground.co.uk/product/nubreed-13-spencer-brown/"]]},
  {mention:true,title:"Music For Two Films About Water",artist:"Liz Harris",label:"Kranky",type:"ALBUM",releaseDate:"2026-11-27",dateAdded:"2026-11-09",tags:["AMBIENT"],ambient:true,
   img:"https://f4.bcbits.com/img/a3619605292_10.jpg",
