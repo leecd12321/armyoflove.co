@@ -277,6 +277,22 @@ nav .links a[aria-current]{color:var(--ink);font-weight:700}
 .up-links a,.up-links button{all:unset;cursor:pointer;color:var(--ink);border-bottom:1.5px solid currentColor;padding-bottom:2px}
 .up-links a:hover,.up-links button:hover{color:var(--muted)}
 .up-tag{display:inline-block;margin-left:6px;padding:2px 6px 1px;border:1px solid var(--muted);font-size:9px;letter-spacing:.1em;color:var(--ink);vertical-align:1px}
+.up-tg .lbl2{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.08em;color:#b9b0a1;margin-left:-6px}
+.rd-tabs{display:flex;border-bottom:1.5px solid var(--ink);margin:0 -14px}
+.rd-tabs button{all:unset;cursor:pointer;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.08em;padding:10px 14px;color:var(--muted)}
+.rd-tabs button[aria-selected="true"]{background:var(--ink);color:#e7d9a8}
+.rd-tabs button:focus-visible{outline:2px solid var(--ink);outline-offset:-2px}
+.rd-wk{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.1em;color:var(--muted);padding:16px 0 2px}
+.rd-wk + .up-row{border-top:0}
+.rd-empty{margin:14px 0;color:var(--muted);font-size:14px}
+.rd-st{display:inline-flex;align-items:center;gap:5px;vertical-align:middle;margin:0 6px 0 4px;font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.08em;padding:4px 7px;border:1px solid var(--ink);color:var(--ink);line-height:1;white-space:nowrap}
+.rd-st b{font-family:"EB Garamond",Garamond,Georgia,serif;font-size:14px;font-weight:400;letter-spacing:0}
+.rd-st.soon{border-style:dashed;color:var(--muted);border-color:var(--muted)}
+.rd-st.today{background:#343a20;border-color:#343a20;color:#f1ece3}
+.rd-st.today i{width:6px;height:6px;border-radius:50%;background:#e7d9a8;animation:rdp 1.6s ease-in-out infinite}
+@keyframes rdp{50%{opacity:.3}}
+@media (prefers-reduced-motion:reduce){.rd-st.today i{animation:none}}
+.rd-st.fresh,.rd-st.fade{border-color:var(--muted);color:var(--muted)}
 .up-form{grid-column:2/-1;display:flex;flex-direction:column;gap:6px}
 .up-form[hidden]{display:none}
 .up-form .r-row{border-bottom-color:var(--ink)}
@@ -466,22 +482,44 @@ function wireMore(art){
   art.hidden=false;mountVideo(art.querySelector(".vid"),p.video);wireMore(art);
 })();
 
-// ---------- Upcoming releases bar ----------
+// ---------- The Radar bar: Coming up / Out now ----------
 (function(){
   const box=document.getElementById("upcoming");if(!box||typeof UPCOMING==="undefined")return;
-  const list=UPCOMING.map(r=>({...r,diff:Math.round((dayOf(r.releaseDate)-TODAY)/864e5)})).filter(r=>r.diff>=0).sort((a,b)=>a.diff-b.diff);
-  if(!list.length)return;
+  const nm=r=>r.artist||(r.artists||[]).map(k=>(typeof A!=="undefined"&&A[k])?A[k].name:k).join(" & ");
+  const lb=r=>(typeof L!=="undefined"&&L[r.label])?L[r.label].name:r.label;
+  const past=(typeof SETS!=="undefined"?[...SETS.albums,...SETS.other]:[]).map(r=>({...r,artist:nm(r),label:lb(r),
+    links:[r.bc&&["BANDCAMP",r.bc],r.sp&&["SPOTIFY",r.sp]].filter(Boolean)}));
+  const all=[...UPCOMING,...past].map(r=>({...r,diff:Math.round((dayOf(r.releaseDate)-TODAY)/864e5)}));
+  const up=all.filter(r=>r.diff>=0).sort((a,b)=>a.diff-b.diff||a.artist.localeCompare(b.artist));
+  const out=all.filter(r=>r.diff<0).sort((a,b)=>a.diff===b.diff?a.artist.localeCompare(b.artist):b.diff-a.diff);
+  if(!up.length&&!out.length)return;
   const dd=d=>dayOf(d).toLocaleDateString("en-GB",{day:"numeric",month:"short"}).toUpperCase();
-  const when=r=>r.diff===0?"OUT TODAY":`IN <b>${r.diff}</b> DAY${r.diff>1?"S":""}`;
-  box.innerHTML=`<button class="up-tg" type="button" aria-expanded="false" aria-controls="up-list"><span class="lbl">✦ UPCOMING RELEASES</span><span class="count">${list.length}</span><span class="thumbs">${list.slice(0,6).map(r=>`<img src="${r.img}" alt="">`).join("")}</span><span class="arrow">SEE ALL ↓</span></button>
-  <div class="up-list" id="up-list" hidden>${list.map((r,i)=>`<div class="up-row" data-i="${i}"><img src="${r.img}" alt="${esc(r.title)} cover" loading="lazy"><div><div class="t">${esc(r.artist)} – ${esc(r.title)} <span class="lab">[${esc(r.label)}]</span></div><div class="d">${dd(r.releaseDate)} · ${when(r)} ${typeBadges(r)}${ambientBadge(r)}</div></div>
+  const st=r=>{const n=r.diff;
+    if(n>0)return `<span class="rd-st soon">IN <b>${n}</b> DAY${n>1?"S":""}</span>`;
+    if(n===0)return `<span class="rd-st today"><i></i>OUT TODAY</span>`;
+    if(n>=-7)return `<span class="rd-st new">NEW · <b>${-n}</b> DAY${n<-1?"S":""}</span>`;
+    if(n>=-30)return `<span class="rd-st fresh">FRESH · <b>${-n}</b> DAYS</span>`;
+    if(n>=-60)return `<span class="rd-st fade" style="opacity:${(1-(-n-30)/60).toFixed(2)}"><b>${-n}</b> DAYS</span>`;
+    return ""};
+  // group by release week, labelled by that week's Friday (Sat–Fri)
+  const fri=d=>{const x=dayOf(d);x.setDate(x.getDate()+((5-x.getDay()+7)%7));return x};
+  const wk=d=>"WEEK OF FRI, "+fri(d).toLocaleDateString("en-US",{month:"short",day:"numeric"}).toUpperCase();
+  let n=0;const row=r=>{const i=n++;r._i=i;return `<div class="up-row" data-i="${i}"><img src="${r.img}" alt="${esc(r.title)} cover" loading="lazy"><div><div class="t">${esc(r.artist)} – ${esc(r.title)} <span class="lab">[${esc(r.label)}]</span></div><div class="d">${dd(r.releaseDate)} ${st(r)} ${typeBadges(r)}${ambientBadge(r)}</div></div>
     <div class="up-links">${(r.links||[]).map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener">${esc(n)} ↗</a>`).join("")}${r.diff>0?`<button type="button" data-rm>REMIND ME →</button>`:""}</div>
-    <form class="up-form" hidden novalidate><div class="r-row"><input type="email" id="up-email-${i}" autocomplete="email" inputmode="email" placeholder="you@example.com" aria-label="Your email" required><button class="r-go" type="submit" aria-label="Remind me">→</button></div><p class="r-msg" aria-live="polite">One email the morning of ${dd(r.releaseDate)}. Nothing else.</p></form></div>`).join("")}</div>`;
+    ${r.diff>0?`<form class="up-form" hidden novalidate><div class="r-row"><input type="email" id="up-email-${i}" autocomplete="email" inputmode="email" placeholder="you@example.com" aria-label="Your email" required><button class="r-go" type="submit" aria-label="Remind me">→</button></div><p class="r-msg" aria-live="polite">One email the morning of ${dd(r.releaseDate)}. Nothing else.</p></form>`:""}</div>`};
+  const grouped=list=>{let h="",last="";list.forEach(r=>{const w=wk(r.releaseDate);if(w!==last){h+=`<div class="rd-wk">${w}</div>`;last=w}h+=row(r)});return h};
+  const rows=[...up,...out];
+  const upH=grouped(up),outH=grouped(out);
+  box.innerHTML=`<button class="up-tg" type="button" aria-expanded="false" aria-controls="up-list"><span class="lbl">✦ THE RADAR</span><span class="count">${up.length}</span><span class="lbl2">COMING UP</span><span class="thumbs">${up.slice(0,6).map(r=>`<img src="${r.img}" alt="">`).join("")}</span><span class="arrow">SEE ALL ↓</span></button>
+  <div class="up-list" id="up-list" hidden><div class="rd-tabs" role="tablist"><button type="button" role="tab" aria-selected="true" data-t="up">COMING UP · ${up.length}</button><button type="button" role="tab" aria-selected="false" data-t="out">OUT NOW · ${out.length}</button></div>
+  <div data-p="up">${upH||'<p class="rd-empty">Nothing announced yet.</p>'}</div><div data-p="out" hidden>${outH||'<p class="rd-empty">Nothing out yet.</p>'}</div></div>`;
   box.hidden=false;
   const tg=box.querySelector(".up-tg"),ul=box.querySelector(".up-list"),ar=tg.querySelector(".arrow");
   tg.addEventListener("click",()=>{const o=ul.hidden;ul.hidden=!o;tg.setAttribute("aria-expanded",o);ar.textContent=o?"CLOSE ↑":"SEE ALL ↓"});
+  box.querySelectorAll("[data-t]").forEach(b=>b.addEventListener("click",()=>{box.querySelectorAll("[data-t]").forEach(x=>x.setAttribute("aria-selected",x===b));box.querySelectorAll("[data-p]").forEach(p=>p.hidden=p.dataset.p!==b.dataset.t)}));
+  const byI={};[...up,...out].forEach(r=>byI[r._i]=r);
   box.querySelectorAll(".up-row").forEach(row=>{
-    const r=list[+row.dataset.i],btn=row.querySelector("[data-rm]"),form=row.querySelector(".up-form");if(!btn)return;
+    const r=byI[+row.dataset.i],btn=row.querySelector("[data-rm]"),form=row.querySelector(".up-form");if(!btn||!form)return;
     const input=form.querySelector("input"),msg=form.querySelector(".r-msg"),go=form.querySelector(".r-go"),key="aol-remind-"+r.releaseDate+r.title;
     try{if(localStorage.getItem(key))btn.textContent="REMINDER SET ✓"}catch(_){}
     btn.addEventListener("click",()=>{if(form.dataset.done)return;form.hidden=!form.hidden;if(!form.hidden)setTimeout(()=>input.focus(),30)});
