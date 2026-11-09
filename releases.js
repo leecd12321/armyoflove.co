@@ -119,7 +119,10 @@ const UPCOMING=[
   links:[["BANDCAMP","https://axelboman.bandcamp.com/album/tell-it-to-the-mountain"]]},
  {mention:true,title:"Home",artist:"Marsh",label:"Marshan Records",type:"ALBUM",releaseDate:"2026-07-21",dateAdded:"2026-11-09",
   img:"https://f4.bcbits.com/img/a0121068038_10.jpg",
-  links:[["BANDCAMP","https://marshmusician.bandcamp.com/album/home"]]}
+  links:[["BANDCAMP","https://marshmusician.bandcamp.com/album/home"]]},
+ {mention:true,title:"Fly Intergalactic Gangsta Schitt",artist:"Tripmastaz",label:"Logistic Records",type:"ALBUM",releaseDate:"2026-12-14",dateAdded:"2026-11-09",
+  img:"https://f4.bcbits.com/img/a3879960382_10.jpg",
+  links:[["BANDCAMP","https://tripmastaz.bandcamp.com/album/fly-intergalactic-gangsta-schitt"]]}
 ];
 
 // Daily posts (one track or release, scheduled by date). The newest post dated today or earlier
