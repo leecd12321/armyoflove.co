@@ -78,7 +78,7 @@ const UPCOMING=[
  {mention:true,va:true,title:"Pop Ambient 2027",artist:"VA",label:"Kompakt",type:"COMPILATION",releaseDate:"2026-12-04",dateAdded:"2026-11-09",tags:["AMBIENT"],ambient:true,
   img:"https://f4.bcbits.com/img/a3826203060_10.jpg",
   links:[["CRATES","https://crates.co/release/pop-ambient-2027/7628066"],["BANDCAMP","https://kompakt.bandcamp.com/album/pop-ambient-2027"]]},
- {mention:true,title:"DJ-Kicks: Dam Swindle",artist:"Dam Swindle",label:"!K7",type:"COMPILATION",releaseDate:"2026-11-20",dateAdded:"2026-11-09",
+ {mention:true,va:true,title:"DJ-Kicks: Dam Swindle",artist:"Dam Swindle",label:"!K7",type:"COMPILATION",releaseDate:"2026-11-20",dateAdded:"2026-11-09",
   img:"https://f4.bcbits.com/img/a2040506614_10.jpg",
   links:[["CRATES","https://crates.co/release/dj-kicks-dam-swindle/7478785"],["BANDCAMP","https://damswindle.bandcamp.com/album/dj-kicks-dam-swindle-2"]]},
  {mention:true,title:"The Hill EP",artist:"Philipp Kolbe",label:"Kompakt",type:"EP",releaseDate:"2026-11-20",dateAdded:"2026-11-09",
@@ -99,7 +99,7 @@ const UPCOMING=[
  {mention:true,title:"My Own Shadow",artist:"Marcel Dettmann",label:"!K7",type:"ALBUM",releaseDate:"2026-11-13",dateAdded:"2026-11-09",
   img:"https://f4.bcbits.com/img/a4074034011_10.jpg",
   links:[["CRATES","https://crates.co/release/my-own-shadow-album/7552811"],["BANDCAMP","https://marceldettmann.bandcamp.com/album/my-own-shadow"]]},
- {mention:true,title:"Global Underground: Nubreed 13",artist:"Spencer Brown",label:"Global Underground",type:"COMPILATION",releaseDate:"2026-12-04",dateAdded:"2026-11-09",
+ {mention:true,va:true,title:"Global Underground: Nubreed 13",artist:"Spencer Brown",label:"Global Underground",type:"COMPILATION",releaseDate:"2026-12-04",dateAdded:"2026-11-09",
   img:"https://gubucket1.s3.eu-west-2.amazonaws.com/wp-content/uploads/2026/07/Nubreed-13-Spencer-Brown-cover-NEW-FINAL.jpeg",
   links:[["CRATES","https://crates.co/release/global-underground-nubreed-13/7699859"],["GU STORE","https://www.globalunderground.co.uk/product/nubreed-13-spencer-brown/"]]}
 ];
