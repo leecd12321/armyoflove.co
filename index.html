@@ -200,11 +200,13 @@ footer{font-family:var(--type);font-size:15px;border-top:1px solid var(--rule);p
 
 /* daily post + 4+ badge */
 .post .eyebrow b{color:var(--ink);font-weight:700}
-/* 4 OR MORE ticket badge */
-.plays{display:inline-flex;align-items:stretch;align-self:center;flex:none;height:30px;background:var(--ink);color:#e7d9a8;line-height:1}
-.plays .tk{display:flex;align-items:center;gap:6px;padding:0 11px 0 10px;font-family:var(--sans);font-weight:800;font-size:13px;letter-spacing:.06em;white-space:nowrap}
-.plays .tk i{font-style:normal;color:#e7d9a8;font-size:10px}
-.plays .st{position:relative;display:flex;align-items:center;gap:4px;padding:0 9px;color:#f1ece3;border-left:1.5px dotted rgba(231,217,168,.8)}
+/* 4 OR MORE split pill badge */
+.plays{display:inline-flex;align-items:stretch;align-self:center;flex:none;height:32px;border:1.5px solid var(--ink);border-radius:999px;overflow:hidden;line-height:1}
+.plays .tk{display:flex;align-items:center;gap:6px;padding:0 12px 0 13px;background:var(--ink);color:#e7d9a8;font-family:var(--sans);font-weight:800;font-size:12.5px;letter-spacing:.07em;white-space:nowrap}
+.plays .tk i{font-style:normal;font-size:10px}
+.plays .st{display:flex;align-items:baseline;gap:6px;padding:0 14px 0 11px;color:var(--ink);align-self:center}
+.plays .st b{font-family:"EB Garamond",Garamond,Georgia,serif;font-weight:500;font-size:19px}
+.plays .st small{font-family:var(--type);font-size:9.5px;letter-spacing:.14em}
 .trow{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px}
 .plays .st::before,.plays .st::after{content:"";position:absolute;left:-4.5px;width:7px;height:7px;border-radius:50%;background:var(--paper)}
 .plays .st::before{top:-3.5px}.plays .st::after{bottom:-3.5px}
@@ -403,7 +405,7 @@ function wireMore(art){
   const p=POSTS[0];if(!p||(qsPreview?dayOf(p.date)>TODAY:new Date()<berlinAt(p.date,GO_LIVE)))return;
   const ps=p.body.split(/\n\s*\n/),pre=ps.slice(0,2).join("\n\n"),rest=ps.slice(2).join("\n\n"),P=p.playlist;
   art.innerHTML=`<div class="eyebrow"><b>${esc(p.kicker)}</b> · ${shortDate(p.date)}</div>
-    <div class="trow"><h2><a href="#${art.id}" data-open>${esc(p.artist)} – ${esc(p.title)}</a></h2>${p.plays>=4?`<span class="plays" title="Played ${p.plays} times and counting"><span class="tk"><i>✦</i>4 OR MORE</span><span class="st"><b>${p.plays}</b><small>PLAYS</small></span></span>`:""}</div>
+    <div class="trow"><h2><a href="#${art.id}" data-open>${esc(p.artist)} – ${esc(p.title)}</a></h2>${p.plays>=4?`<span class="plays" title="Listened ${p.plays} times and counting"><span class="tk"><i>✦</i>4 OR MORE</span><span class="st"><b>${p.plays}</b><small>LISTENS</small></span></span>`:""}</div>
     <p class="by">${esc(p.label||"")}</p>
     <div class="media">${videoBox(p.img,p.imgWide)}</div>
     <p class="trackline"><span class="tid">TRACK ID:</span> <b>${esc(p.artist)} – ${esc(p.title)}</b>${p.label?` [${esc(p.label)}]`:""}</p>
@@ -415,7 +417,7 @@ function wireMore(art){
       ${P?`<section class="pl"><a class="pl-art" href="${P.url}" target="_blank" rel="noopener"><img src="${P.img}" alt="${esc(P.title)} playlist artwork"><span class="pl-cta">click to listen ↗</span></a>
         <div class="pl-text"><div class="meta">SPOTIFY PLAYLIST · ARMY OF LOVE</div><h2>${esc(P.title)}</h2>
         <a class="pl-link" href="${P.url}" target="_blank" rel="noopener">click to listen ↗</a><p><b>${esc(P.line)}</b><br>${esc(P.note)}</p></div></section>`:""}
-      ${p.plays>=4?`<p class="legend"><b>4 or more</b> &nbsp;Tracks I've gone back to four or more times. The number is how many plays so far.</p>`:""}
+      ${p.plays>=4?`<p class="legend"><b>4 or more</b> &nbsp;Tracks I've gone back to four or more times. The number is how many listens so far.</p>`:""}
     </div>
     <div class="entry-foot"><button class="readmore" type="button" data-more-toggle>READ MORE ↓</button>${P?`<a class="quiet" href="${P.url}" target="_blank" rel="noopener">${esc(P.title)} playlist ↗</a>`:""}</div>`;
   art.hidden=false;mountVideo(art.querySelector(".vid"),p.video);wireMore(art);
