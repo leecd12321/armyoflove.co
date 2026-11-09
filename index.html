@@ -305,6 +305,40 @@ nav .links a[aria-current]{color:var(--ink);font-weight:700}
 .rd-clear{all:unset;cursor:pointer;margin-left:auto;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.08em;background:var(--ink);color:#e7d9a8;padding:7px 12px;border-radius:999px}
 .rd-clear:hover{background:#343a20}
 .rd-clear:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.db-badge{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:5px;vertical-align:middle;padding:5px 10px;border-radius:999px;background:var(--ink);color:#e7d9a8;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.1em;line-height:1;transition:transform .15s}
+.db-badge:hover{transform:translateY(-1px)}
+.db-badge.is-open{background:#343a20}
+.db-badge:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.db-drawer{grid-column:2/-1;background:var(--ink);color:#f1ece3;padding:12px 14px 6px;margin-top:2px}
+.db-drawer[hidden]{display:none}
+.db-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.1em;color:#e7d9a8;margin-bottom:6px}
+.db-all{all:unset;cursor:pointer;color:#f1ece3;border-bottom:1px solid currentColor}
+.db-list{list-style:none;margin:0;padding:0;counter-reset:n}
+.db-list li{counter-increment:n;display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:8px 0;border-top:1px solid rgba(241,236,227,.15)}
+.db-list li::before{content:counter(n,decimal-leading-zero);font-family:var(--mono);font-size:10px;color:#b9b0a1}
+.db-name{font-family:var(--type);font-size:15px;flex:1;min-width:0}
+.db-play{all:unset;cursor:pointer;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.08em;padding:5px 10px;border-radius:999px;background:#e7d9a8;color:var(--ink);white-space:nowrap}
+.db-play:hover{background:#f1ece3}
+.db-play:focus-visible{outline:2px solid #e7d9a8;outline-offset:2px}
+.db-nov{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:#8f887c}
+.db-vid{flex-basis:100%;aspect-ratio:16/9;max-width:520px;background:#000}
+.db-vid[hidden]{display:none}
+.db-vid iframe{width:100%;height:100%;border:0;display:block}
+.db-row{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--rule)}
+.rd-wk+.db-row{border-top:0}
+.db-row img{width:44px;height:44px;object-fit:cover;border:1px solid var(--ink)}
+.db-row .t{font-weight:700;font-size:15px}
+.db-row .s{font-size:13px;color:var(--muted)}
+.db-row .s i{font-family:"EB Garamond",Garamond,Georgia,serif;font-size:15px}
+.db-row .db-play{background:var(--ink);color:#e7d9a8}
+.db-row .db-nov{color:var(--muted)}
+.db-row .db-vid{grid-column:1/-1;max-width:none}
+.super-badge{display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;width:28px;height:28px;border-radius:50%;background:var(--ink);color:#f7c948;font-size:17px;line-height:1;flex:none;margin-right:6px}
+.up-row .super-badge{cursor:pointer;transition:transform .15s}
+.up-row .super-badge:hover{transform:scale(1.08)}
+.super-badge.sm{width:20px;height:20px;font-size:11px;margin:0 0 0 4px}
+.super-badge.is-on{box-shadow:0 0 0 2px var(--paper),0 0 0 4px var(--ink)}
+.rd-fbadge .super-badge{margin:0}
 .up-form{grid-column:2/-1;display:flex;flex-direction:column;gap:6px}
 .up-form[hidden]{display:none}
 .up-form .r-row{border-bottom-color:var(--ink)}
@@ -516,32 +550,48 @@ function wireMore(art){
   // group by release week, labelled by that week's Friday (Sat–Fri)
   const fri=d=>{const x=dayOf(d);x.setDate(x.getDate()+((5-x.getDay()+7)%7));return x};
   const wk=d=>dayOf(d).toLocaleDateString("en-US",{weekday:"long",month:"short",day:"numeric"}).toUpperCase(); // one heading per release day
-  let n=0;const row=r=>{const i=n++;r._i=i;const f=[r.type==="ALBUM"&&"album",(r.va||r.artist==="VA")&&"va",r.ambient&&"ambient"].filter(Boolean).join(" ");return `<div class="up-row" data-i="${i}" data-f="${f}"><img src="${r.img}" alt="${esc(r.title)} cover" loading="lazy"><div><div class="t">${esc(r.artist)} – ${esc(r.title)} <span class="lab">[${esc(r.label)}]</span></div><div class="d">${dd(r.releaseDate)} ${st(r)} ${typeBadges(r)}${ambientBadge(r)}</div></div>
+  const tst=(r,t)=>r.tasters&&r.tasters[t];
+  const superB=r=>r.superProject?`<span class="super-badge" title="Super project" aria-label="Super project">★</span>`:"";
+  const dbDrawer=(r,i)=>`<div class="db-drawer" id="db-${i}" hidden><div class="db-head"><span>▣ ADDED TO THE DATABASS</span><button type="button" class="db-all">SEE ALL DATABASS TRACKS →</button></div><ol class="db-list">${r.tracks.map(t=>`<li><span class="db-name">${esc(t)}</span>${tst(r,t)?`<button type="button" class="db-play" data-v="${tst(r,t)}">▶ TASTER</button>`:""}<div class="db-vid" hidden></div></li>`).join("")}</ol></div>`;
+  let n=0;const row=r=>{const i=n++;r._i=i;const f=[r.type==="ALBUM"&&"album",(r.va||r.artist==="VA")&&"va",r.ambient&&"ambient",(r.tracks&&r.tracks.length)&&"databass",r.superProject&&"super"].filter(Boolean).join(" ");return `<div class="up-row" data-i="${i}" data-f="${f}"><img src="${r.img}" alt="${esc(r.title)} cover" loading="lazy"><div><div class="t">${esc(r.artist)} – ${esc(r.title)} <span class="lab">[${esc(r.label)}]</span></div><div class="d">${dd(r.releaseDate)} ${st(r)} ${superB(r)}${typeBadges(r)}${ambientBadge(r)}${(r.tracks&&r.tracks.length)?`<button type="button" class="db-badge" data-db="${i}" aria-expanded="false" title="See the tracks I added to the DATABASS">▣ ${r.tracks.length} IN DATABASS</button>`:""}</div></div>
     <div class="up-links">${(r.links||[]).map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener">${esc(n)} ↗</a>`).join("")}${r.diff>0?`<button type="button" data-rm>REMIND ME →</button>`:""}</div>
+    ${(r.tracks&&r.tracks.length)?dbDrawer(r,i):""}
     ${r.diff>0?`<form class="up-form" hidden novalidate><div class="r-row"><input type="email" id="up-email-${i}" autocomplete="email" inputmode="email" placeholder="you@example.com" aria-label="Your email" required><button class="r-go" type="submit" aria-label="Remind me">→</button></div><p class="r-msg" aria-live="polite">One email the morning of ${dd(r.releaseDate)}. Nothing else.</p></form>`:""}</div>`};
   const grouped=list=>{let h="",last="";list.forEach(r=>{const w=wk(r.releaseDate);if(w!==last){h+=`<div class="rd-wk">${w}</div>`;last=w}h+=row(r)});return h};
   const rows=[...up,...out];
   const upH=grouped(up),outH=grouped(out);
+  // DATABASS: long-running list of every kept track, newest additions first
+  const dbRel=[...all].filter(r=>r.tracks&&r.tracks.length).sort((a,b)=>(b.dateAdded||b.releaseDate).localeCompare(a.dateAdded||a.releaseDate)||a.artist.localeCompare(b.artist));
+  const dbN=dbRel.reduce((a,r)=>a+r.tracks.length,0);
+  let dbH="",dl="";dbRel.forEach(r=>{const k="ADDED "+wk(r.dateAdded||r.releaseDate);if(k!==dl){dbH+=`<div class="rd-wk">${k}</div>`;dl=k}
+    r.tracks.forEach(t=>{dbH+=`<div class="db-row"><img src="${r.img}" alt="" loading="lazy"><div class="db-meta"><div class="t">${esc(t)}</div><div class="s">${esc(r.artist)} · <i>${esc(r.title)}</i> [${esc(r.label)}]${r.superProject?` <span class="super-badge sm" title="Super project">★</span>`:""}</div></div>${tst(r,t)?`<button type="button" class="db-play" data-v="${tst(r,t)}">▶ TASTER</button>`:""}<div class="db-vid" hidden></div></div>`})});
   box.innerHTML=`<button class="up-tg" type="button" aria-expanded="false" aria-controls="up-list"><span class="lbl">✦ THE RADAR</span><span class="count">${up.length}</span><span class="lbl2">COMING UP</span><span class="thumbs">${up.slice(0,6).map(r=>`<img src="${r.img}" alt="">`).join("")}</span><span class="arrow">SEE ALL ↓</span></button>
-  <div class="up-list" id="up-list" hidden><div class="rd-tabs" role="tablist"><button type="button" role="tab" aria-selected="true" data-t="up">COMING UP · ${up.length}</button><button type="button" role="tab" aria-selected="false" data-t="out">OUT NOW · ${out.length}</button></div>
-  <div class="rd-filter" hidden><span class="lbl">SHOWING ONLY</span><span class="rd-fbadge"></span><span class="rd-fcount"></span><button type="button" class="rd-clear">✕ CLEAR FILTER</button></div><div data-p="up">${upH||'<p class="rd-empty">Nothing announced yet.</p>'}</div><div data-p="out" hidden>${outH||'<p class="rd-empty">Nothing out yet.</p>'}</div></div>`;
+  <div class="up-list" id="up-list" hidden><div class="rd-tabs" role="tablist"><button type="button" role="tab" aria-selected="true" data-t="up">COMING UP · ${up.length}</button><button type="button" role="tab" aria-selected="false" data-t="out">OUT NOW · ${out.length}</button><button type="button" role="tab" aria-selected="false" data-t="db">▣ DATABASS · ${dbN}</button></div>
+  <div class="rd-filter" hidden><span class="lbl">SHOWING ONLY</span><span class="rd-fbadge"></span><span class="rd-fcount"></span><button type="button" class="rd-clear">✕ CLEAR FILTER</button></div><div data-p="up">${upH||'<p class="rd-empty">Nothing announced yet.</p>'}</div><div data-p="out" hidden>${outH||'<p class="rd-empty">Nothing out yet.</p>'}</div><div data-p="db" hidden>${dbH}</div></div>`;
   box.hidden=false;
   const tg=box.querySelector(".up-tg"),ul=box.querySelector(".up-list"),ar=tg.querySelector(".arrow");
   tg.addEventListener("click",()=>{const o=ul.hidden;ul.hidden=!o;tg.setAttribute("aria-expanded",o);ar.textContent=o?"CLOSE ↑":"SEE ALL ↓"});
   box.querySelectorAll("[data-t]").forEach(b=>b.addEventListener("click",()=>{box.querySelectorAll("[data-t]").forEach(x=>x.setAttribute("aria-selected",x===b));box.querySelectorAll("[data-p]").forEach(p=>p.hidden=p.dataset.p!==b.dataset.t)}));
+  // DATABASS badge opens the track drawer; tasters play inline
+  box.querySelectorAll(".db-badge").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();const d=box.querySelector("#db-"+b.dataset.db);d.hidden=!d.hidden;b.setAttribute("aria-expanded",!d.hidden);b.classList.toggle("is-open",!d.hidden)}));
+  box.addEventListener("click",e=>{const p=e.target.closest(".db-play");if(!p)return;const host=p.parentElement.querySelector(".db-vid");
+    if(!host.hidden){host.hidden=true;host.innerHTML="";p.textContent="▶ TASTER";return}
+    box.querySelectorAll(".db-vid:not([hidden])").forEach(v=>{v.hidden=true;v.innerHTML="";const pb=v.parentElement.querySelector(".db-play");if(pb)pb.textContent="▶ TASTER"});
+    host.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${p.dataset.v}?autoplay=1&rel=0&playsinline=1" title="Taster video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;host.hidden=false;p.textContent="■ CLOSE TASTER"});
+  box.querySelectorAll(".db-all").forEach(b=>b.addEventListener("click",()=>{box.querySelector('[data-t="db"]').click()}));
   // Badges as filters: click ALBUM / VA / AMBIENT to show only those; CLEAR FILTER returns the full list
   const fbar=box.querySelector(".rd-filter");let cur="";
   const applyF=f=>{cur=f;
-    box.querySelectorAll("[data-p]").forEach(p=>{p.querySelectorAll(".up-row").forEach(r=>r.hidden=!!f&&!(r.dataset.f||"").split(" ").includes(f));
+    box.querySelectorAll('[data-p="up"],[data-p="out"]').forEach(p=>{p.querySelectorAll(".up-row").forEach(r=>r.hidden=!!f&&!(r.dataset.f||"").split(" ").includes(f));
       p.querySelectorAll(".rd-wk").forEach(w=>{let x=w.nextElementSibling,any=false;while(x&&!x.classList.contains("rd-wk")){if(x.classList.contains("up-row")&&!x.hidden)any=true;x=x.nextElementSibling}w.hidden=!any})});
-    box.querySelectorAll(".type-badge,.ambient-badge").forEach(b=>b.classList.toggle("is-on",!!f&&b.dataset.f===f));
-    if(!f){fbar.hidden=true;box.querySelectorAll("[data-t]").forEach(b=>b.textContent=b.textContent.replace(/·.*$/,"· "+(b.dataset.t==="up"?up.length:out.length)));return}
+    box.querySelectorAll(".type-badge,.ambient-badge,.super-badge").forEach(b=>b.classList.toggle("is-on",!!f&&b.dataset.f===f));
+    if(!f){fbar.hidden=true;box.querySelectorAll('[data-t="up"],[data-t="out"]').forEach(b=>b.textContent=b.textContent.replace(/·.*$/,"· "+(b.dataset.t==="up"?up.length:out.length)));return}
     const src=box.querySelector(`.up-row [data-f="${f}"]`);fbar.querySelector(".rd-fbadge").innerHTML=src?src.outerHTML:f.toUpperCase();
     const cnt=t=>box.querySelectorAll(`[data-p="${t}"] .up-row:not([hidden])`).length;
-    box.querySelectorAll("[data-t]").forEach(b=>b.textContent=b.textContent.replace(/·.*$/,"· "+cnt(b.dataset.t)));
+    box.querySelectorAll('[data-t="up"],[data-t="out"]').forEach(b=>b.textContent=b.textContent.replace(/·.*$/,"· "+cnt(b.dataset.t)));
     const vis=box.querySelector("[data-p]:not([hidden])");fbar.querySelector(".rd-fcount").textContent=cnt(vis.dataset.p)+" HERE";
     fbar.hidden=false};
-  box.querySelectorAll(".up-row .type-badge,.up-row .ambient-badge").forEach(b=>{b.dataset.f=b.classList.contains("ambient-badge")?"ambient":b.classList.contains("va")?"va":"album";b.setAttribute("role","button");b.tabIndex=0;b.title="Show only "+b.dataset.f.toUpperCase();
+  box.querySelectorAll(".up-row .type-badge,.up-row .ambient-badge,.up-row .super-badge").forEach(b=>{b.dataset.f=b.classList.contains("super-badge")?"super":b.classList.contains("ambient-badge")?"ambient":b.classList.contains("va")?"va":"album";b.setAttribute("role","button");b.tabIndex=0;b.title=b.dataset.f==="super"?"Super project · show only super projects":"Show only "+b.dataset.f.toUpperCase();
     const go=e=>{e.preventDefault();applyF(cur===b.dataset.f?"":b.dataset.f)};b.addEventListener("click",go);b.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" ")go(e)})});
   fbar.querySelector(".rd-clear").addEventListener("click",()=>applyF(""));
   box.querySelectorAll("[data-t]").forEach(b=>b.addEventListener("click",()=>{if(cur)applyF(cur)}));

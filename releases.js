@@ -1,5 +1,7 @@
 // Army of Love · Radar archive data
 // Set ambient:true on any release or daily post to show the AMBIENT badge.
+// superProject:true = SUPER PROJECT badge (black circle, gold star).
+// DATABASS: tracks:[...] = tracks Leefer added to the DATABASS; tasters:{"Track name":"YouTubeID"} = his taster video for that track.
 // One entry per release. Artists (A) and labels (L) are shared, so each is written once
 // and reused across posts. Fields per release: title, artists, label, type, track count,
 // releaseDate, dateAdded, Leefer's note (blurb), tracks that caught him, links.
@@ -31,10 +33,10 @@ const L={ // labels
 const SETS= // Fruitful Friday · Nov 6, 2026
 {
  albums:[
- {title:"Dream",video:"3BCLIhSUMQU",releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["amtrac"],label:"openers",type:"ALBUM",count:14,img:"dream-cover.jpg",
+ {title:"Dream",video:"3BCLIhSUMQU",tasters:{"Ricardo's Last Dance":"3BCLIhSUMQU"},releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["amtrac"],label:"openers",type:"ALBUM",count:14,img:"dream-cover.jpg",
   blurb:"One of my favorite producers since I discovered him this year. Insanely clean productions, real depth, and just the right amount of good cheese.\n\nI'm saving the full listen for the right moment, but wanted you to know it's out.",
   tracks:["Ricardo's Last Dance"],bc:"https://amtrac.bandcamp.com/album/dream",sp:"https://open.spotify.com/album/3oNraxn7bql4vFjqiBfCgG"},
- {title:"Apiformes",video:"CxhSDdVOpWk",releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["polygonia","popp"],label:"squama",type:"ALBUM",count:11,img:"apiformes-cover.jpg",
+ {title:"Apiformes",video:"CxhSDdVOpWk",tasters:{"Hive Mind":"CxhSDdVOpWk"},releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["polygonia","popp"],label:"squama",type:"ALBUM",count:11,img:"apiformes-cover.jpg",
   blurb:"Techno jazz alien.\n\nPolygonia's music challenges my listening muscles and I deeply appreciate it.\nSounds and rhythms from another planet.\n\nIt's not for everyone, but I invite you to explore sound design from another planet.",
   tracks:["Honeydrop","Nectar Flow","Hive Mind","Pollination Beats"],bc:"https://polygonia.bandcamp.com/album/apiformes",sp:"https://open.spotify.com/album/31z5z1c3dDB1kkbK1LXTY5"},
  {title:"Planes In Reverse",releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["funke"],label:"kompakt",type:"ALBUM",count:10,img:"planes-in-reverse-cover.jpg",
@@ -47,9 +49,9 @@ const SETS= // Fruitful Friday · Nov 6, 2026
   blurb:"I'm not familiar with Ksky, but the single for this album came out last week and I really connected with it: \"Bad Philly.\"\n\nLooking forward to taking this one for a walk and an intentional listen.\nHonestly, that could take days or weeks from now.",tracks:["Bad Philly","Weirdub"],bc:"https://runningbackrecords.bandcamp.com/album/collected-works",sp:"https://open.spotify.com/album/3DCc8tUSaFjfIP7dbNbvJH"}
  ],
  other:[
- {title:"Ontario EP",video:"rKuTxzf5Zdo",releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["hammar"],label:"dirtyhands",type:"EP",count:4,img:"ontario-ep-cover.jpg",
+ {title:"Ontario EP",video:"rKuTxzf5Zdo",tasters:{"Ontario":"rKuTxzf5Zdo"},releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["hammar"],label:"dirtyhands",type:"EP",count:4,img:"ontario-ep-cover.jpg",
   blurb:"My favorite release so far, absolutely love it!\n\nStraight-up slam dance bangers with tasteful elements, builds, twists and turns.\n\nI connected with 3 of the 4 tracks on first listen, which is a staggeringly high rate for me.\nThis dude is something special.",
-  tracks:["Ontario","Off Disk","Oops All Sixes"],bc:"https://dirtyhandsrec.bandcamp.com/album/ontario-ep"},
+  tracks:["Ontario","Off Disk","Oops All Sixes","Airex"],superProject:true,bc:"https://dirtyhandsrec.bandcamp.com/album/ontario-ep"},
  {title:"Lab 94' EP",releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["lex"],label:"dog",type:"EP",count:4,img:"lab-94-cover.jpg",
   blurb:"Delusions of Grandeur has become a favorite label of mine as of late. The releases often feature guitar and semi-jazzy sounds.\n\nHonestly, I don't know what I'm talking about, so don't take my write-ups about genres and sounds too seriously. I'm just speaking from the heart.\n\nI'm somewhat musically ignorant, but I know what I like and what moves me.\nI haven't fully listened outside of snippets, but there are some cool-sounding tunes on here.",tracks:[],bc:"https://lexathens.bandcamp.com/album/lab-94-ep",sp:"https://open.spotify.com/album/1LZ3IQkJP9RFpDqkNMSTT3"},
  {title:"Ascorbic",releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["mytron"],label:"multiculti",type:"EP",count:4,img:"ascorbic-cover.jpg",
@@ -117,7 +119,7 @@ const UPCOMING=[
  {mention:true,title:"Tell It To The Mountain",artist:"Axel Boman & Superpitcher",label:"Blurry",type:"ALBUM",releaseDate:"2026-09-25",dateAdded:"2026-11-09",
   img:"https://f4.bcbits.com/img/a0726252316_10.jpg",
   links:[["BANDCAMP","https://axelboman.bandcamp.com/album/tell-it-to-the-mountain"]]},
- {mention:true,title:"Home",artist:"Marsh",label:"Marshan Records",type:"ALBUM",releaseDate:"2026-11-03",dateAdded:"2026-11-09",
+ {mention:true,title:"Home",artist:"Marsh",label:"Marshan Records",type:"ALBUM",releaseDate:"2026-11-03",dateAdded:"2026-11-09",tracks:["Home","Jacob's Song","Designer"],
   img:"https://f4.bcbits.com/img/a0121068038_10.jpg",
   links:[["CRATES","https://crates.co/release/home/7345513"],["BANDCAMP","https://marshmusician.bandcamp.com/album/home"]]},
  {mention:true,title:"Fly Intergalactic Gangsta Schitt",artist:"Tripmastaz",label:"Logistic Records",type:"ALBUM",releaseDate:"2026-12-14",dateAdded:"2026-11-09",
