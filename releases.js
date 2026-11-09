@@ -101,7 +101,19 @@ const UPCOMING=[
   links:[["CRATES","https://crates.co/release/my-own-shadow-album/7552811"],["BANDCAMP","https://marceldettmann.bandcamp.com/album/my-own-shadow"]]},
  {mention:true,va:true,title:"Global Underground: Nubreed 13",artist:"Spencer Brown",label:"Global Underground",type:"COMPILATION",releaseDate:"2026-12-04",dateAdded:"2026-11-09",
   img:"https://gubucket1.s3.eu-west-2.amazonaws.com/wp-content/uploads/2026/07/Nubreed-13-Spencer-Brown-cover-NEW-FINAL.jpeg",
-  links:[["CRATES","https://crates.co/release/global-underground-nubreed-13/7699859"],["GU STORE","https://www.globalunderground.co.uk/product/nubreed-13-spencer-brown/"]]}
+  links:[["CRATES","https://crates.co/release/global-underground-nubreed-13/7699859"],["GU STORE","https://www.globalunderground.co.uk/product/nubreed-13-spencer-brown/"]]},
+ {mention:true,title:"Music For Two Films About Water",artist:"Liz Harris",label:"Kranky",type:"ALBUM",releaseDate:"2026-11-27",dateAdded:"2026-11-09",tags:["AMBIENT"],ambient:true,
+  img:"https://f4.bcbits.com/img/a3619605292_10.jpg",
+  links:[["CRATES","https://crates.co/release/music-for-two-films-about-water/7613973"],["BANDCAMP","https://grouper.bandcamp.com/album/music-for-two-films-about-water"]]},
+ {mention:true,title:"It's Time EP",artist:"Tour-Maubourg",label:"Alone Together",type:"EP",releaseDate:"2026-11-27",dateAdded:"2026-11-09",
+  img:"https://f4.bcbits.com/img/a3560979287_10.jpg",
+  links:[["CRATES","https://crates.co/release/its-time/7584524"],["BANDCAMP","https://tourmaubourg.bandcamp.com/album/tour-maubourg-its-time-ep"]]},
+ {mention:true,va:true,title:"fabric presents Palms Trax",artist:"Palms Trax",label:"fabric Records",type:"COMPILATION",releaseDate:"2026-11-27",dateAdded:"2026-11-09",
+  img:"https://f4.bcbits.com/img/a3971595965_10.jpg",
+  links:[["CRATES","https://crates.co/release/fabric-presents-palms-trax/7641723"],["BANDCAMP","https://palmstrax.bandcamp.com/album/fabric-presents-palms-trax"]]},
+ {mention:true,title:"I'm Failing To Lie",artist:"Dino Lenny",label:"Crosstown Rebels",type:"SINGLE",releaseDate:"2026-11-27",dateAdded:"2026-11-09",
+  img:"https://www.horizonsmusic.co.uk/cdn/shop/files/1_40572c21-3796-4cc6-af3b-837d49652fb2.jpg",
+  links:[["CRATES","https://crates.co/release/im-failing-to-lie/7685302"],["VINYL","https://www.horizonsmusic.co.uk/products/dino-lenny-im-failing-to-lie"]]}
 ];
 
 // Daily posts (one track or release, scheduled by date). The newest post dated today or earlier
