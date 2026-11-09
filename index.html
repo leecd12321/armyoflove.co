@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Army of Love</title>
-<meta name="description" content="Fruitful Friday, Nov 6, 2026: four albums out today.">
+<meta name="description" content="Army of Love: new music, the Radar, and essays from Leefer.">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -192,76 +192,107 @@ footer{font-family:var(--type);font-size:15px;border-top:1px solid var(--rule);p
 .vid-poster img{position:absolute;top:0;left:50%;height:100%;width:auto;aspect-ratio:1/1;transform:translateX(-50%);object-fit:cover;display:block}
 .vid.started .vid-poster{opacity:0}
 .soon .more-link{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.05em;text-underline-offset:4px}
+
+/* daily post + 4+ badge */
+.post .eyebrow b{color:var(--ink);font-weight:700}
+.plays{display:inline-flex;align-items:center;gap:10px;align-self:flex-start}
+.plays .ring{width:54px;height:54px;border-radius:50%;background:var(--ink);color:#e8e1d5;display:flex;align-items:center;justify-content:center;font-family:"EB Garamond",Garamond,Georgia,serif;font-size:22px;letter-spacing:-.01em;box-shadow:0 0 0 3px var(--card),0 0 0 4px var(--ink)}
+.plays .cap{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.07em;line-height:1.35;color:var(--muted)}
+.legend{margin:6px 0 0;padding-top:10px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--muted)}
+.legend b{font-family:"EB Garamond",Garamond,Georgia,serif;font-size:15px;font-weight:400;color:var(--ink)}
+.signoff{margin:2px 0 0;font-family:var(--type);font-size:15.5px;line-height:1.6}
+/* ---------- blog feed ---------- */
+.feed{width:100%;max-width:780px;margin:0 auto;display:flex;flex-direction:column}
+.entry{padding:46px 0 44px;border-top:1px solid var(--ink);display:flex;flex-direction:column;gap:12px}
+.feed > .entry:not([hidden]) ~ .entry{}
+.feed .entry:first-of-type, .feed .entry[hidden] + .entry:not([hidden]){}
+.entry[hidden]{display:none}
+.entry .eyebrow b{color:var(--ink);font-weight:700}
+.entry h2{margin:0;font-size:clamp(32px,6.4vw,50px);font-weight:700;letter-spacing:-.025em;line-height:1.02}
+.entry h2 a{text-decoration:none}
+.entry h2 a:hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
+.entry h2.g{font-family:"EB Garamond",Garamond,Georgia,serif;font-weight:400;letter-spacing:-.01em}
+.entry .by{margin:-2px 0 0}
+.entry .sub-i{font-family:"EB Garamond",Garamond,Georgia,serif;font-style:italic;font-size:21px}
+.entry .media{margin:8px 0 6px}
+.entry .media .vid{margin:0}
+.entry .photo{display:block;aspect-ratio:16/9;overflow:hidden;background:#afa89e;margin:8px 0 6px}
+.entry .photo img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.9);transition:transform .6s ease}
+.entry .photo:hover img{transform:scale(1.02)}
+.entry .blurb{margin:0}
+.entry .badge,.entry .plays{margin:2px 0}
+.entry-foot{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;margin-top:8px}
+.readmore{all:unset;cursor:pointer;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--ink);text-decoration:none;border-bottom:1.5px solid var(--ink);padding-bottom:3px}
+.readmore:hover,.readmore:focus-visible{color:var(--muted);border-color:var(--muted)}
+.quiet{font-size:13.5px;color:var(--muted);text-underline-offset:3px}
+.more-body{display:flex;flex-direction:column;gap:14px}
+.more-body[hidden]{display:none}
+.more-body .pl{margin-top:6px}
+.essay-entry .eyebrow b{color:#343a20}
+.strip{all:unset;cursor:pointer;display:grid;grid-template-columns:repeat(10,1fr);gap:4px;margin:8px 0 2px}
+.strip img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;transition:transform .25s}
+.strip:hover img{transform:translateY(-2px)}
+.entry.open .strip{display:none}
+@media (max-width:560px){.strip{grid-template-columns:repeat(5,1fr)}.entry{padding:36px 0}}
+nav .links{display:flex;gap:18px}
+nav .links a{color:var(--muted);font-weight:500}
+nav .links a[aria-current]{color:var(--ink);font-weight:700}
 </style>
 </head>
 <body>
 <div class="page">
-  <nav><a class="logo" href="index.html" aria-label="Army of Love home"><img src="army-of-love-wordmark.png" alt="Army of Love" width="640" height="135"></a><span>THE RADAR</span></nav>
+  <nav><a class="logo" href="index.html" aria-label="Army of Love home"><img src="army-of-love-wordmark.png" alt="Army of Love" width="640" height="135"></a><span class="links"><a href="index.html" aria-current="page">THE RADAR</a><!-- <a href="festivals.html">FESTIVALS &amp; CLUBS</a> (hidden until published) --></span></nav>
 
-  <section class="shelf" aria-labelledby="essays-h">
-    <div class="shelf-head"><h2 id="essays-h">CASUAL HEALING · ESSAYS</h2><a href="https://casualhealing.substack.com/archive" target="_blank" rel="noopener">ALL ESSAYS →</a></div>
-    <div class="shelf-row">
-      <a class="essay" href="https://casualhealing.substack.com/p/a-wave-of-anxiety" target="_blank" rel="noopener">
-        <div class="essay-img"><img src="https://substackcdn.com/image/fetch/$s_!9pab!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F95e29903-4f69-4978-ab8e-9572bffee5b0_3840x5120.jpeg" alt="" loading="lazy"></div>
-        <div class="d">NEW · MON, NOV 9</div>
-        <h3>A wave of anxiety…</h3>
-        <p class="sub">Rumination.</p>
-      </a>
-      <!-- next essays go here: copy the <a class="essay"> block above -->
-      <div class="essay-sub">
-        <p>A new essay every week. Written for myself, shared with you.</p>
-        <a class="more" href="https://casualhealing.substack.com/subscribe" target="_blank" rel="noopener">SUBSCRIBE ON SUBSTACK →</a>
-      </div>
+  <main class="feed">
+
+  <article class="entry" id="techno-tuesday-holo" data-date="2026-11-10" hidden></article>
+
+  <article class="entry" id="arp-felix-rosch" hidden></article>
+
+  <article class="entry essay-entry" id="a-wave-of-anxiety">
+    <div class="eyebrow"><b>CASUAL HEALING · ESSAY</b> · MON, NOV 9</div>
+    <h2 class="g"><a href="https://casualhealing.substack.com/p/a-wave-of-anxiety" target="_blank" rel="noopener">A wave of anxiety…</a></h2>
+    <p class="by sub-i">Rumination.</p>
+    <a class="media photo" href="https://casualhealing.substack.com/p/a-wave-of-anxiety" target="_blank" rel="noopener"><img src="https://substackcdn.com/image/fetch/$s_!9pab!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F95e29903-4f69-4978-ab8e-9572bffee5b0_3840x5120.jpeg" alt="" loading="lazy"></a>
+    <div class="entry-foot">
+      <a class="readmore" href="https://casualhealing.substack.com/p/a-wave-of-anxiety" target="_blank" rel="noopener">CONTINUE READING ON SUBSTACK →</a>
+      <a class="quiet" href="https://casualhealing.substack.com/subscribe" target="_blank" rel="noopener">A new essay every week · Subscribe ↗</a>
     </div>
-  </section>
+  </article>
 
-  <section class="soon" id="soon" hidden aria-labelledby="soon-h"></section>
-
-  <header class="intro">
-    <div class="eyebrow">FRIDAY · NOV 6, 2026</div>
-    <h1>Fruitful Friday</h1>
-    <p class="lede">Tons of new music out today! Let's start with a focus on five albums to get on your radar. In addition to the albums, there's a bunch of other notable releases. My personal favorite project so far is the <a href="https://dirtyhandsrec.bandcamp.com/album/ontario-ep" target="_blank" rel="noopener">Per Hammar EP</a>.</p>
-  </header>
-
-  <section class="pl" aria-label="New Releases playlist">
-    <a class="pl-art" href="https://open.spotify.com/playlist/4XHIWAkY2OPglDJkUmSBRC" target="_blank" rel="noopener">
-      <img src="new-releases-playlist.jpg" alt="Army of Love New Releases playlist artwork">
-      <span class="pl-cta">click to listen ↗</span>
-    </a>
-    <div class="pl-text">
-      <div class="meta">SPOTIFY PLAYLIST · UPDATED DAILY</div>
-      <h2>New Releases</h2>
-      <a class="pl-link" href="https://open.spotify.com/playlist/4XHIWAkY2OPglDJkUmSBRC" target="_blank" rel="noopener">click to listen ↗</a>
-      <p><b>All of this week's releases and more</b> are featured here.<br>Sort by recently added.</p>
-      <div class="pl-count">119 tracks added today</div>
+  <article class="entry" id="fruitful-friday-nov-6">
+    <div class="eyebrow"><b>FRUITFUL FRIDAY</b> · FRI, NOV 6</div>
+    <h2><a href="#fruitful-friday-nov-6" data-open>Fruitful Friday</a></h2>
+    <p class="blurb">Tons of new music out today! Let's start with a focus on five albums to get on your radar. In addition to the albums, there's a bunch of other notable releases. My personal favorite project so far is the <a href="https://dirtyhandsrec.bandcamp.com/album/ontario-ep" target="_blank" rel="noopener">Per Hammar EP</a>.</p>
+    <button class="strip" type="button" data-more-toggle aria-label="Open Fruitful Friday"></button>
+    <div class="more-body" hidden>
+      <section class="pl" aria-label="New Releases playlist">
+        <a class="pl-art" href="https://open.spotify.com/playlist/4XHIWAkY2OPglDJkUmSBRC" target="_blank" rel="noopener">
+          <img src="new-releases-playlist.jpg" alt="Army of Love New Releases playlist artwork">
+          <span class="pl-cta">click to listen ↗</span>
+        </a>
+        <div class="pl-text">
+          <div class="meta">SPOTIFY PLAYLIST · UPDATED DAILY</div>
+          <h2>New Releases</h2>
+          <a class="pl-link" href="https://open.spotify.com/playlist/4XHIWAkY2OPglDJkUmSBRC" target="_blank" rel="noopener">click to listen ↗</a>
+          <p><b>All of this week's releases and more</b> are featured here.<br>Sort by recently added.</p>
+        </div>
+      </section>
+      <section aria-labelledby="albums-h">
+        <div class="glance-head"><h2 id="albums-h">ALBUMS</h2><p>Tap a release for details</p></div>
+        <div class="glance g5" data-set="albums"></div>
+        <section class="detail" data-detail="albums" hidden aria-live="polite"></section>
+      </section>
+      <section aria-labelledby="other-h">
+        <div class="glance-head"><h2 id="other-h">OTHER RELEASES</h2></div>
+        <div class="glance g5" data-set="other"></div>
+        <section class="detail" data-detail="other" hidden aria-live="polite"></section>
+      </section>
     </div>
-  </section>
+    <div class="entry-foot"><button class="readmore" type="button" data-more-toggle>READ MORE ↓</button><span class="quiet">10 releases</span></div>
+  </article>
 
-  <section aria-labelledby="albums-h">
-    <div class="glance-head"><h2 id="albums-h">ALBUMS</h2><p>Tap a release for details</p></div>
-    <div class="glance g5" data-set="albums"></div>
-    <section class="detail" data-detail="albums" hidden aria-live="polite"></section>
-  </section>
-
-  <section aria-labelledby="other-h">
-    <div class="glance-head"><h2 id="other-h">OTHER RELEASES</h2></div>
-    <div class="glance g5" data-set="other"></div>
-    <section class="detail" data-detail="other" hidden aria-live="polite"></section>
-  </section>
-
-  <section class="pl" id="pl-bottom" hidden aria-label="New Releases playlist">
-    <a class="pl-art" href="https://open.spotify.com/playlist/4XHIWAkY2OPglDJkUmSBRC" target="_blank" rel="noopener">
-      <img src="new-releases-playlist.jpg" alt="Army of Love New Releases playlist artwork">
-      <span class="pl-cta">click to listen ↗</span>
-    </a>
-    <div class="pl-text">
-      <div class="meta">SPOTIFY PLAYLIST · UPDATED DAILY</div>
-      <h2>New Releases</h2>
-      <a class="pl-link" href="https://open.spotify.com/playlist/4XHIWAkY2OPglDJkUmSBRC" target="_blank" rel="noopener">click to listen ↗</a>
-      <p><b>All of this week's releases and more</b> are featured here.<br>Sort by recently added.</p>
-      <div class="pl-count">119 tracks added today</div>
-    </div>
-  </section>
+  </main>
 
   <footer>Sending you love,<br>Leefer</footer>
 </div>
@@ -329,26 +360,63 @@ function mountVideo(box,id){
 // Where "Email me" reminders are sent (Formspree form endpoint, e.g. "https://formspree.io/f/abcdwxyz"). Empty = email option shows a "coming soon" note.
 const REMIND_FORM="";
 
-// Upcoming release announcement: countdown badge + Remind me (calendar) until release day
+// ---------- Feed helpers ----------
+const qsPreview=new URLSearchParams(location.search).get("preview");
+const TODAY=(()=>{const t=qsPreview?new Date(qsPreview+"T12:00:00"):new Date();t.setHours(12,0,0,0);return t})();
+const dayOf=d=>new Date(d+"T12:00:00");
+const shortDate=d=>dayOf(d).toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"}).toUpperCase();
+const paras=t=>t.split(/\n\s*\n/).map(p=>`<p class="blurb">${esc(p.trim())}</p>`).join("");
+const videoBox=(img)=>`<div class="vid"><div class="yt"></div>${img?`<div class="vid-poster" aria-hidden="true"><div class="bg" style="background-image:url('${img}')"></div><img src="${img}" alt=""></div>`:""}<button class="vid-hit" type="button" aria-label="Play or pause video"><span class="vid-play" aria-hidden="true"></span></button><button class="vid-fs" type="button" aria-label="Full screen">⤢</button></div>`;
+function wireMore(art){
+  const body=art.querySelector(".more-body");if(!body)return;
+  const btns=art.querySelectorAll("[data-more-toggle]"),label=art.querySelector(".readmore[data-more-toggle]");
+  const set=open=>{body.hidden=!open;if(label)label.textContent=open?"SHOW LESS ↑":"READ MORE ↓";art.classList.toggle("open",open);
+    if(open&&history.replaceState)history.replaceState(null,"","#"+art.id)};
+  btns.forEach(b=>b.addEventListener("click",()=>{const open=body.hidden;set(open);if(!open)art.scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"})}));
+  art.querySelectorAll("[data-open]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();set(true)}));
+  if(location.hash==="#"+art.id){set(true);setTimeout(()=>art.scrollIntoView({block:"start"}),60)}
+}
+
+// ---------- Techno Tuesday / daily track posts ----------
 (function(){
-  const box=document.getElementById("soon");if(!box||typeof UPCOMING==="undefined")return;
-  const day=d=>{const x=new Date(d+"T12:00:00");return x};
-  const today=new Date();today.setHours(12,0,0,0);
-  const r=UPCOMING.map(u=>({...u,diff:Math.round((day(u.releaseDate)-today)/864e5)})).filter(u=>u.diff>=-7).sort((a,b)=>a.diff-b.diff)[0];
-  if(!r)return;
-  const when=day(r.releaseDate).toLocaleDateString("en-US",{weekday:"long",month:"short",day:"numeric"}).toUpperCase();
-  let badge,eyebrow;
-  if(r.diff>0){badge=`<span class="badge${r.diff<=7?" near":""}">IN <span class="num">${r.diff}</span> DAY${r.diff>1?"S":""}</span>`;eyebrow=`COMING ${when}`}
-  else if(r.diff===0){badge=`<span class="badge today"><span class="dot"></span>OUT TODAY</span>`;eyebrow=`OUT TODAY · ${when}`}
-  else{badge=`<span class="badge new">NEW · <span class="num">${-r.diff}</span> DAY${r.diff<-1?"S":""}</span>`;eyebrow=`OUT NOW · RELEASED ${when}`}
-  box.innerHTML=`<div class="vid"><div class="yt"></div>${r.img?`<div class="vid-poster" aria-hidden="true"><div class="bg" style="background-image:url('${r.img}')"></div><img src="${r.img}" alt=""></div>`:""}<button class="vid-hit" type="button" aria-label="Play or pause video"><span class="vid-play" aria-hidden="true"></span></button><button class="vid-fs" type="button" aria-label="Full screen">⤢</button></div>
-    <div class="soon-info">
-      <div class="eyebrow">${eyebrow}</div>
-      ${badge}
-      <h2 id="soon-h">${esc(r.title)}</h2>
-      <p class="by">${esc(r.artist)} · <span class="sub">${esc(r.type.toLowerCase())} on ${esc(r.label)}</span></p>
-      ${((r.diff<=0&&r.blurbOut)||r.blurb).split(/\n\s*\n/).map(p=>`<p class="blurb">${esc(p.trim())}</p>`).join("")}
-      ${r.diff>0?`<div class="remind">
+  const art=document.getElementById("techno-tuesday-holo");if(!art||typeof POSTS==="undefined")return;
+  const p=POSTS[0];if(!p||dayOf(p.date)>TODAY)return;
+  const ps=p.body.split(/\n\s*\n/),pre=ps.slice(0,2).join("\n\n"),rest=ps.slice(2).join("\n\n"),P=p.playlist;
+  art.innerHTML=`<div class="eyebrow"><b>${esc(p.kicker)}</b> · ${shortDate(p.date)}</div>
+    <h2><a href="#${art.id}" data-open>${esc(p.artist)} – ${esc(p.title)}</a></h2>
+    <p class="by">${esc(p.label||"")}</p>
+    ${p.plays>=4?`<span class="plays" title="I've gone back to this ${p.plays}+ times"><span class="ring">${p.plays}+</span><span class="cap">PLAYS<br>AND COUNTING</span></span>`:""}
+    <div class="media">${videoBox(p.img)}</div>
+    ${paras(pre)}
+    <div class="more-body" hidden>
+      ${paras(rest)}
+      <p class="signoff">Sending you love,<br>Leefer</p>
+      <div class="links">${p.sp?`<a class="btn" href="${p.sp}" target="_blank" rel="noopener">LISTEN ON SPOTIFY ↗</a>`:""}${p.artistSp?`<a class="btn ghost" href="${p.artistSp}" target="_blank" rel="noopener">MORE ${esc(p.artist.toUpperCase())} ↗</a>`:""}</div>
+      ${P?`<section class="pl"><a class="pl-art" href="${P.url}" target="_blank" rel="noopener"><img src="${P.img}" alt="${esc(P.title)} playlist artwork"><span class="pl-cta">click to listen ↗</span></a>
+        <div class="pl-text"><div class="meta">SPOTIFY PLAYLIST · ARMY OF LOVE</div><h2>${esc(P.title)}</h2>
+        <a class="pl-link" href="${P.url}" target="_blank" rel="noopener">click to listen ↗</a><p><b>${esc(P.line)}</b><br>${esc(P.note)}</p></div></section>`:""}
+      ${p.plays>=4?`<p class="legend"><b>4+</b> &nbsp;Tracks I've gone back to four or more times. The number is how many so far.</p>`:""}
+    </div>
+    <div class="entry-foot"><button class="readmore" type="button" data-more-toggle>READ MORE ↓</button>${P?`<a class="quiet" href="${P.url}" target="_blank" rel="noopener">${esc(P.title)} playlist ↗</a>`:""}</div>`;
+  art.hidden=false;mountVideo(art.querySelector(".vid"),p.video);wireMore(art);
+})();
+
+// ---------- Release announcements (ARP) ----------
+(function(){
+  const art=document.getElementById("arp-felix-rosch");if(!art||typeof UPCOMING==="undefined")return;
+  const r=UPCOMING[0];if(!r)return;r.diff=Math.round((dayOf(r.releaseDate)-TODAY)/864e5);
+  const when=dayOf(r.releaseDate).toLocaleDateString("en-US",{weekday:"long",month:"short",day:"numeric"});
+  let badge="";
+  if(r.diff>0)badge=`<span class="badge${r.diff<=7?" near":""}">IN <span class="num">${r.diff}</span> DAY${r.diff>1?"S":""}</span>`;
+  else if(r.diff===0)badge=`<span class="badge today"><span class="dot"></span>OUT TODAY</span>`;
+  else if(r.diff>=-7)badge=`<span class="badge new">NEW · <span class="num">${-r.diff}</span> DAY${r.diff<-1?"S":""}</span>`;
+  art.innerHTML=`<div class="eyebrow"><b>${r.diff>0?"COMING SOON":"NEW RELEASE"}</b> · ${shortDate(r.dateAdded)}</div>
+    <h2><a href="${r.sp||"#"}" target="_blank" rel="noopener">${esc(r.artist)} – ${esc(r.title)}</a></h2>
+    <p class="by">${esc(r.type.charAt(0)+r.type.slice(1).toLowerCase())} on ${esc(r.label)} · ${r.diff>0?"out":"released"} ${esc(when)}</p>
+    ${badge}
+    <div class="media">${videoBox(r.img)}</div>
+    ${paras((r.diff<=0&&r.blurbOut)||r.blurb)}
+    ${r.diff>0?`<div class="remind">
         <button class="btn" type="button" id="remind-btn" aria-expanded="false" aria-controls="remind-panel">REMIND ME →</button>
         <div class="remind-panel" id="remind-panel"><div class="r-inner"><div class="r-card">
           <div class="r-choices">
@@ -363,22 +431,20 @@ const REMIND_FORM="";
           <form class="r-form" hidden novalidate>
             <label for="r-email">YOUR EMAIL</label>
             <div class="r-row"><input id="r-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required><button class="r-go" type="submit" aria-label="Remind me">→</button></div>
-            <p class="r-msg" aria-live="polite">One email the morning of ${esc(day(r.releaseDate).toLocaleDateString("en-US",{weekday:"long",month:"short",day:"numeric"}))}. Nothing else.</p>
+            <p class="r-msg" aria-live="polite">One email the morning of ${esc(when)}. Nothing else.</p>
             <button class="r-back" type="button">← BACK</button>
           </form>
-        </div></div></div></div>`:""}
-      ${r.sp&&r.diff<=0?`<div class="links"><a class="btn" href="${r.sp}" target="_blank" rel="noopener">LISTEN ON SPOTIFY ↗</a></div>`:""}
-      ${r.more?`<a class="more-link" href="${r.more}" target="_blank" rel="noopener">MORE ON ${esc(r.artist.toUpperCase())} ↗</a>`:""}
-    </div>`;
-  box.hidden=false;
-  mountVideo(box.querySelector(".vid"),r.video);
+        </div></div></div></div>`:(r.sp?`<div class="links"><a class="btn" href="${r.sp}" target="_blank" rel="noopener">LISTEN ON SPOTIFY ↗</a></div>`:"")}
+    <div class="entry-foot">${r.more?`<a class="quiet" href="${r.more}" target="_blank" rel="noopener">More on ${esc(r.artist)} ↗</a>`:""}</div>`;
+  art.hidden=false;mountVideo(art.querySelector(".vid"),r.video);
+
   const rb=document.getElementById("remind-btn");
   if(rb){
-    const wrap=box.querySelector(".remind"),choices=wrap.querySelector(".r-choices"),form=wrap.querySelector(".r-form"),
+    const wrap=art.querySelector(".remind"),choices=wrap.querySelector(".r-choices"),form=wrap.querySelector(".r-form"),
       input=form.querySelector("input"),msg=form.querySelector(".r-msg"),go=form.querySelector(".r-go"),msg0=msg.textContent,
       opts=[...wrap.querySelectorAll(".r-opt")];
-    const setOpen=o=>{wrap.classList.toggle("open",o);rb.setAttribute("aria-expanded",o);opts.forEach(x=>x.tabIndex=o?0:-1);if(!o)reset()};
     const reset=()=>{if(form.dataset.done)return;choices.hidden=false;form.hidden=true;msg.className="r-msg";msg.textContent=msg0};
+    const setOpen=o=>{wrap.classList.toggle("open",o);rb.setAttribute("aria-expanded",o);opts.forEach(x=>x.tabIndex=o?0:-1);if(!o)reset()};
     rb.addEventListener("click",()=>setOpen(!wrap.classList.contains("open")));
     wrap.querySelector('[data-r="email"]').addEventListener("click",()=>{choices.hidden=true;form.hidden=false;setTimeout(()=>input.focus(),50)});
     form.querySelector(".r-back").addEventListener("click",reset);
@@ -394,12 +460,20 @@ const REMIND_FORM="";
         if(!res.ok)throw 0;
         try{localStorage.setItem("aol-remind-"+r.releaseDate+r.title,"1")}catch(_){}
         form.dataset.done="1";
-        form.innerHTML=`<p class="r-msg"><span class="r-done">You're on the list.</span>See you ${esc(day(r.releaseDate).toLocaleDateString("en-US",{weekday:"long"}))} morning. Sending you love.</p>`;
+        form.innerHTML=`<p class="r-msg"><span class="r-done">You're on the list.</span>See you ${esc(dayOf(r.releaseDate).toLocaleDateString("en-US",{weekday:"long"}))} morning. Sending you love.</p>`;
         rb.textContent="REMINDER SET ✓";
       }catch(_){go.disabled=false;go.textContent="→";msg.className="r-msg err";msg.textContent="Something went wrong. Try again in a moment?"}
     });
     try{if(localStorage.getItem("aol-remind-"+r.releaseDate+r.title))rb.textContent="REMINDER SET ✓"}catch(_){}
   }
+})();
+
+// ---------- Fruitful Friday preview strip ----------
+(function(){
+  const art=document.getElementById("fruitful-friday-nov-6");if(!art)return;
+  const s=art.querySelector(".strip");
+  if(s&&typeof SETS!=="undefined")s.innerHTML=SETS.albums.concat(SETS.other).slice(0,10).map(r=>`<img src="${r.img}" alt="" loading="lazy">`).join("");
+  wireMore(art);
 })();
 </script>
 </body>

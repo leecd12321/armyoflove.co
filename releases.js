@@ -66,7 +66,17 @@ const SETS= // Fruitful Friday · Nov 6, 2026
 const UPCOMING=[
  {title:"ARP",artist:"Felix Rösch",label:"Nettwerk",type:"ALBUM",releaseDate:"2026-11-13",dateAdded:"2026-11-09",video:"90SEUNfNPfo",
   img:"https://i.scdn.co/image/ab67616d0000b2733ed385984f09e12241edf8e8",sp:"https://open.spotify.com/album/1NjOUiBBVueeLMIVZXkJUc",
-  blurb:"A new album from Felix Rösch lands this Friday. A deeply personal record of neo-classical composition, and the first piece of it, \"Für Lea\", is already out.\n\nSet a reminder and I'll see you on release day.",
+  blurb:"I'm a big fan of Felix Rösch's music and he has a new album coming out this Friday. Wanted to get that on your radar and plant a seed for you to check out his existing catalog.",
   blurbOut:"ARP is out today. A deeply personal record of neo-classical composition from Felix Rösch.",
-  more:"https://nettwerk.com/artist/felix-rosch"}
+  more:"https://open.spotify.com/artist/5DN6qP3OzoKVYXF3o2KCXp"}
+];
+
+// Daily posts (one track or release, scheduled by date). The newest post dated today or earlier
+// sits at the top of the homepage. "plays" = how many times Leefer has gone back to it (4+ badge).
+const POSTS=[
+ {date:"2026-11-10",kicker:"TECHNO TUESDAY",title:"Does It Get Easier?",artist:"Holo",label:"Noire & Blanche",video:"dxGl-BoL-jw",plays:10,
+  img:"https://i.scdn.co/image/ab67616d0000b273bb4c9fc51deffd1281e7460d",
+  sp:"https://open.spotify.com/track/1zmThgFg1hww3UqVouPNRl",artistSp:"https://open.spotify.com/artist/5PrWAhH8BO28ieKNfYYFEX",
+  playlist:{title:"Techno Tuesday",url:"https://open.spotify.com/playlist/3QViRQw2MjLQAI98kmWNuk",img:"https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da846a5cc179cc2196842094ce52",line:"Only the top of the tippity top. Send it!",note:"Every Techno Tuesday track lives here."},
+  body:"Something new on the Radar today: the 4+.\n\nWhen a track earns a 4+, it means I've played it four or more times. Not because I scheduled it, not because I'm writing about it. I just kept going back. Something in it keeps pulling me in.\n\nThis one is way past that. \"Does It Get Easier?\" is at 10+ for me right now, and still climbing.\n\nAnd the title. I'm not even going to pretend I don't hear the question. Some days it does. Some days you just put the track on again.\n\nTurn it up, let it run all the way through, and see if it pulls you back too."}
 ];
