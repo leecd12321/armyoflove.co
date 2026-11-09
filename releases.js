@@ -68,7 +68,7 @@ const UPCOMING=[
   img:"https://i.scdn.co/image/ab67616d0000b2733ed385984f09e12241edf8e8",sp:"https://open.spotify.com/album/1NjOUiBBVueeLMIVZXkJUc",
   blurb:"I'm a big fan of Felix Rösch's music and he has a new album coming out this Friday. Wanted to get that on your radar and plant a seed for you to check out his existing catalog.",
   blurbOut:"ARP is out today. A deeply personal record of neo-classical composition from Felix Rösch.",
-  more:"https://open.spotify.com/artist/5DN6qP3OzoKVYXF3o2KCXp"}
+  more:"https://felixrosch.bandcamp.com/"}
 ];
 
 // Daily posts (one track or release, scheduled by date). The newest post dated today or earlier

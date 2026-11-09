@@ -237,6 +237,8 @@ footer{font-family:var(--type);font-size:15px;border-top:1px solid var(--rule);p
 nav .links{display:flex;gap:18px}
 nav .links a{color:var(--muted);font-weight:500}
 nav .links a[aria-current]{color:var(--ink);font-weight:700}
+.excerpt{display:flex;flex-direction:column;gap:12px;max-width:62ch}
+.excerpt p{margin:0;font-family:var(--type);font-size:16px;line-height:1.7}
 </style>
 </head>
 <body>
@@ -245,20 +247,23 @@ nav .links a[aria-current]{color:var(--ink);font-weight:700}
 
   <main class="feed">
 
+  <article class="entry essay-entry" id="a-wave-of-anxiety">
+    <div class="eyebrow"><b>CASUAL HEALING · ESSAY</b> · MON, NOV 9</div>
+    <h2 class="g"><a href="https://casualhealing.substack.com/p/a-wave-of-anxiety" target="_blank" rel="noopener">A wave of anxiety…</a></h2>
+    <p class="by sub-i">An exploration of rumination vs feeling.</p>
+    <div class="excerpt">
+      <p>I woke up with a wave of anxiety this morning.<br>It wasn’t pleasant.</p>
+    </div>
+    <div class="entry-foot">
+      <a class="readmore" href="https://casualhealing.substack.com/p/a-wave-of-anxiety" target="_blank" rel="noopener">CONTINUE READING ON SUBSTACK →</a>
+    </div>
+  </article>
+
+
   <article class="entry" id="techno-tuesday-holo" data-date="2026-11-10" hidden></article>
 
   <article class="entry" id="arp-felix-rosch" hidden></article>
 
-  <article class="entry essay-entry" id="a-wave-of-anxiety">
-    <div class="eyebrow"><b>CASUAL HEALING · ESSAY</b> · MON, NOV 9</div>
-    <h2 class="g"><a href="https://casualhealing.substack.com/p/a-wave-of-anxiety" target="_blank" rel="noopener">A wave of anxiety…</a></h2>
-    <p class="by sub-i">Rumination.</p>
-    <a class="media photo" href="https://casualhealing.substack.com/p/a-wave-of-anxiety" target="_blank" rel="noopener"><img src="https://substackcdn.com/image/fetch/$s_!9pab!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F95e29903-4f69-4978-ab8e-9572bffee5b0_3840x5120.jpeg" alt="" loading="lazy"></a>
-    <div class="entry-foot">
-      <a class="readmore" href="https://casualhealing.substack.com/p/a-wave-of-anxiety" target="_blank" rel="noopener">CONTINUE READING ON SUBSTACK →</a>
-      <a class="quiet" href="https://casualhealing.substack.com/subscribe" target="_blank" rel="noopener">A new essay every week · Subscribe ↗</a>
-    </div>
-  </article>
 
   <article class="entry" id="fruitful-friday-nov-6">
     <div class="eyebrow"><b>FRUITFUL FRIDAY</b> · FRI, NOV 6</div>
@@ -358,7 +363,7 @@ function mountVideo(box,id){
 }
 
 // Where "Email me" reminders are sent (Formspree form endpoint, e.g. "https://formspree.io/f/abcdwxyz"). Empty = email option shows a "coming soon" note.
-const REMIND_FORM="";
+const REMIND_FORM="https://app.kit.com/forms/10166878/subscriptions"; // Kit form "Radar Reminders"
 
 // ---------- Feed helpers ----------
 const qsPreview=new URLSearchParams(location.search).get("preview");
@@ -455,9 +460,11 @@ function wireMore(art){
       if(!REMIND_FORM){msg.className="r-msg err";msg.textContent="Email reminders open very soon. For now, pre-save on Spotify.";return}
       go.disabled=true;go.textContent="…";
       try{
-        const res=await fetch(REMIND_FORM,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json"},
-          body:JSON.stringify({email,release:`${r.artist} – ${r.title}`,releaseDate:r.releaseDate,_subject:`Remind me: ${r.artist} – ${r.title}`})});
+        const fd=new FormData();fd.append("email_address",email);
+        const res=await fetch(REMIND_FORM,{method:"POST",headers:{"Accept":"application/json"},body:fd});
         if(!res.ok)throw 0;
+        let j={};try{j=await res.json()}catch(_){}
+        if(j.status&&j.status!=="success")throw 0;
         try{localStorage.setItem("aol-remind-"+r.releaseDate+r.title,"1")}catch(_){}
         form.dataset.done="1";
         form.innerHTML=`<p class="r-msg"><span class="r-done">You're on the list.</span>See you ${esc(dayOf(r.releaseDate).toLocaleDateString("en-US",{weekday:"long"}))} morning. Sending you love.</p>`;
