@@ -271,7 +271,7 @@ nav .links a[aria-current]{color:var(--ink);font-weight:700}
 .up-row img{width:56px;height:56px;object-fit:cover;display:block;border:1px solid var(--ink)}
 .up-row .t{font-weight:700;font-size:15.5px;line-height:1.25}
 .up-row .t .lab{font-weight:500;color:var(--muted)}
-.up-row .d{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.07em;color:var(--muted);margin-top:3px}
+.up-row .d{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.07em;color:var(--ink);margin-top:3px}
 .up-row .d b{font-family:"EB Garamond",Garamond,Georgia,serif;font-size:15px;font-weight:400;letter-spacing:0;color:var(--ink)}
 .up-links{display:flex;flex-wrap:wrap;gap:6px 12px;justify-content:flex-end;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.06em}
 .up-links a,.up-links button{all:unset;cursor:pointer;color:var(--ink);border-bottom:1.5px solid currentColor;padding-bottom:2px}
@@ -282,7 +282,8 @@ nav .links a[aria-current]{color:var(--ink);font-weight:700}
 .rd-tabs button{all:unset;cursor:pointer;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.08em;padding:10px 14px;color:var(--muted)}
 .rd-tabs button[aria-selected="true"]{background:var(--ink);color:#e7d9a8}
 .rd-tabs button:focus-visible{outline:2px solid var(--ink);outline-offset:-2px}
-.rd-wk{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.1em;color:var(--muted);padding:16px 0 2px}
+.rd-wk{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--ink);padding:20px 0 6px}
+.rd-wk::after{content:"";flex:1;height:1.5px;background:var(--ink)}
 .rd-wk + .up-row{border-top:0}
 .rd-empty{margin:14px 0;color:var(--muted);font-size:14px}
 .rd-st{display:inline-flex;align-items:center;gap:5px;vertical-align:middle;margin:0 6px 0 4px;font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.08em;padding:4px 7px;border:1px solid var(--ink);color:var(--ink);line-height:1;white-space:nowrap}
@@ -293,6 +294,17 @@ nav .links a[aria-current]{color:var(--ink);font-weight:700}
 @keyframes rdp{50%{opacity:.3}}
 @media (prefers-reduced-motion:reduce){.rd-st.today i{animation:none}}
 .rd-st.fresh,.rd-st.fade{border-color:var(--muted);color:var(--muted)}
+.up-row .type-badge,.up-row .ambient-badge{cursor:pointer;transition:transform .15s,box-shadow .15s}
+.up-row .type-badge:hover,.up-row .ambient-badge:hover{transform:translateY(-1px);box-shadow:0 2px 0 var(--ink)}
+.up-row .type-badge:focus-visible,.up-row .ambient-badge:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.type-badge.is-on,.ambient-badge.is-on{box-shadow:0 0 0 2px var(--ink)}
+.rd-filter{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:0 -14px;padding:10px 14px;background:#e8e1d5;border-bottom:1px solid var(--rule)}
+.rd-filter[hidden],.up-row[hidden],.rd-wk[hidden]{display:none}
+.rd-filter .lbl,.rd-fcount{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--muted)}
+.rd-fbadge .type-badge,.rd-fbadge .ambient-badge{margin:0;box-shadow:none}
+.rd-clear{all:unset;cursor:pointer;margin-left:auto;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.08em;background:var(--ink);color:#e7d9a8;padding:7px 12px;border-radius:999px}
+.rd-clear:hover{background:#343a20}
+.rd-clear:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 .up-form{grid-column:2/-1;display:flex;flex-direction:column;gap:6px}
 .up-form[hidden]{display:none}
 .up-form .r-row{border-bottom-color:var(--ink)}
@@ -504,7 +516,7 @@ function wireMore(art){
   // group by release week, labelled by that week's Friday (Sat–Fri)
   const fri=d=>{const x=dayOf(d);x.setDate(x.getDate()+((5-x.getDay()+7)%7));return x};
   const wk=d=>dayOf(d).toLocaleDateString("en-US",{weekday:"long",month:"short",day:"numeric"}).toUpperCase(); // one heading per release day
-  let n=0;const row=r=>{const i=n++;r._i=i;return `<div class="up-row" data-i="${i}"><img src="${r.img}" alt="${esc(r.title)} cover" loading="lazy"><div><div class="t">${esc(r.artist)} – ${esc(r.title)} <span class="lab">[${esc(r.label)}]</span></div><div class="d">${dd(r.releaseDate)} ${st(r)} ${typeBadges(r)}${ambientBadge(r)}</div></div>
+  let n=0;const row=r=>{const i=n++;r._i=i;const f=[r.type==="ALBUM"&&"album",(r.va||r.artist==="VA")&&"va",r.ambient&&"ambient"].filter(Boolean).join(" ");return `<div class="up-row" data-i="${i}" data-f="${f}"><img src="${r.img}" alt="${esc(r.title)} cover" loading="lazy"><div><div class="t">${esc(r.artist)} – ${esc(r.title)} <span class="lab">[${esc(r.label)}]</span></div><div class="d">${dd(r.releaseDate)} ${st(r)} ${typeBadges(r)}${ambientBadge(r)}</div></div>
     <div class="up-links">${(r.links||[]).map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener">${esc(n)} ↗</a>`).join("")}${r.diff>0?`<button type="button" data-rm>REMIND ME →</button>`:""}</div>
     ${r.diff>0?`<form class="up-form" hidden novalidate><div class="r-row"><input type="email" id="up-email-${i}" autocomplete="email" inputmode="email" placeholder="you@example.com" aria-label="Your email" required><button class="r-go" type="submit" aria-label="Remind me">→</button></div><p class="r-msg" aria-live="polite">One email the morning of ${dd(r.releaseDate)}. Nothing else.</p></form>`:""}</div>`};
   const grouped=list=>{let h="",last="";list.forEach(r=>{const w=wk(r.releaseDate);if(w!==last){h+=`<div class="rd-wk">${w}</div>`;last=w}h+=row(r)});return h};
@@ -512,11 +524,27 @@ function wireMore(art){
   const upH=grouped(up),outH=grouped(out);
   box.innerHTML=`<button class="up-tg" type="button" aria-expanded="false" aria-controls="up-list"><span class="lbl">✦ THE RADAR</span><span class="count">${up.length}</span><span class="lbl2">COMING UP</span><span class="thumbs">${up.slice(0,6).map(r=>`<img src="${r.img}" alt="">`).join("")}</span><span class="arrow">SEE ALL ↓</span></button>
   <div class="up-list" id="up-list" hidden><div class="rd-tabs" role="tablist"><button type="button" role="tab" aria-selected="true" data-t="up">COMING UP · ${up.length}</button><button type="button" role="tab" aria-selected="false" data-t="out">OUT NOW · ${out.length}</button></div>
-  <div data-p="up">${upH||'<p class="rd-empty">Nothing announced yet.</p>'}</div><div data-p="out" hidden>${outH||'<p class="rd-empty">Nothing out yet.</p>'}</div></div>`;
+  <div class="rd-filter" hidden><span class="lbl">SHOWING ONLY</span><span class="rd-fbadge"></span><span class="rd-fcount"></span><button type="button" class="rd-clear">✕ CLEAR FILTER</button></div><div data-p="up">${upH||'<p class="rd-empty">Nothing announced yet.</p>'}</div><div data-p="out" hidden>${outH||'<p class="rd-empty">Nothing out yet.</p>'}</div></div>`;
   box.hidden=false;
   const tg=box.querySelector(".up-tg"),ul=box.querySelector(".up-list"),ar=tg.querySelector(".arrow");
   tg.addEventListener("click",()=>{const o=ul.hidden;ul.hidden=!o;tg.setAttribute("aria-expanded",o);ar.textContent=o?"CLOSE ↑":"SEE ALL ↓"});
   box.querySelectorAll("[data-t]").forEach(b=>b.addEventListener("click",()=>{box.querySelectorAll("[data-t]").forEach(x=>x.setAttribute("aria-selected",x===b));box.querySelectorAll("[data-p]").forEach(p=>p.hidden=p.dataset.p!==b.dataset.t)}));
+  // Badges as filters: click ALBUM / VA / AMBIENT to show only those; CLEAR FILTER returns the full list
+  const fbar=box.querySelector(".rd-filter");let cur="";
+  const applyF=f=>{cur=f;
+    box.querySelectorAll("[data-p]").forEach(p=>{p.querySelectorAll(".up-row").forEach(r=>r.hidden=!!f&&!(r.dataset.f||"").split(" ").includes(f));
+      p.querySelectorAll(".rd-wk").forEach(w=>{let x=w.nextElementSibling,any=false;while(x&&!x.classList.contains("rd-wk")){if(x.classList.contains("up-row")&&!x.hidden)any=true;x=x.nextElementSibling}w.hidden=!any})});
+    box.querySelectorAll(".type-badge,.ambient-badge").forEach(b=>b.classList.toggle("is-on",!!f&&b.dataset.f===f));
+    if(!f){fbar.hidden=true;box.querySelectorAll("[data-t]").forEach(b=>b.textContent=b.textContent.replace(/·.*$/,"· "+(b.dataset.t==="up"?up.length:out.length)));return}
+    const src=box.querySelector(`.up-row [data-f="${f}"]`);fbar.querySelector(".rd-fbadge").innerHTML=src?src.outerHTML:f.toUpperCase();
+    const cnt=t=>box.querySelectorAll(`[data-p="${t}"] .up-row:not([hidden])`).length;
+    box.querySelectorAll("[data-t]").forEach(b=>b.textContent=b.textContent.replace(/·.*$/,"· "+cnt(b.dataset.t)));
+    const vis=box.querySelector("[data-p]:not([hidden])");fbar.querySelector(".rd-fcount").textContent=cnt(vis.dataset.p)+" HERE";
+    fbar.hidden=false};
+  box.querySelectorAll(".up-row .type-badge,.up-row .ambient-badge").forEach(b=>{b.dataset.f=b.classList.contains("ambient-badge")?"ambient":b.classList.contains("va")?"va":"album";b.setAttribute("role","button");b.tabIndex=0;b.title="Show only "+b.dataset.f.toUpperCase();
+    const go=e=>{e.preventDefault();applyF(cur===b.dataset.f?"":b.dataset.f)};b.addEventListener("click",go);b.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" ")go(e)})});
+  fbar.querySelector(".rd-clear").addEventListener("click",()=>applyF(""));
+  box.querySelectorAll("[data-t]").forEach(b=>b.addEventListener("click",()=>{if(cur)applyF(cur)}));
   const byI={};[...up,...out].forEach(r=>byI[r._i]=r);
   box.querySelectorAll(".up-row").forEach(row=>{
     const r=byI[+row.dataset.i],btn=row.querySelector("[data-rm]"),form=row.querySelector(".up-form");if(!btn||!form)return;
