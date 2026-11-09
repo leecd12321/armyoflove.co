@@ -68,7 +68,12 @@ const UPCOMING=[
   img:"https://i.scdn.co/image/ab67616d0000b2733ed385984f09e12241edf8e8",sp:"https://open.spotify.com/album/1NjOUiBBVueeLMIVZXkJUc",
   blurb:"I'm a big fan of Felix Rösch's music and he has a new album coming out this Friday. Wanted to get that on your radar and plant a seed for you to check out his existing catalog.",
   blurbOut:"ARP is out today. A deeply personal record of neo-classical composition from Felix Rösch.",
-  more:"https://felixrosch.bandcamp.com/"}
+  more:"https://felixrosch.bandcamp.com/",
+  links:[["SPOTIFY","https://open.spotify.com/album/1NjOUiBBVueeLMIVZXkJUc"],["BANDCAMP","https://felixrosch.bandcamp.com/"]]},
+ // Radar mentions: short, shown only in the Upcoming releases bar (no full post)
+ {mention:true,title:"Astro",artist:"Donato Dozzy",label:"Tresor Records",type:"ALBUM",releaseDate:"2026-11-20",dateAdded:"2026-11-09",
+  img:"https://f4.bcbits.com/img/a3622820286_10.jpg",
+  links:[["CRATES","https://crates.co/release/astro/7415369"],["BANDCAMP","https://donaotodozzy.bandcamp.com/album/astro"]]}
 ];
 
 // Daily posts (one track or release, scheduled by date). The newest post dated today or earlier

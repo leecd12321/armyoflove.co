@@ -253,6 +253,36 @@ nav .links a{color:var(--muted);font-weight:500}
 nav .links a[aria-current]{color:var(--ink);font-weight:700}
 .excerpt{display:flex;flex-direction:column;gap:12px;max-width:62ch}
 .excerpt p{margin:0;font-family:var(--type);font-size:16px;line-height:1.7}
+/* ---------- Upcoming releases bar (expandable) ---------- */
+.upbar{margin:0 0 4px}
+.upbar[hidden]{display:none}
+.up-tg{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;flex-wrap:wrap;gap:10px 14px;width:100%;background:var(--ink);color:var(--paper);padding:11px 14px}
+.up-tg:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.up-tg .lbl{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.08em;color:#e7d9a8}
+.up-tg .count{font-family:"EB Garamond",Garamond,Georgia,serif;font-size:17px}
+.up-tg .thumbs{display:flex}
+.up-tg .thumbs img{width:26px;height:26px;object-fit:cover;border:1.5px solid var(--ink);margin-left:-6px}
+.up-tg .thumbs img:first-child{margin-left:0}
+.up-tg .arrow{margin-left:auto;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.06em;border-bottom:1.5px solid currentColor;padding-bottom:2px;white-space:nowrap}
+.up-list{border:1.5px solid var(--ink);border-top:0;padding:0 14px}
+.up-list[hidden]{display:none}
+.up-row{display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:14px;align-items:center;padding:12px 0;border-top:1px solid var(--rule)}
+.up-row:first-child{border-top:0}
+.up-row img{width:56px;height:56px;object-fit:cover;display:block;border:1px solid var(--ink)}
+.up-row .t{font-weight:700;font-size:15.5px;line-height:1.25}
+.up-row .t .lab{font-weight:500;color:var(--muted)}
+.up-row .d{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.07em;color:var(--muted);margin-top:3px}
+.up-row .d b{font-family:"EB Garamond",Garamond,Georgia,serif;font-size:15px;font-weight:400;letter-spacing:0;color:var(--ink)}
+.up-links{display:flex;flex-wrap:wrap;gap:6px 12px;justify-content:flex-end;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.06em}
+.up-links a,.up-links button{all:unset;cursor:pointer;color:var(--ink);border-bottom:1.5px solid currentColor;padding-bottom:2px}
+.up-links a:hover,.up-links button:hover{color:var(--muted)}
+.up-form{grid-column:2/-1;display:flex;flex-direction:column;gap:6px}
+.up-form[hidden]{display:none}
+.up-form .r-row{border-bottom-color:var(--ink)}
+.up-form .r-row input{font-size:19px;color:var(--ink)}
+.up-form .r-go{color:var(--ink);border-color:var(--ink)}
+.up-form .r-msg{color:var(--muted)}
+@media (max-width:600px){.up-row{grid-template-columns:48px minmax(0,1fr)}.up-row img{width:48px;height:48px}.up-links{grid-column:2;justify-content:flex-start}.up-tg .thumbs{display:none}}
 </style>
 </head>
 <body>
@@ -260,6 +290,8 @@ nav .links a[aria-current]{color:var(--ink);font-weight:700}
   <nav><a class="logo" href="index.html" aria-label="Army of Love home"><img src="army-of-love-wordmark.png" alt="Army of Love" width="640" height="135"></a><span class="links"><a href="index.html" aria-current="page">THE RADAR</a><!-- <a href="festivals.html">FESTIVALS &amp; CLUBS</a> (hidden until published) --></span></nav>
 
   <main class="feed">
+
+  <section class="upbar" id="upcoming" hidden aria-label="Upcoming releases"></section>
 
   <article class="entry essay-entry" id="a-wave-of-anxiety">
     <div class="eyebrow"><b>CASUAL HEALING · ESSAY</b> · MON, NOV 9</div>
@@ -423,10 +455,41 @@ function wireMore(art){
   art.hidden=false;mountVideo(art.querySelector(".vid"),p.video);wireMore(art);
 })();
 
+// ---------- Upcoming releases bar ----------
+(function(){
+  const box=document.getElementById("upcoming");if(!box||typeof UPCOMING==="undefined")return;
+  const list=UPCOMING.map(r=>({...r,diff:Math.round((dayOf(r.releaseDate)-TODAY)/864e5)})).filter(r=>r.diff>=0).sort((a,b)=>a.diff-b.diff);
+  if(!list.length)return;
+  const dd=d=>dayOf(d).toLocaleDateString("en-GB",{day:"numeric",month:"short"}).toUpperCase();
+  const when=r=>r.diff===0?"OUT TODAY":`IN <b>${r.diff}</b> DAY${r.diff>1?"S":""}`;
+  box.innerHTML=`<button class="up-tg" type="button" aria-expanded="false" aria-controls="up-list"><span class="lbl">✦ UPCOMING RELEASES</span><span class="count">${list.length}</span><span class="thumbs">${list.map(r=>`<img src="${r.img}" alt="">`).join("")}</span><span class="arrow">SEE ALL ↓</span></button>
+  <div class="up-list" id="up-list" hidden>${list.map((r,i)=>`<div class="up-row" data-i="${i}"><img src="${r.img}" alt="${esc(r.title)} cover" loading="lazy"><div><div class="t">${esc(r.artist)} – ${esc(r.title)} <span class="lab">[${esc(r.label)}]</span></div><div class="d">${dd(r.releaseDate)} · ${when(r)}</div></div>
+    <div class="up-links">${(r.links||[]).map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener">${esc(n)} ↗</a>`).join("")}${r.diff>0?`<button type="button" data-rm>REMIND ME →</button>`:""}</div>
+    <form class="up-form" hidden novalidate><div class="r-row"><input type="email" id="up-email-${i}" autocomplete="email" inputmode="email" placeholder="you@example.com" aria-label="Your email" required><button class="r-go" type="submit" aria-label="Remind me">→</button></div><p class="r-msg" aria-live="polite">One email the morning of ${dd(r.releaseDate)}. Nothing else.</p></form></div>`).join("")}</div>`;
+  box.hidden=false;
+  const tg=box.querySelector(".up-tg"),ul=box.querySelector(".up-list"),ar=tg.querySelector(".arrow");
+  tg.addEventListener("click",()=>{const o=ul.hidden;ul.hidden=!o;tg.setAttribute("aria-expanded",o);ar.textContent=o?"CLOSE ↑":"SEE ALL ↓"});
+  box.querySelectorAll(".up-row").forEach(row=>{
+    const r=list[+row.dataset.i],btn=row.querySelector("[data-rm]"),form=row.querySelector(".up-form");if(!btn)return;
+    const input=form.querySelector("input"),msg=form.querySelector(".r-msg"),go=form.querySelector(".r-go"),key="aol-remind-"+r.releaseDate+r.title;
+    try{if(localStorage.getItem(key))btn.textContent="REMINDER SET ✓"}catch(_){}
+    btn.addEventListener("click",()=>{if(form.dataset.done)return;form.hidden=!form.hidden;if(!form.hidden)setTimeout(()=>input.focus(),30)});
+    form.addEventListener("submit",async e=>{e.preventDefault();const email=input.value.trim();
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){msg.className="r-msg err";msg.textContent="That email doesn't look right. Mind checking it?";input.focus();return}
+      go.disabled=true;go.textContent="…";
+      try{const fd=new FormData();fd.append("email_address",email);
+        const res=await fetch(REMIND_FORM,{method:"POST",headers:{"Accept":"application/json"},body:fd});if(!res.ok)throw 0;
+        let j={};try{j=await res.json()}catch(_){}if(j.status&&j.status!=="success")throw 0;
+        try{localStorage.setItem(key,"1")}catch(_){}
+        form.dataset.done="1";form.innerHTML=`<p class="r-msg">You're on the list. Sending you love.</p>`;btn.textContent="REMINDER SET ✓";
+      }catch(_){go.disabled=false;go.textContent="→";msg.className="r-msg err";msg.textContent="Something went wrong. Try again in a moment?"}});
+  });
+})();
+
 // ---------- Release announcements (ARP) ----------
 (function(){
   const art=document.getElementById("arp-felix-rosch");if(!art||typeof UPCOMING==="undefined")return;
-  const r=UPCOMING[0];if(!r)return;r.diff=Math.round((dayOf(r.releaseDate)-TODAY)/864e5);
+  const r=UPCOMING.find(x=>!x.mention);if(!r)return;r.diff=Math.round((dayOf(r.releaseDate)-TODAY)/864e5);
   const when=dayOf(r.releaseDate).toLocaleDateString("en-US",{weekday:"long",month:"short",day:"numeric"});
   let badge="";
   if(r.diff>0)badge=`<span class="badge${r.diff<=7?" near":""}">IN <span class="num">${r.diff}</span> DAY${r.diff>1?"S":""}</span>`;
