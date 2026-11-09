@@ -1,4 +1,5 @@
 // Army of Love · Radar archive data
+// Set ambient:true on any release or daily post to show the AMBIENT badge.
 // One entry per release. Artists (A) and labels (L) are shared, so each is written once
 // and reused across posts. Fields per release: title, artists, label, type, track count,
 // releaseDate, dateAdded, Leefer's note (blurb), tracks that caught him, links.
@@ -73,7 +74,34 @@ const UPCOMING=[
  // Radar mentions: short, shown only in the Upcoming releases bar (no full post)
  {mention:true,title:"Astro",artist:"Donato Dozzy",label:"Tresor Records",type:"ALBUM",releaseDate:"2026-11-20",dateAdded:"2026-11-09",
   img:"https://f4.bcbits.com/img/a3622820286_10.jpg",
-  links:[["CRATES","https://crates.co/release/astro/7415369"],["BANDCAMP","https://donaotodozzy.bandcamp.com/album/astro"]]}
+  links:[["CRATES","https://crates.co/release/astro/7415369"],["BANDCAMP","https://donaotodozzy.bandcamp.com/album/astro"]]},
+ {mention:true,title:"Pop Ambient 2027",artist:"VA",label:"Kompakt",type:"COMPILATION",releaseDate:"2026-12-04",dateAdded:"2026-11-09",tags:["AMBIENT"],ambient:true,
+  img:"https://f4.bcbits.com/img/a3826203060_10.jpg",
+  links:[["CRATES","https://crates.co/release/pop-ambient-2027/7628066"],["BANDCAMP","https://kompakt.bandcamp.com/album/pop-ambient-2027"]]},
+ {mention:true,title:"DJ-Kicks: Dam Swindle",artist:"Dam Swindle",label:"!K7",type:"COMPILATION",releaseDate:"2026-11-20",dateAdded:"2026-11-09",
+  img:"https://f4.bcbits.com/img/a2040506614_10.jpg",
+  links:[["CRATES","https://crates.co/release/dj-kicks-dam-swindle/7478785"],["BANDCAMP","https://damswindle.bandcamp.com/album/dj-kicks-dam-swindle-2"]]},
+ {mention:true,title:"The Hill EP",artist:"Philipp Kolbe",label:"Kompakt",type:"EP",releaseDate:"2026-11-20",dateAdded:"2026-11-09",
+  img:"https://f4.bcbits.com/img/a2778628170_10.jpg",
+  links:[["CRATES","https://crates.co/release/the-hill-ep/7506248"],["BANDCAMP","https://philipp-kolbe.bandcamp.com/album/the-hill-ep"]]},
+ {mention:true,title:"Tumbling Cycles",artist:"Billus",label:"Smallville Records",type:"ALBUM",releaseDate:"2026-11-20",dateAdded:"2026-11-09",
+  img:"https://f4.bcbits.com/img/a1620741630_10.jpg",
+  links:[["CRATES","https://crates.co/release/tumbling-cycles/7632578"],["BANDCAMP","https://smallville-records.bandcamp.com/album/smallville-lp-19-billus-tumbling-cycles"]]},
+ {mention:true,title:"Running Back Mastermix: Edward – Edits",artist:"Edward",label:"Running Back",type:"COMPILATION",releaseDate:"2026-11-20",dateAdded:"2026-11-09",
+  img:"https://f4.bcbits.com/img/a2454391620_10.jpg",
+  links:[["CRATES","https://crates.co/release/running-back-mastermix-edward-edits/7632803"],["BANDCAMP","https://runningbackrecords.bandcamp.com/album/running-back-mastermix-edward-edits"]]},
+ {mention:true,title:"Rings of Light",artist:"Sven Väth & Roman Flügel",label:"Time Warp Records",type:"SINGLE",releaseDate:"2026-11-20",dateAdded:"2026-11-09",
+  img:"https://f4.bcbits.com/img/a2728950555_10.jpg",
+  links:[["CRATES","https://crates.co/release/rings-of-light/7565465"],["BANDCAMP","https://timewarpofficial.bandcamp.com/album/rings-of-light"]]},
+ {mention:true,title:"Forest of Tranquility",artist:"Masayoshi Fujita",label:"Erased Tapes",type:"ALBUM",releaseDate:"2026-11-13",dateAdded:"2026-11-09",tags:["AMBIENT"],ambient:true,
+  img:"https://f4.bcbits.com/img/a3300898528_10.jpg",
+  links:[["CRATES","https://crates.co/release/forest-of-tranquility/7237598"],["BANDCAMP","https://masayoshifujita.bandcamp.com/album/forest-of-tranquility"]]},
+ {mention:true,title:"My Own Shadow",artist:"Marcel Dettmann",label:"!K7",type:"ALBUM",releaseDate:"2026-11-13",dateAdded:"2026-11-09",
+  img:"https://f4.bcbits.com/img/a4074034011_10.jpg",
+  links:[["CRATES","https://crates.co/release/my-own-shadow-album/7552811"],["BANDCAMP","https://marceldettmann.bandcamp.com/album/my-own-shadow"]]},
+ {mention:true,title:"Global Underground: Nubreed 13",artist:"Spencer Brown",label:"Global Underground",type:"COMPILATION",releaseDate:"2026-12-04",dateAdded:"2026-11-09",
+  img:"https://gubucket1.s3.eu-west-2.amazonaws.com/wp-content/uploads/2026/07/Nubreed-13-Spencer-Brown-cover-NEW-FINAL.jpeg",
+  links:[["CRATES","https://crates.co/release/global-underground-nubreed-13/7699859"],["GU STORE","https://www.globalunderground.co.uk/product/nubreed-13-spencer-brown/"]]}
 ];
 
 // Daily posts (one track or release, scheduled by date). The newest post dated today or earlier

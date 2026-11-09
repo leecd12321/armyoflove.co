@@ -276,6 +276,7 @@ nav .links a[aria-current]{color:var(--ink);font-weight:700}
 .up-links{display:flex;flex-wrap:wrap;gap:6px 12px;justify-content:flex-end;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.06em}
 .up-links a,.up-links button{all:unset;cursor:pointer;color:var(--ink);border-bottom:1.5px solid currentColor;padding-bottom:2px}
 .up-links a:hover,.up-links button:hover{color:var(--muted)}
+.up-tag{display:inline-block;margin-left:6px;padding:2px 6px 1px;border:1px solid var(--muted);font-size:9px;letter-spacing:.1em;color:var(--ink);vertical-align:1px}
 .up-form{grid-column:2/-1;display:flex;flex-direction:column;gap:6px}
 .up-form[hidden]{display:none}
 .up-form .r-row{border-bottom-color:var(--ink)}
@@ -283,6 +284,9 @@ nav .links a[aria-current]{color:var(--ink);font-weight:700}
 .up-form .r-go{color:var(--ink);border-color:var(--ink)}
 .up-form .r-msg{color:var(--muted)}
 @media (max-width:600px){.up-row{grid-template-columns:48px minmax(0,1fr)}.up-row img{width:48px;height:48px}.up-links{grid-column:2;justify-content:flex-start}.up-tg .thumbs{display:none}}
+/* Ambient release marker */
+.ambient-badge{display:inline-flex;align-items:center;gap:6px;vertical-align:middle;width:max-content;flex:none;padding:5px 10px;border:1px solid #7b8a79;border-radius:999px;background:#e4e9de;color:#425642;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.12em;line-height:1.2;white-space:nowrap}
+.ambient-badge svg{width:18px;height:10px;flex:none}
 </style>
 </head>
 <body>
@@ -352,6 +356,7 @@ nav .links a[aria-current]{color:var(--ink);font-weight:700}
 <script>
 const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const fmtDate=d=>{const x=new Date(d+"T12:00:00");const s=x.toLocaleDateString("en-US",{month:"short",day:"numeric"}).toUpperCase();const today=new Date();today.setHours(12,0,0,0);return (x>today?"OUT ":"RELEASED ")+s};
+const archiveAmbientBadge=r=>r.ambient===true?`<span class="ambient-badge"><svg viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M1 4c4-7 6 7 11 0s7 7 11 0M1 9c4-7 6 7 11 0s7 7 11 0"/></svg>AMBIENT</span>`:"";
 const names=r=>r.artists.map(k=>A[k].name).join(" & ");
 const PL=[["bc","Bandcamp"],["sp","Spotify"],["sc","SoundCloud"],["ig","Instagram"]];
 const row=(o,isLabel)=>{const ls=PL.filter(p=>o[p[0]]).map(p=>`<a href="${o[p[0]]}" target="_blank" rel="noopener">${p[1]}</a>`);
@@ -363,7 +368,7 @@ Object.keys(SETS).forEach(key=>{
   g.innerHTML=R.map((r,i)=>`<button class="tile" data-i="${i}" aria-expanded="false">
     <img src="${r.img}" alt="${esc(r.title)} cover art">
     <span class="n">${esc(L[r.label].name.toUpperCase())}</span>
-    <span class="t">${esc(r.title)}</span><span class="a">${esc(names(r))}</span></button>`).join("");
+    <span class="t">${esc(r.title)}</span>${archiveAmbientBadge(r)}<span class="a">${esc(names(r))}</span></button>`).join("");
   const sync=()=>{g.querySelectorAll(".tile").forEach((t,i)=>t.setAttribute("aria-expanded",i===cur));const pb=document.getElementById("pl-bottom");if(pb)pb.hidden=!document.querySelector(".detail:not([hidden])")};
   const hide=()=>{d.hidden=true;cur=-1;sync()};
   function show(i,scroll){
@@ -373,7 +378,7 @@ Object.keys(SETS).forEach(key=>{
     <img src="${r.img}" alt="${esc(r.title)} cover art">
     <div class="info">
       <div class="meta">${esc(r.type)} · ${r.count} TRACKS · ${esc(L[r.label].name.toUpperCase())} · ${fmtDate(r.releaseDate)}</div>
-      <h3>${esc(r.title)}</h3><p class="by">${esc(names(r))}${r.sub?`<br><span class="sub">${esc(r.sub)}</span>`:""}</p>
+      <div class="trow"><h3>${esc(r.title)}</h3>${archiveAmbientBadge(r)}</div><p class="by">${esc(names(r))}${r.sub?`<br><span class="sub">${esc(r.sub)}</span>`:""}</p>
       ${r.video?`<div class="vid"><div class="yt"></div><button class="vid-hit" type="button" aria-label="Play or pause video"><span class="vid-play" aria-hidden="true"></span></button><button class="vid-fs" type="button" aria-label="Full screen">⤢</button></div>`:""}
       ${r.blurb?r.blurb.split(/\n\s*\n/).map(p=>`<p class="blurb">${esc(p.trim()).replace(/\n/g,"<br>")}</p>`).join(""):""}
       ${r.originals?`<p class="blurb">${r.originals.map(o=>`<a href="${o[1]}" target="_blank" rel="noopener">${esc(o[0])} ↗</a>`).join("<br>")}</p>`:""}
@@ -420,6 +425,7 @@ const GO_LIVE="06:45";
 const berlinAt=(d,t)=>{const g=new Date(d+"T"+t+":00Z");let o=1;try{const v=new Intl.DateTimeFormat("en-US",{timeZone:"Europe/Berlin",timeZoneName:"shortOffset"}).formatToParts(g).find(x=>x.type==="timeZoneName").value;const m=v.match(/GMT([+-]\d+)/);o=m?+m[1]:0}catch(_){}return new Date(g.getTime()-o*36e5)};
 const shortDate=d=>dayOf(d).toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"}).toUpperCase();
 const paras=t=>t.split(/\n\s*\n/).map(p=>`<p class="blurb">${esc(p.trim())}</p>`).join("");
+const ambientBadge=r=>r.ambient===true?`<span class="ambient-badge"><svg viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M1 4c4-7 6 7 11 0s7 7 11 0M1 9c4-7 6 7 11 0s7 7 11 0"/></svg>AMBIENT</span>`:"";
 const videoBox=(img,wide)=>`<div class="vid"><div class="yt"></div>${img?`<div class="vid-poster${wide?" wide":""}" aria-hidden="true"><div class="bg" style="background-image:url('${img}')"></div><img src="${img}" alt=""></div>`:""}<button class="vid-hit" type="button" aria-label="Play or pause video"><span class="vid-play" aria-hidden="true"></span></button><button class="vid-fs" type="button" aria-label="Full screen">⤢</button></div>`;
 function wireMore(art){
   const body=art.querySelector(".more-body");if(!body)return;
@@ -437,7 +443,7 @@ function wireMore(art){
   const p=POSTS[0];if(!p||(qsPreview?dayOf(p.date)>TODAY:new Date()<berlinAt(p.date,GO_LIVE)))return;
   const ps=p.body.split(/\n\s*\n/),pre=ps.slice(0,2).join("\n\n"),rest=ps.slice(2).join("\n\n"),P=p.playlist;
   art.innerHTML=`<div class="eyebrow"><b>${esc(p.kicker)}</b> · ${shortDate(p.date)}</div>
-    <div class="trow"><h2><a href="#${art.id}" data-open>${esc(p.artist)} – ${esc(p.title)}</a></h2>${p.plays>=4?`<span class="plays" title="Listened ${p.plays} times and counting"><span class="tk"><i>✦</i>4 OR MORE</span><span class="st"><b>${p.plays}</b><small>LISTENS</small></span></span>`:""}</div>
+    <div class="trow"><h2><a href="#${art.id}" data-open>${esc(p.artist)} – ${esc(p.title)}</a></h2>${ambientBadge(p)}${p.plays>=4?`<span class="plays" title="Listened ${p.plays} times and counting"><span class="tk"><i>✦</i>4 OR MORE</span><span class="st"><b>${p.plays}</b><small>LISTENS</small></span></span>`:""}</div>
     <p class="by">${esc(p.label||"")}</p>
     <div class="media">${videoBox(p.img,p.imgWide)}</div>
     <p class="trackline"><span class="tid">TRACK ID:</span> <b>${esc(p.artist)} – ${esc(p.title)}</b>${p.label?` [${esc(p.label)}]`:""}</p>
@@ -462,8 +468,8 @@ function wireMore(art){
   if(!list.length)return;
   const dd=d=>dayOf(d).toLocaleDateString("en-GB",{day:"numeric",month:"short"}).toUpperCase();
   const when=r=>r.diff===0?"OUT TODAY":`IN <b>${r.diff}</b> DAY${r.diff>1?"S":""}`;
-  box.innerHTML=`<button class="up-tg" type="button" aria-expanded="false" aria-controls="up-list"><span class="lbl">✦ UPCOMING RELEASES</span><span class="count">${list.length}</span><span class="thumbs">${list.map(r=>`<img src="${r.img}" alt="">`).join("")}</span><span class="arrow">SEE ALL ↓</span></button>
-  <div class="up-list" id="up-list" hidden>${list.map((r,i)=>`<div class="up-row" data-i="${i}"><img src="${r.img}" alt="${esc(r.title)} cover" loading="lazy"><div><div class="t">${esc(r.artist)} – ${esc(r.title)} <span class="lab">[${esc(r.label)}]</span></div><div class="d">${dd(r.releaseDate)} · ${when(r)}</div></div>
+  box.innerHTML=`<button class="up-tg" type="button" aria-expanded="false" aria-controls="up-list"><span class="lbl">✦ UPCOMING RELEASES</span><span class="count">${list.length}</span><span class="thumbs">${list.slice(0,6).map(r=>`<img src="${r.img}" alt="">`).join("")}</span><span class="arrow">SEE ALL ↓</span></button>
+  <div class="up-list" id="up-list" hidden>${list.map((r,i)=>`<div class="up-row" data-i="${i}"><img src="${r.img}" alt="${esc(r.title)} cover" loading="lazy"><div><div class="t">${esc(r.artist)} – ${esc(r.title)} <span class="lab">[${esc(r.label)}]</span></div><div class="d">${dd(r.releaseDate)} · ${when(r)} ${ambientBadge(r)}</div></div>
     <div class="up-links">${(r.links||[]).map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener">${esc(n)} ↗</a>`).join("")}${r.diff>0?`<button type="button" data-rm>REMIND ME →</button>`:""}</div>
     <form class="up-form" hidden novalidate><div class="r-row"><input type="email" id="up-email-${i}" autocomplete="email" inputmode="email" placeholder="you@example.com" aria-label="Your email" required><button class="r-go" type="submit" aria-label="Remind me">→</button></div><p class="r-msg" aria-live="polite">One email the morning of ${dd(r.releaseDate)}. Nothing else.</p></form></div>`).join("")}</div>`;
   box.hidden=false;
@@ -496,7 +502,7 @@ function wireMore(art){
   else if(r.diff===0)badge=`<span class="badge today"><span class="dot"></span>OUT TODAY</span>`;
   else if(r.diff>=-7)badge=`<span class="badge new">NEW · <span class="num">${-r.diff}</span> DAY${r.diff<-1?"S":""}</span>`;
   art.innerHTML=`<div class="eyebrow"><b>${r.diff>0?"COMING SOON":"NEW RELEASE"}</b> · ${shortDate(r.dateAdded)}</div>
-    <h2><a href="${r.sp||"#"}" target="_blank" rel="noopener">${esc(r.artist)} – ${esc(r.title)}</a></h2>
+    <div class="trow"><h2><a href="${r.sp||"#"}" target="_blank" rel="noopener">${esc(r.artist)} – ${esc(r.title)}</a></h2>${ambientBadge(r)}</div>
     <p class="by">${esc(r.type.charAt(0)+r.type.slice(1).toLowerCase())} on ${esc(r.label)} · ${r.diff>0?"out":"released"} ${esc(when)}</p>
     ${badge}
     <div class="media">${videoBox(r.img)}</div>
