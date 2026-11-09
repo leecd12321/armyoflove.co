@@ -75,7 +75,7 @@ const UPCOMING=[
  {mention:true,title:"Astro",artist:"Donato Dozzy",label:"Tresor Records",type:"ALBUM",releaseDate:"2026-11-20",dateAdded:"2026-11-09",
   img:"https://f4.bcbits.com/img/a3622820286_10.jpg",
   links:[["CRATES","https://crates.co/release/astro/7415369"],["BANDCAMP","https://donaotodozzy.bandcamp.com/album/astro"]]},
- {mention:true,title:"Pop Ambient 2027",artist:"VA",label:"Kompakt",type:"COMPILATION",releaseDate:"2026-12-04",dateAdded:"2026-11-09",tags:["AMBIENT"],ambient:true,
+ {mention:true,va:true,title:"Pop Ambient 2027",artist:"VA",label:"Kompakt",type:"COMPILATION",releaseDate:"2026-12-04",dateAdded:"2026-11-09",tags:["AMBIENT"],ambient:true,
   img:"https://f4.bcbits.com/img/a3826203060_10.jpg",
   links:[["CRATES","https://crates.co/release/pop-ambient-2027/7628066"],["BANDCAMP","https://kompakt.bandcamp.com/album/pop-ambient-2027"]]},
  {mention:true,title:"DJ-Kicks: Dam Swindle",artist:"Dam Swindle",label:"!K7",type:"COMPILATION",releaseDate:"2026-11-20",dateAdded:"2026-11-09",
