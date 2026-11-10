@@ -36,7 +36,7 @@ const SETS= // Fruitful Friday · Nov 6, 2026
  {title:"Dream",video:"3BCLIhSUMQU",tasters:{"Ricardo's Last Dance":"3BCLIhSUMQU"},releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["amtrac"],label:"openers",type:"ALBUM",count:14,img:"dream-cover.jpg",
   blurb:"One of my favorite producers since I discovered him this year. Insanely clean productions, real depth, and just the right amount of good cheese.\n\nI'm saving the full listen for the right moment, but wanted you to know it's out.",
   tracks:["Ricardo's Last Dance"],bc:"https://amtrac.bandcamp.com/album/dream",sp:"https://open.spotify.com/album/3oNraxn7bql4vFjqiBfCgG"},
- {title:"Apiformes",video:"CxhSDdVOpWk",tasters:{"Hive Mind":"CxhSDdVOpWk"},releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["polygonia","popp"],label:"squama",type:"ALBUM",count:11,img:"apiformes-cover.jpg",
+ {title:"Apiformes",video:"CxhSDdVOpWk",tasters:{"Hive Mind":"CxhSDdVOpWk","Nectar Flow":"66RA0nC82J0","Pollination Beats":"R_osLnp6fKA"},releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["polygonia","popp"],label:"squama",type:"ALBUM",count:11,img:"apiformes-cover.jpg",
   blurb:"Techno jazz alien.\n\nPolygonia's music challenges my listening muscles and I deeply appreciate it.\nSounds and rhythms from another planet.\n\nIt's not for everyone, but I invite you to explore sound design from another planet.",
   tracks:["Honeydrop","Nectar Flow","Hive Mind","Pollination Beats"],bc:"https://polygonia.bandcamp.com/album/apiformes",sp:"https://open.spotify.com/album/31z5z1c3dDB1kkbK1LXTY5"},
  {title:"Planes In Reverse",releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["funke"],label:"kompakt",type:"ALBUM",count:10,img:"planes-in-reverse-cover.jpg",
@@ -49,7 +49,7 @@ const SETS= // Fruitful Friday · Nov 6, 2026
   blurb:"I'm not familiar with Ksky, but the single for this album came out last week and I really connected with it: \"Bad Philly.\"\n\nLooking forward to taking this one for a walk and an intentional listen.\nHonestly, that could take days or weeks from now.",tracks:["Bad Philly","Weirdub"],bc:"https://runningbackrecords.bandcamp.com/album/collected-works",sp:"https://open.spotify.com/album/3DCc8tUSaFjfIP7dbNbvJH"}
  ],
  other:[
- {title:"Ontario EP",video:"rKuTxzf5Zdo",tasters:{"Ontario":"rKuTxzf5Zdo"},releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["hammar"],label:"dirtyhands",type:"EP",count:4,img:"ontario-ep-cover.jpg",
+ {title:"Ontario EP",video:"rKuTxzf5Zdo",tasters:{"Ontario":"rKuTxzf5Zdo","Off Disk":"A61fcAFBdl4","Oops All Sixes":"Pl_njZlePy4"},releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["hammar"],label:"dirtyhands",type:"EP",count:4,img:"ontario-ep-cover.jpg",
   blurb:"My favorite release so far, absolutely love it!\n\nStraight-up slam dance bangers with tasteful elements, builds, twists and turns.\n\nI connected with 3 of the 4 tracks on first listen, which is a staggeringly high rate for me.\nThis dude is something special.",
   tracks:["Ontario","Off Disk","Oops All Sixes","Airex"],superProject:true,bc:"https://dirtyhandsrec.bandcamp.com/album/ontario-ep"},
  {title:"Lab 94' EP",releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["lex"],label:"dog",type:"EP",count:4,img:"lab-94-cover.jpg",
@@ -124,7 +124,16 @@ const UPCOMING=[
   links:[["CRATES","https://crates.co/release/home/7345513"],["BANDCAMP","https://marshmusician.bandcamp.com/album/home"]]},
  {mention:true,title:"Fly Intergalactic Gangsta Schitt",artist:"Tripmastaz",label:"Logistic Records",type:"ALBUM",releaseDate:"2026-12-14",dateAdded:"2026-11-09",
   img:"https://f4.bcbits.com/img/a3879960382_10.jpg",
-  links:[["BANDCAMP","https://tripmastaz.bandcamp.com/album/fly-intergalactic-gangsta-schitt"]]}
+  links:[["BANDCAMP","https://tripmastaz.bandcamp.com/album/fly-intergalactic-gangsta-schitt"]]},
+ {mention:true,title:"ICU,BBY,STA",artist:"Neon Dots",label:"All Things Connect",type:"EP",releaseDate:"2026-08-18",dateAdded:"2026-11-09",
+  tracks:["ICU,BBY,STA (I See You Baby)"],
+  img:"https://f4.bcbits.com/img/a1894914524_10.jpg",
+  links:[["CRATES","https://crates.co/release/icubbysta/7678915"],["BANDCAMP","https://allthingsconnect.bandcamp.com/album/icu-bby-sta"]]},
+ // DATABASS-only entry (not a Radar release row). Appears in the DATABASS on its dateAdded at the go-live time.
+ {dbOnly:true,title:"Nights Over Melbourne",artist:"Holo",label:"Noire & Blanche",releaseDate:"",dateAdded:"2026-11-10",
+  tracks:["Does It Get Easier?"],tasters:{"Does It Get Easier?":"dxGl-BoL-jw"},
+  img:"https://i.scdn.co/image/ab67616d0000b273bb4c9fc51deffd1281e7460d",
+  links:[["SPOTIFY","https://open.spotify.com/track/1zmThgFg1hww3UqVouPNRl"]]}
 ];
 
 // Daily posts (one track or release, scheduled by date). The newest post dated today or earlier
