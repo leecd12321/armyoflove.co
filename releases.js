@@ -131,7 +131,7 @@ const UPCOMING=[
   links:[["CRATES","https://crates.co/release/icubbysta/7678915"],["BANDCAMP","https://allthingsconnect.bandcamp.com/album/icu-bby-sta"]]},
  // DATABASS-only entry (not a Radar release row). Appears in the DATABASS on its dateAdded at the go-live time.
  {dbOnly:true,title:"Nights Over Melbourne",artist:"Holo",label:"Noire & Blanche",releaseDate:"",dateAdded:"2026-11-10",
-  tracks:["Does It Get Easier?"],tasters:{"Does It Get Easier?":"dxGl-BoL-jw"},
+  tracks:["Does It Get Easier?"],tasters:{"Does It Get Easier?":"dH8c9BBw9To"},
   img:"https://i.scdn.co/image/ab67616d0000b273bb4c9fc51deffd1281e7460d",
   links:[["SPOTIFY","https://open.spotify.com/track/1zmThgFg1hww3UqVouPNRl"]]}
 ];
@@ -139,7 +139,7 @@ const UPCOMING=[
 // Daily posts (one track or release, scheduled by date). The newest post dated today or earlier
 // sits at the top of the homepage. "plays" = how many times Leefer has gone back to it (4+ badge).
 const POSTS=[
- {date:"2026-11-10",kicker:"TECHNO TUESDAY",title:"Does It Get Easier?",artist:"Holo",label:"Noire & Blanche",video:"dxGl-BoL-jw",plays:10,
+ {date:"2026-11-10",kicker:"TECHNO TUESDAY",title:"Does It Get Easier?",artist:"Holo",label:"Noire & Blanche",video:"dH8c9BBw9To",plays:10,
   img:"techno-tuesday-holo.jpg",imgWide:true,
   sp:"https://open.spotify.com/track/1zmThgFg1hww3UqVouPNRl",artistSp:"https://open.spotify.com/artist/5PrWAhH8BO28ieKNfYYFEX",
   playlist:{title:"Techno Tuesday",url:"https://open.spotify.com/playlist/3QViRQw2MjLQAI98kmWNuk",img:"https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da846a5cc179cc2196842094ce52",line:"Only the top of the tippity top. Send it!",note:"Every Techno Tuesday track lives here."},
