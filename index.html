@@ -345,6 +345,12 @@ nav .links a[aria-current]{color:var(--ink);font-weight:700}
 .super-badge[data-tip]:hover::after,.super-badge[data-tip]:focus-visible::after{opacity:1;transform:translate(-50%,0)}
 .super-badge[data-tip]:hover::before,.super-badge[data-tip]:focus-visible::before{opacity:1}
 .db-dates{margin-top:3px;font-family:var(--mono);font-size:9.5px;font-weight:700;letter-spacing:.08em;color:var(--muted)}
+.db-sort{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;padding:14px 0 2px}
+.db-sort span{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--muted);margin-right:4px}
+.db-sort button{all:unset;cursor:pointer;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.08em;padding:7px 12px;border:1.5px solid var(--ink);border-radius:999px;color:var(--ink)}
+.db-sort button.on{background:var(--ink);color:#e7d9a8}
+.db-sort button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+[data-s-list][hidden]{display:none}
 .up-form{grid-column:2/-1;display:flex;flex-direction:column;gap:6px}
 .up-form[hidden]{display:none}
 .up-form .r-row{border-bottom-color:var(--ink)}
@@ -572,8 +578,10 @@ function wireMore(art){
   const dbLive=r=>!r.dateAdded||(qsPreview?dayOf(r.dateAdded)<=TODAY:new Date()>=berlinAt(r.dateAdded,GO_LIVE));
   const dbRel=[...every].filter(r=>r.tracks&&r.tracks.length&&dbLive(r)).sort((a,b)=>(b.dateAdded||b.releaseDate).localeCompare(a.dateAdded||a.releaseDate)||a.artist.localeCompare(b.artist));
   const dbN=dbRel.reduce((a,r)=>a+r.tracks.length,0);
-  let dbH="",dl="";dbRel.forEach(r=>{const k="ADDED "+wk(r.dateAdded||r.releaseDate);if(k!==dl){dbH+=`<div class="rd-wk">${k}</div>`;dl=k}
-    r.tracks.forEach(t=>{dbH+=`<div class="db-row"><img src="${r.img}" alt="" loading="lazy"><div class="db-meta"><div class="t">${esc(t)}</div><div class="s">${esc(r.artist)} · <i>${esc(r.title)}</i> [${esc(r.label)}]${r.superProject?` <span class="super-badge sm" data-tip="FIRE PROJECT" aria-label="Fire project">★</span>`:""}</div><div class="db-dates">${r.releaseDate?`RELEASED ${dfull(r.releaseDate)} · `:""}ADDED TO DATABASS ${dfull(r.dateAdded||r.releaseDate)}</div></div>${tst(r,t)?`<button type="button" class="db-play" data-v="${tst(r,t)}">▶ TASTER</button>`:""}<div class="db-vid" hidden></div></div>`})});
+  // DATABASS list, two orders: by date added (default) or by release date
+  const dbRow=(r,t)=>`<div class="db-row"><img src="${r.img}" alt="" loading="lazy"><div class="db-meta"><div class="t">${esc(t)}</div><div class="s">${esc(r.artist)} · <i>${esc(r.title)}</i> [${esc(r.label)}]${r.superProject?` <span class="super-badge sm" data-tip="FIRE PROJECT" aria-label="Fire project">★</span>`:""}</div><div class="db-dates">${r.releaseDate?`RELEASED ${dfull(r.releaseDate)} · `:""}ADDED TO DATABASS ${dfull(r.dateAdded||r.releaseDate)}</div></div>${tst(r,t)?`<button type="button" class="db-play" data-v="${tst(r,t)}">▶ TASTER</button>`:""}<div class="db-vid" hidden></div></div>`;
+  const dbList=(key,label)=>{let h="",last="";[...dbRel].sort((a,b)=>(key(b)||"").localeCompare(key(a)||"")||a.artist.localeCompare(b.artist)).forEach(r=>{const d=key(r);const k=d?label+" "+wk(d):"RELEASE DATE TO COME";if(k!==last){h+=`<div class="rd-wk">${k}</div>`;last=k}r.tracks.forEach(t=>h+=dbRow(r,t))});return h};
+  const dbH=`<div class="db-sort" role="group" aria-label="Sort the DATABASS"><span>SORT BY</span><button type="button" class="on" data-s="added" aria-pressed="true">DATE ADDED</button><button type="button" data-s="released" aria-pressed="false">RELEASE DATE</button></div><div data-s-list="added">${dbList(r=>r.dateAdded||r.releaseDate,"ADDED")}</div><div data-s-list="released" hidden>${dbList(r=>r.releaseDate,"RELEASED")}</div>`;
   box.innerHTML=`<button class="up-tg" type="button" aria-expanded="false" aria-controls="up-list"><span class="lbl">✦ THE RADAR</span><span class="count">${up.length}</span><span class="lbl2">COMING UP</span><span class="thumbs">${up.slice(0,6).map(r=>`<img src="${r.img}" alt="">`).join("")}</span><span class="arrow">SEE ALL ↓</span></button>
   <div class="up-list" id="up-list" hidden><div class="rd-tabs" role="tablist"><button type="button" role="tab" aria-selected="true" data-t="up">COMING UP · ${up.length}</button><button type="button" role="tab" aria-selected="false" data-t="out">OUT NOW · ${out.length}</button><button type="button" role="tab" aria-selected="false" data-t="db">▣ DATABASS · ${dbN}</button></div>
   <div class="rd-filter" hidden><span class="lbl">SHOWING ONLY</span><span class="rd-fbadge"></span><span class="rd-fcount"></span><button type="button" class="rd-clear">✕ CLEAR FILTER</button></div><div data-p="up">${upH||'<p class="rd-empty">Nothing announced yet.</p>'}</div><div data-p="out" hidden>${outH||'<p class="rd-empty">Nothing out yet.</p>'}</div><div data-p="db" hidden>${dbH}</div></div>`;
@@ -581,6 +589,8 @@ function wireMore(art){
   const tg=box.querySelector(".up-tg"),ul=box.querySelector(".up-list"),ar=tg.querySelector(".arrow");
   tg.addEventListener("click",()=>{const o=ul.hidden;ul.hidden=!o;tg.setAttribute("aria-expanded",o);ar.textContent=o?"CLOSE ↑":"SEE ALL ↓"});
   box.querySelectorAll("[data-t]").forEach(b=>b.addEventListener("click",()=>{box.querySelectorAll("[data-t]").forEach(x=>x.setAttribute("aria-selected",x===b));box.querySelectorAll("[data-p]").forEach(p=>p.hidden=p.dataset.p!==b.dataset.t)}));
+  box.querySelectorAll(".db-sort button").forEach(b=>b.addEventListener("click",()=>{box.querySelectorAll(".db-sort button").forEach(x=>{const on=x===b;x.classList.toggle("on",on);x.setAttribute("aria-pressed",on)});box.querySelectorAll("[data-s-list]").forEach(l=>l.hidden=l.dataset.sList!==b.dataset.s);
+    box.querySelectorAll(".db-vid:not([hidden])").forEach(v=>{v.hidden=true;v.innerHTML="";const pb=v.parentElement.querySelector(".db-play");if(pb)pb.textContent="▶ TASTER"})}));
   // DATABASS badge opens the track drawer; tasters play inline
   box.querySelectorAll(".db-badge").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();const d=box.querySelector("#db-"+b.dataset.db);d.hidden=!d.hidden;b.setAttribute("aria-expanded",!d.hidden);b.classList.toggle("is-open",!d.hidden)}));
   box.addEventListener("click",e=>{const p=e.target.closest(".db-play");if(!p)return;const host=p.parentElement.querySelector(".db-vid");
