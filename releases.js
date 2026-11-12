@@ -92,6 +92,10 @@ const UPCOMING=[
  {mention:true,title:"Running Back Mastermix: Edward – Edits",artist:"Edward",label:"Running Back",type:"COMPILATION",releaseDate:"2026-11-20",dateAdded:"2026-11-09",
   img:"https://f4.bcbits.com/img/a2454391620_10.jpg",
   links:[["CRATES","https://crates.co/release/running-back-mastermix-edward-edits/7632803"],["BANDCAMP","https://runningbackrecords.bandcamp.com/album/running-back-mastermix-edward-edits"]]},
+ // taster:"YouTubeID" = Leefer's taster video for the release (▶ TASTER pill on the Radar row)
+ {mention:true,title:"Greetings Earthlings",artist:"Rebūke",label:"ERA",type:"SINGLE",releaseDate:"2026-11-20",dateAdded:"2026-11-11",taster:"cxxYFC4CyeQ",
+  img:"https://i.ytimg.com/vi/cxxYFC4CyeQ/hqdefault.jpg",
+  links:[]},
  {mention:true,title:"Rings of Light",artist:"Sven Väth & Roman Flügel",label:"Time Warp Records",type:"SINGLE",releaseDate:"2026-11-20",dateAdded:"2026-11-09",
   img:"https://f4.bcbits.com/img/a2728950555_10.jpg",
   links:[["CRATES","https://crates.co/release/rings-of-light/7565465"],["BANDCAMP","https://timewarpofficial.bandcamp.com/album/rings-of-light"]]},

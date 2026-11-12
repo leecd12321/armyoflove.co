@@ -323,6 +323,13 @@ nav .links a[aria-current]{color:var(--ink);font-weight:700}
 .db-nov{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:#8f887c}
 .db-vid{flex-basis:100%;aspect-ratio:16/9;max-width:520px;background:#000}
 .db-vid[hidden]{display:none}
+.tst-badge{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:5px;vertical-align:middle;margin-left:4px;padding:5px 10px;border-radius:999px;background:#e7d9a8;border:1px solid var(--ink);color:var(--ink);font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.1em;line-height:1;transition:transform .15s}
+.tst-badge:hover{transform:translateY(-1px)}
+.tst-badge.is-open{background:var(--ink);color:#e7d9a8}
+.tst-badge:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.tst-vid{grid-column:2/-1;aspect-ratio:16/9;max-width:520px;width:100%;background:#000}
+.tst-vid[hidden]{display:none}
+.tst-vid iframe{width:100%;height:100%;border:0;display:block}
 .db-vid iframe{width:100%;height:100%;border:0;display:block}
 .db-row{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--rule)}
 .rd-wk+.db-row{border-top:0}
@@ -574,9 +581,10 @@ function wireMore(art){
   const dfull=d=>dayOf(d).toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"}).toUpperCase();
   const superB=r=>r.superProject?`<span class="super-badge" data-tip="FIRE PROJECT" aria-label="Fire project">★</span>`:"";
   const dbDrawer=(r,i)=>`<div class="db-drawer" id="db-${i}" hidden><div class="db-head"><span>▣ ADDED TO THE DATABASS</span><button type="button" class="db-all">SEE ALL DATABASS TRACKS →</button></div><ol class="db-list">${r.tracks.map(t=>`<li><span class="db-name">${esc(t)}</span>${tst(r,t)?`<button type="button" class="db-play" data-v="${tst(r,t)}">▶ TASTER</button>`:""}<div class="db-vid" hidden></div></li>`).join("")}</ol></div>`;
-  const RM={};let n=0;const row=r=>{const i=n++;r._i=i;RM[i]=r;const f=[r.type==="ALBUM"&&"album",(r.va||r.artist==="VA")&&"va",r.ambient&&"ambient",(r.tracks&&r.tracks.length)&&"databass",r.superProject&&"super"].filter(Boolean).join(" ");return `<div class="up-row" data-i="${i}" data-f="${f}"><img src="${r.img}" alt="${esc(r.title)} cover" loading="lazy"><div><div class="t">${esc(r.artist)} – ${esc(r.title)} <span class="lab">[${esc(r.label)}]</span></div><div class="d">${dd(r.releaseDate)} ${st(r)} ${superB(r)}${typeBadges(r)}${ambientBadge(r)}${(r.tracks&&r.tracks.length)?`<button type="button" class="db-badge" data-db="${i}" aria-expanded="false" title="See the tracks I added to the DATABASS">▣ ${r.tracks.length} IN DATABASS</button>`:""}</div></div>
+  const RM={};let n=0;const row=r=>{const i=n++;r._i=i;RM[i]=r;const f=[r.type==="ALBUM"&&"album",(r.va||r.artist==="VA")&&"va",r.ambient&&"ambient",(r.tracks&&r.tracks.length)&&"databass",r.superProject&&"super"].filter(Boolean).join(" ");return `<div class="up-row" data-i="${i}" data-f="${f}"><img src="${r.img}" alt="${esc(r.title)} cover" loading="lazy"><div><div class="t">${esc(r.artist)} – ${esc(r.title)} <span class="lab">[${esc(r.label)}]</span></div><div class="d">${dd(r.releaseDate)} ${st(r)} ${superB(r)}${typeBadges(r)}${ambientBadge(r)}${(r.tracks&&r.tracks.length)?`<button type="button" class="db-badge" data-db="${i}" aria-expanded="false" title="See the tracks I added to the DATABASS">▣ ${r.tracks.length} IN DATABASS</button>`:""}${r.taster?`<button type="button" class="tst-badge" data-tv="${r.taster}" aria-expanded="false" title="Watch my taster">▶ TASTER</button>`:""}</div></div>
     <div class="up-links">${(r.links||[]).map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener">${esc(n)} ↗</a>`).join("")}${r.diff>0?`<button type="button" data-rm>REMIND ME →</button>`:""}</div>
     ${(r.tracks&&r.tracks.length)?dbDrawer(r,i):""}
+    ${r.taster?`<div class="tst-vid" hidden></div>`:""}
     ${r.diff>0?`<form class="up-form" hidden novalidate><div class="r-row"><input type="email" id="up-email-${i}" autocomplete="email" inputmode="email" placeholder="you@example.com" aria-label="Your email" required><button class="r-go" type="submit" aria-label="Remind me">→</button></div><p class="r-msg" aria-live="polite">One email the morning of ${dd(r.releaseDate)}. Nothing else.</p></form>`:""}</div>`};
   const grouped=list=>{let h="",last="";list.forEach(r=>{const w=wk(r.releaseDate);if(w!==last){h+=`<div class="rd-wk">${w}</div>`;last=w}h+=row(r)});return h};
   const rows=[...up,...out];
@@ -613,6 +621,11 @@ function wireMore(art){
     if(!host.hidden){host.hidden=true;host.innerHTML="";p.textContent="▶ TASTER";return}
     box.querySelectorAll(".db-vid:not([hidden])").forEach(v=>{v.hidden=true;v.innerHTML="";const pb=v.parentElement.querySelector(".db-play");if(pb)pb.textContent="▶ TASTER"});
     host.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${p.dataset.v}?autoplay=1&rel=0&playsinline=1" title="Taster video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;host.hidden=false;p.textContent="■ CLOSE TASTER"});
+  // Release-level taster pill: plays Leefer's video under the row
+  const closeTst=()=>box.querySelectorAll(".tst-vid:not([hidden])").forEach(v=>{v.hidden=true;v.innerHTML="";const b=v.closest(".up-row").querySelector(".tst-badge");if(b){b.textContent="▶ TASTER";b.classList.remove("is-open");b.setAttribute("aria-expanded","false")}});
+  box.addEventListener("click",e=>{const b=e.target.closest(".tst-badge");if(!b)return;e.stopPropagation();const host=b.closest(".up-row").querySelector(".tst-vid");
+    if(!host.hidden){closeTst();return}closeTst();
+    host.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${b.dataset.tv}?autoplay=1&rel=0&playsinline=1" title="Taster video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;host.hidden=false;b.textContent="■ CLOSE TASTER";b.classList.add("is-open");b.setAttribute("aria-expanded","true")});
   box.querySelectorAll(".db-all").forEach(b=>b.addEventListener("click",()=>{box.querySelector('[data-t="db"]').click()}));
   // Badges as filters: click ALBUM / VA / AMBIENT to show only those; CLEAR FILTER returns the full list
   const fbar=box.querySelector(".rd-filter");let cur="";
