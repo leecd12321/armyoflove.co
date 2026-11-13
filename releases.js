@@ -120,7 +120,7 @@ const UPCOMING=[
  {mention:true,title:"Mirrorball Sleaze",artist:"Dave Seaman",label:"Selador",type:"ALBUM",count:12,releaseDate:"2026-11-13",dateAdded:"2026-11-13",
   img:"https://geo-media.beatport.com/image_size/500x500/c0454059-a0b5-4936-adfe-1c4b9dca8c43.jpg",
   links:[["BANDCAMP","https://selador-recordings.bandcamp.com/album/dave-seaman-mirrorball-sleaze-digital-mix-individual-downloads-selador"],["SPOTIFY","https://open.spotify.com/album/3udFw9oP8zrADsjMEWLKGr"]]},
- {mention:true,title:"Anjanas 20th Anniversary Reprise",artist:"Pablo Bolivar",label:"Seven Villas Forest",type:"ALBUM",count:11,releaseDate:"2026-11-13",dateAdded:"2026-11-13",
+ {mention:true,superProject:true,title:"Anjanas 20th Anniversary Reprise",artist:"Pablo Bolivar",label:"Seven Villas Forest",type:"ALBUM",count:11,releaseDate:"2026-11-13",dateAdded:"2026-11-13",
   img:"https://geo-media.beatport.com/image_size/500x500/a8e1e805-26c2-4c9f-8b2e-c03b09f661b8.jpg",
   links:[["BANDCAMP","https://sevenvillas.bandcamp.com/album/anjanas-20th-anniversary-reprise"],["SPOTIFY","https://open.spotify.com/album/3gPffH35DKJQbm7POGo1tZ"]]},
  {mention:true,title:"Forest of Tranquility",artist:"Masayoshi Fujita",label:"Erased Tapes",type:"ALBUM",releaseDate:"2026-11-13",dateAdded:"2026-11-09",tags:["AMBIENT"],ambient:true,
