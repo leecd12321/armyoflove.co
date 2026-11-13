@@ -548,6 +548,9 @@ const dayOf=d=>new Date(d+"T12:00:00");
 const GO_LIVE="06:45";
 const berlinAt=(d,t)=>{const g=new Date(d+"T"+t+":00Z");let o=1;try{const v=new Intl.DateTimeFormat("en-US",{timeZone:"Europe/Berlin",timeZoneName:"shortOffset"}).formatToParts(g).find(x=>x.type==="timeZoneName").value;const m=v.match(/GMT([+-]\d+)/);o=m?+m[1]:0}catch(_){}return new Date(g.getTime()-o*36e5)};
 const shortDate=d=>dayOf(d).toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"}).toUpperCase();
+// Links: once a release is out, CRATES drops off (pre-release only). Bandcamp always leads, then Spotify.
+const LINK_ORDER={BANDCAMP:0,STORE:0,SPOTIFY:1};
+const relLinks=(links,out)=>(links||[]).filter(l=>!(out&&l[0]==="CRATES")).map((l,i)=>[l,i]).sort((a,b)=>((LINK_ORDER[a[0][0]]??9)-(LINK_ORDER[b[0][0]]??9))||a[1]-b[1]).map(x=>x[0]);
 const paras=t=>t.split(/\n\s*\n/).map(p=>`<p class="blurb">${esc(p.trim())}</p>`).join("");
 // Icon badges: album, various artists, ambient, downtempo (EPs get none)
 const IB={album:["Album",'<circle cx="7" cy="7" r="5.75"/><circle cx="7" cy="7" r="1.4"/>'],
@@ -624,7 +627,7 @@ function wireMore(art){
   const superB=r=>r.superProject?`<span class="super-badge" data-tip="FIRE PROJECT" aria-label="Fire project">★</span>`:"";
   const dbDrawer=(r,i)=>`<div class="db-drawer" id="db-${i}" hidden><div class="db-head"><span>▣ ADDED TO THE DATABASS</span><button type="button" class="db-all">SEE ALL DATABASS TRACKS →</button></div><ol class="db-list">${r.tracks.map(t=>`<li><span class="db-name">${esc(t)}</span>${tst(r,t)?`<button type="button" class="db-play" data-v="${tst(r,t)}">▶ TASTER</button>`:""}<div class="db-vid" hidden></div></li>`).join("")}</ol></div>`;
   const RM={};let n=0;const row=r=>{const i=n++;r._i=i;RM[i]=r;const f=[r.type==="ALBUM"&&"album",(r.va||r.artist==="VA")&&"va",r.ambient&&"ambient",r.downtempo&&"downtempo",(r.tracks&&r.tracks.length)&&"databass",r.superProject&&"super"].filter(Boolean).join(" ");return `<div class="up-row" data-i="${i}" data-f="${f}"><img src="${r.img}" alt="${esc(r.title)} cover" loading="lazy"><div><div class="t">${esc(r.artist)} – ${esc(r.title)} <span class="lab">[${esc(r.label)}]</span></div><div class="d">${dd(r.releaseDate)} ${st(r)} ${superB(r)}${typeBadges(r)}${ambientBadge(r)}${r.taster?`<button type="button" class="tst-badge" data-tv="${r.taster}" aria-expanded="false" title="Watch my taster">▶ TASTER</button>`:""}</div></div>
-    <div class="up-links">${(r.links||[]).map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener">${esc(n)} ↗</a>`).join("")}${r.diff>0?`<button type="button" data-rm>REMIND ME →</button>`:""}</div>
+    <div class="up-links">${relLinks(r.links,r.diff<=0).map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener">${esc(n)} ↗</a>`).join("")}${r.diff>0?`<button type="button" data-rm>REMIND ME →</button>`:""}</div>
     ${r.taster?`<div class="tst-vid" hidden></div>`:""}
     ${r.diff>0?`<form class="up-form" hidden novalidate><div class="r-row"><input type="email" id="up-email-${i}" autocomplete="email" inputmode="email" placeholder="you@example.com" aria-label="Your email" required><button class="r-go" type="submit" aria-label="Remind me">→</button></div><p class="r-msg" aria-live="polite">One email the morning of ${dd(r.releaseDate)}. Nothing else.</p></form>`:""}</div>`};
   const grouped=list=>{let h="",last="";list.forEach(r=>{const w=wk(r.releaseDate);if(w!==last){h+=`<div class="rd-wk">${w}</div>`;last=w}h+=row(r)});return h};
@@ -708,7 +711,7 @@ function wireMore(art){
   const p=NMF[0];if(!p||(qsPreview?dayOf(p.date)>TODAY:new Date()<berlinAt(p.date,GO_LIVE)))return;
   const list=p.picks.map(t=>UPCOMING.find(r=>r.title===t)).filter(Boolean);
   const pad=n=>(n<10?"0":"")+n,top=p.top||6;
-  const tile=(r,i)=>{const links=(r.links&&r.links.length)?r.links:[r.sp&&["SPOTIFY",r.sp]].filter(Boolean);
+  const tile=(r,i)=>{const links=relLinks((r.links&&r.links.length)?r.links:[r.sp&&["SPOTIFY",r.sp]].filter(Boolean),true);
     return `<div class="nmf-t${i===0?" feat":""}"><a class="nmf-art" href="${(links[0]||[])[1]||"#"}" target="_blank" rel="noopener"><img src="${r.img}" alt="${esc(r.artist)} – ${esc(r.title)} cover" loading="lazy"><span class="nmf-no">${pad(i+1)}</span></a>
     <div class="ln"><b>${esc(r.artist)}</b> – ${esc(r.title)} <span class="lab">[${esc(r.label)}]</span></div>
     ${p.notes&&p.notes[r.title]?`<div class="nmf-note">${paras(p.notes[r.title])}</div>`:""}
