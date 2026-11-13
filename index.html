@@ -388,7 +388,7 @@ nav .links a[aria-current]{color:var(--ink);font-weight:700}
 .trow .ib{margin-left:4px}
 /* New Music Friday cover wall */
 .nmf-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:8px 24px}
-.nmf-date{font-family:"EB Garamond",Garamond,Georgia,serif;font-size:clamp(32px,6.4vw,50px);line-height:.9;color:var(--muted)}
+.nmf-date{font-family:"EB Garamond",Garamond,Georgia,serif;font-weight:400;letter-spacing:-.01em;color:var(--muted);white-space:nowrap}
 .nmf-wall{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px 20px;margin-top:10px}
 .nmf-wall .feat{grid-column:span 2;grid-row:span 2}
 .nmf-rest{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:22px 14px}
@@ -717,8 +717,7 @@ function wireMore(art){
     ${p.notes&&p.notes[r.title]?`<div class="nmf-note">${paras(p.notes[r.title])}</div>`:""}
     <div class="nmf-lk">${links.map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener">${esc(n)} ↗</a>`).join("")}</div></div>`};
   art.id=p.id;
-  art.innerHTML=`<div class="eyebrow"><b>NEW MUSIC FRIDAY</b> · ${shortDate(p.date)}</div>
-    <div class="nmf-head"><h2><a href="#${p.id}">${esc(p.title)}</a></h2><span class="nmf-date">${dayOf(p.date).toLocaleDateString("en-GB",{day:"numeric",month:"short"})}</span></div>
+  art.innerHTML=`<h2><a href="#${p.id}">${esc(p.title)}</a> <span class="nmf-date">· ${dayOf(p.date).toLocaleDateString("en-GB",{day:"numeric",month:"short"})}</span></h2>
     ${p.note?paras(p.note):""}
     <div class="nmf-wall">${list.slice(0,top).map(tile).join("")}</div>
     ${list.length>top?`<div class="nmf-sec">ALSO OUT TODAY</div><div class="nmf-rest">${list.slice(top).map((r,i)=>tile(r,i+top)).join("")}</div>`:""}
