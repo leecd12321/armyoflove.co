@@ -404,6 +404,12 @@ nav .links a[aria-current]{color:var(--ink);font-weight:700}
 .nmf-lk{display:flex;flex-wrap:wrap;gap:6px 12px}
 .nmf-lk a{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.06em;text-decoration:none;border-bottom:1.5px solid currentColor;padding-bottom:2px}
 .nmf-lk a:hover{color:var(--muted)}
+.nmf-wall.solo{grid-template-columns:minmax(0,1fr)}
+.nmf-wall .nmf-t.feat{max-width:none;margin:0}
+.nmf-wall.solo .feat{grid-column:auto;grid-row:auto;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);column-gap:28px;row-gap:10px;align-content:start}
+.nmf-wall.solo .feat .nmf-art{grid-column:1;grid-row:1/span 4;align-self:start;width:100%;box-sizing:border-box}
+.nmf-wall.solo .feat>:not(.nmf-art){grid-column:2}
+@media (max-width:700px){.nmf-wall.solo .feat{grid-template-columns:1fr}.nmf-wall.solo .feat .nmf-art,.nmf-wall.solo .feat>:not(.nmf-art){grid-column:1;grid-row:auto}}
 .nmf-note{display:flex;flex-direction:column;gap:10px;margin:2px 0 4px}
 .nmf-note .blurb{margin:0;max-width:560px}
 .nmf-sec{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:.1em;margin-top:22px}
@@ -719,7 +725,7 @@ function wireMore(art){
   art.id=p.id;
   art.innerHTML=`<h2><a href="#${p.id}">${esc(p.title)}</a> <span class="nmf-date">· ${dayOf(p.date).toLocaleDateString("en-GB",{day:"numeric",month:"short"})}</span></h2>
     ${p.note?paras(p.note):""}
-    <div class="nmf-wall">${list.slice(0,top).map(tile).join("")}</div>
+    <div class="nmf-wall${top===1?" solo":""}">${list.slice(0,top).map(tile).join("")}</div>
     ${list.length>top?`<div class="nmf-sec">ALSO OUT TODAY</div><div class="nmf-rest">${list.slice(top).map((r,i)=>tile(r,i+top)).join("")}</div>`:""}
     <div class="entry-foot"><a class="readmore" href="#upcoming" data-radar>SEE THE FULL RADAR ↑</a><a class="readmore" href="https://open.spotify.com/playlist/4XHIWAkY2OPglDJkUmSBRC" target="_blank" rel="noopener">NEW RELEASES PLAYLIST ↗</a></div>`;
   art.hidden=false;
