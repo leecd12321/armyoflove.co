@@ -72,7 +72,7 @@ const UPCOMING=[
   blurb:"I'm a big fan of Felix Rösch's music and he has a new album coming out this Friday. Wanted to get that on your radar and plant a seed for you to check out his existing catalog.",
   blurbOut:"ARP is out today. A deeply personal record of neo-classical composition from Felix Rösch.",
   more:"https://felixrosch.bandcamp.com/",
-  links:[["STORE","https://felixrosch.com"],["SPOTIFY","https://open.spotify.com/album/1NjOUiBBVueeLMIVZXkJUc"]]},
+  links:[["WEBSITE","https://felixrosch.com"],["SPOTIFY","https://open.spotify.com/album/1NjOUiBBVueeLMIVZXkJUc"]]},
  // Radar mentions: short, shown only in the Upcoming releases bar (no full post)
  {mention:true,title:"Astro",artist:"Donato Dozzy",label:"Tresor Records",type:"ALBUM",releaseDate:"2026-11-20",dateAdded:"2026-11-09",
   img:"https://f4.bcbits.com/img/a3622820286_10.jpg",
@@ -168,7 +168,7 @@ const UPCOMING=[
 // the first is the big tile, the first 6 are the big covers, the rest go under ALSO OUT TODAY.
 const NMF=[
  {date:"2026-11-13",id:"new-music-friday-nov-13",title:"New Music Friday",top:6,
-  notes:{"Anjanas 20th Anniversary Reprise":"I just took this album for a morning walk and I absolutely love it.\n\nThis is the 20-year anniversary of Pablo's debut album. He went back, revisited each track and made a new version for the 20th anniversary. What a cool concept.\n\n5/5 I recommend you sink in and give this album a listen. Thank you Pablo, love it."},
+  notes:{"Anjanas 20th Anniversary Reprise":"I just took this album for a morning walk and I absolutely love it.\n\nThis is the 20-year anniversary of Pablo's debut album. He went back, revisited each track and made a new version for the 20th anniversary. What a cool concept.\n\n5/5 I recommend you sink in and give this album a listen.\n\nThis plays so smoothly from start to finish, the arrangement feels very intentional... Bravo Pablo."},
   picks:["Anjanas 20th Anniversary Reprise","Eyes Wide Open EP","A Tiger Never Loses Its Stripes (Part 3)","A Window In","ARP","My Own Shadow",
          "Mirrorball Sleaze","Endless / Purge","Forest of Tranquility","My Definition of House Music Part 3","20 Years Of Bar 25 Music"]}
 ];
