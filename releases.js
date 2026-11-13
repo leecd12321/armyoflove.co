@@ -168,7 +168,8 @@ const UPCOMING=[
 // the first is the big tile, the first 6 are the big covers, the rest go under ALSO OUT TODAY.
 const NMF=[
  {date:"2026-11-13",id:"new-music-friday-nov-13",title:"New Music Friday",top:6,
-  picks:["ARP","Eyes Wide Open EP","A Tiger Never Loses Its Stripes (Part 3)","A Window In","Anjanas 20th Anniversary Reprise","My Own Shadow",
+  notes:{"Anjanas 20th Anniversary Reprise":"I just took this album for a morning walk and I absolutely love it.\n\nThis is the 20-year anniversary of Pablo's debut album. He went back, revisited each track and made a new version for the 20th anniversary. What a cool concept.\n\n5/5 I recommend you sink in and give this album a listen. Thank you Pablo, love it."},
+  picks:["Anjanas 20th Anniversary Reprise","Eyes Wide Open EP","A Tiger Never Loses Its Stripes (Part 3)","A Window In","ARP","My Own Shadow",
          "Mirrorball Sleaze","Endless / Purge","Forest of Tranquility","My Definition of House Music Part 3","20 Years Of Bar 25 Music"]}
 ];
 
