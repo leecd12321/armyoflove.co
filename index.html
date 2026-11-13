@@ -549,7 +549,7 @@ const GO_LIVE="06:45";
 const berlinAt=(d,t)=>{const g=new Date(d+"T"+t+":00Z");let o=1;try{const v=new Intl.DateTimeFormat("en-US",{timeZone:"Europe/Berlin",timeZoneName:"shortOffset"}).formatToParts(g).find(x=>x.type==="timeZoneName").value;const m=v.match(/GMT([+-]\d+)/);o=m?+m[1]:0}catch(_){}return new Date(g.getTime()-o*36e5)};
 const shortDate=d=>dayOf(d).toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"}).toUpperCase();
 // Links: once a release is out, CRATES drops off (pre-release only). Bandcamp always leads, then Spotify.
-const LINK_ORDER={BANDCAMP:0,STORE:0,SPOTIFY:1};
+const LINK_ORDER={BANDCAMP:0,WEBSITE:0,SPOTIFY:1};
 const relLinks=(links,out)=>(links||[]).filter(l=>!(out&&l[0]==="CRATES")).map((l,i)=>[l,i]).sort((a,b)=>((LINK_ORDER[a[0][0]]??9)-(LINK_ORDER[b[0][0]]??9))||a[1]-b[1]).map(x=>x[0]);
 const paras=t=>t.split(/\n\s*\n/).map(p=>`<p class="blurb">${esc(p.trim())}</p>`).join("");
 // Icon badges: album, various artists, ambient, downtempo (EPs get none)
