@@ -404,6 +404,8 @@ nav .links a[aria-current]{color:var(--ink);font-weight:700}
 .nmf-lk{display:flex;flex-wrap:wrap;gap:6px 12px}
 .nmf-lk a{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.06em;text-decoration:none;border-bottom:1.5px solid currentColor;padding-bottom:2px}
 .nmf-lk a:hover{color:var(--muted)}
+.nmf-note{display:flex;flex-direction:column;gap:10px;margin:2px 0 4px}
+.nmf-note .blurb{margin:0;max-width:560px}
 .nmf-sec{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:.1em;margin-top:22px}
 .nmf-sec::after{content:"";flex:1;height:1.5px;background:var(--ink)}
 @media (prefers-reduced-motion:reduce){.nmf-art img{transition:none}}
@@ -709,6 +711,7 @@ function wireMore(art){
   const tile=(r,i)=>{const links=(r.links&&r.links.length)?r.links:[r.sp&&["SPOTIFY",r.sp]].filter(Boolean);
     return `<div class="nmf-t${i===0?" feat":""}"><a class="nmf-art" href="${(links[0]||[])[1]||"#"}" target="_blank" rel="noopener"><img src="${r.img}" alt="${esc(r.artist)} – ${esc(r.title)} cover" loading="lazy"><span class="nmf-no">${pad(i+1)}</span></a>
     <div class="ln"><b>${esc(r.artist)}</b> – ${esc(r.title)} <span class="lab">[${esc(r.label)}]</span></div>
+    ${p.notes&&p.notes[r.title]?`<div class="nmf-note">${paras(p.notes[r.title])}</div>`:""}
     <div class="nmf-lk">${links.map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener">${esc(n)} ↗</a>`).join("")}</div></div>`};
   art.id=p.id;
   art.innerHTML=`<div class="eyebrow"><b>NEW MUSIC FRIDAY</b> · ${shortDate(p.date)}</div>
