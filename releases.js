@@ -105,12 +105,24 @@ const UPCOMING=[
  {mention:true,title:"Endless / Purge",artist:"Efdemin & .VRIL",label:"CINTH",type:"EP",count:4,releaseDate:"2026-11-13",dateAdded:"2026-11-12",
   img:"https://geo-media.beatport.com/image_size/500x500/e77a7a28-e560-47ec-a737-52d63e30cbb5.jpg",
   links:[["CRATES","https://crates.co/release/endless-purge/7607451"]]},
- {mention:true,title:"A Window In",artist:"gingembre & KCM",label:"Serafin Audio Imprint",type:"ALBUM",count:8,releaseDate:"2026-11-13",dateAdded:"2026-11-12",
+ {mention:true,downtempo:true,title:"A Window In",artist:"gingembre & KCM",label:"Serafin Audio Imprint",type:"ALBUM",count:8,releaseDate:"2026-11-13",dateAdded:"2026-11-12",
   img:"https://geo-media.beatport.com/image_size/500x500/0681ce4a-9a75-4bca-b60b-e2d6653c51d2.jpg",
   links:[["CRATES","https://crates.co/release/a-window-in/7609530"]]},
  {mention:true,title:"Eyes Wide Open EP",artist:"Toman",label:"HIGH CEILINGS",type:"EP",count:2,releaseDate:"2026-11-13",dateAdded:"2026-11-12",
   img:"https://geo-media.beatport.com/image_size/500x500/6909f19b-ea36-44dc-a216-1f00e68c57f4.jpg",
   links:[["CRATES","https://crates.co/release/eyes-wide-open-ep/7623334"]]},
+ {mention:true,title:"A Tiger Never Loses Its Stripes (Part 3)",artist:"Tiger Stripes",label:"Rekids",type:"EP",count:4,releaseDate:"2026-11-13",dateAdded:"2026-11-13",
+  img:"https://geo-media.beatport.com/image_size/500x500/418c6eac-630f-46b8-a1a7-ae2e8e68d79e.jpg",
+  links:[["CRATES","https://crates.co/release/a-tiger-never-loses-its-stripes-part-3/7625086"]]},
+ {mention:true,va:true,title:"20 Years Of Bar 25 Music",artist:"VA",label:"Bar 25 Music",type:"COMPILATION",count:15,releaseDate:"2026-11-13",dateAdded:"2026-11-13",
+  img:"https://geo-media.beatport.com/image_size/500x500/fa6c5609-d788-4edf-b00c-587c5f4e4368.jpg",
+  links:[["CRATES","https://crates.co/release/20-years-of-bar-25-music/7624249"]]},
+ {mention:true,title:"Mirrorball Sleaze",artist:"Dave Seaman",label:"Selador",type:"ALBUM",count:12,releaseDate:"2026-11-13",dateAdded:"2026-11-13",
+  img:"https://geo-media.beatport.com/image_size/500x500/c0454059-a0b5-4936-adfe-1c4b9dca8c43.jpg",
+  links:[["CRATES","https://crates.co/release/mirrorball-sleaze/7618002"]]},
+ {mention:true,title:"Anjanas 20th Anniversary Reprise",artist:"Pablo Bolivar",label:"Seven Villas Forest",type:"ALBUM",count:11,releaseDate:"2026-11-13",dateAdded:"2026-11-13",
+  img:"https://geo-media.beatport.com/image_size/500x500/a8e1e805-26c2-4c9f-8b2e-c03b09f661b8.jpg",
+  links:[["CRATES","https://crates.co/release/anjanas-20th-anniversary-reprise/7632344"]]},
  {mention:true,title:"Forest of Tranquility",artist:"Masayoshi Fujita",label:"Erased Tapes",type:"ALBUM",releaseDate:"2026-11-13",dateAdded:"2026-11-09",tags:["AMBIENT"],ambient:true,
   img:"https://f4.bcbits.com/img/a3300898528_10.jpg",
   links:[["CRATES","https://crates.co/release/forest-of-tranquility/7237598"],["BANDCAMP","https://masayoshifujita.bandcamp.com/album/forest-of-tranquility"]]},
@@ -150,6 +162,14 @@ const UPCOMING=[
   tracks:["Does It Get Easier?"],tasters:{"Does It Get Easier?":"dH8c9BBw9To"},
   img:"https://i.scdn.co/image/ab67616d0000b273bb4c9fc51deffd1281e7460d",
   links:[["SPOTIFY","https://open.spotify.com/track/1zmThgFg1hww3UqVouPNRl"]]}
+];
+
+// New Music Friday posts (cover wall at the top of the homepage). picks = release titles from UPCOMING, in order;
+// the first is the big tile, the first 6 are the big covers, the rest go under ALSO OUT TODAY.
+const NMF=[
+ {date:"2026-11-13",id:"new-music-friday-nov-13",title:"New Music Friday",top:6,
+  picks:["ARP","Eyes Wide Open EP","A Tiger Never Loses Its Stripes (Part 3)","A Window In","Anjanas 20th Anniversary Reprise","My Own Shadow",
+         "Mirrorball Sleaze","Endless / Purge","Forest of Tranquility","My Definition of House Music Part 3","20 Years Of Bar 25 Music"]}
 ];
 
 // Daily posts (one track or release, scheduled by date). The newest post dated today or earlier
