@@ -18,12 +18,18 @@ const A={ // artists
  abacus:{name:"Abacus",sp:"https://open.spotify.com/artist/6NLqTCFXDOWYXrZV6WyVO6"},
  urbancc:{name:"URBAN CC",sp:"https://open.spotify.com/artist/1beunTtJdnQMKxmCQJ0VMh"}
 };
-const L={ // labels
+const L={ // labels · founders:[...] + founded:year = the label/founder side DATABASS
+ hoomidaas:{name:"Hoomidaas",founders:["Armen Miran"],founded:2019},
+ happycamper:{name:"Happy Camper",founders:["Unders","Noraj Cue","Britta Arnold"]},
+ highceilings:{name:"High Ceilings",founders:["Toman"],founded:2025},
+ sevenvillas:{name:"Seven Villas Music",founders:["Pablo Bolivar"],bc:"https://sevenvillas.bandcamp.com"},
+ iamyou:{name:"I AM YOU",founders:["Deer Jade"]},
+ marginalia:{name:"Marginalia",founders:["ELIF"],founded:2023},
  openers:{name:"Openers",bc:"https://openers.bandcamp.com",ig:"https://www.instagram.com/openersrecs/"},
  squama:{name:"Squama",bc:"https://squamarecordings.bandcamp.com",ig:"https://www.instagram.com/squama.rec/"},
  kompakt:{name:"Kompakt",bc:"https://kompakt.bandcamp.com",ig:"https://www.instagram.com/kompaktrecords/"},
  innervisions:{name:"Innervisions",bc:"https://innervisionsmusic.bandcamp.com",ig:"https://www.instagram.com/innervisions_official/"},
- runningback:{name:"Running Back",bc:"https://runningbackrecords.bandcamp.com",ig:"https://www.instagram.com/runningbackrecords/"},
+ runningback:{name:"Running Back",founders:["Gerd Janson","Thorsten Scheu"],founded:2002,bc:"https://runningbackrecords.bandcamp.com",ig:"https://www.instagram.com/runningbackrecords/"},
  dirtyhands:{name:"Dirty Hands",bc:"https://dirtyhandsrec.bandcamp.com",ig:"https://www.instagram.com/dirtyhandsrec/"},
  dog:{name:"Delusions of Grandeur",bc:"https://delusionsofgrandeurrec.bandcamp.com",ig:"https://www.instagram.com/delusionsofgrandeurrecords/"},
  multiculti:{name:"Multi Culti",bc:"https://multiculti.bandcamp.com",sc:"https://soundcloud.com/multiculti",ig:"https://www.instagram.com/multicultifamily/"},
@@ -46,7 +52,7 @@ const SETS= // Fruitful Friday · Nov 6, 2026
   blurb:"To be honest, I didn't connect with this on my first listen.\nMost people I know love Innervisions, so I wanted to make sure you knew this came out today.\n\nIt's just not for me.",
   tracks:[],bc:"https://ame-engoli.bandcamp.com/album/love-is-the-dance-lp",sp:"https://open.spotify.com/album/3GMbNTMjPI2gJULzw5RaK5"},
  {title:"Collected Works",releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["ksky"],label:"runningback",type:"ALBUM",count:10,img:"collected-works-cover.jpg",
-  blurb:"I'm not familiar with Ksky, but the single for this album came out last week and I really connected with it: \"Bad Philly.\"\n\nLooking forward to taking this one for a walk and an intentional listen.\nHonestly, that could take days or weeks from now.",tracks:["Bad Philly","Weirdub"],bc:"https://runningbackrecords.bandcamp.com/album/collected-works",sp:"https://open.spotify.com/album/3DCc8tUSaFjfIP7dbNbvJH"}
+  blurb:"I'm not familiar with Ksky, but the single for this album came out last week and I really connected with it: \"Bad Philly.\"\n\nLooking forward to taking this one for a walk and an intentional listen.\nHonestly, that could take days or weeks from now.",tracks:["Bad Philly","Weirdub"],tasters:{"Weirdub":"4lP2FuPpKGI"},bc:"https://runningbackrecords.bandcamp.com/album/collected-works",sp:"https://open.spotify.com/album/3DCc8tUSaFjfIP7dbNbvJH"}
  ],
  other:[
  {title:"Ontario EP",video:"rKuTxzf5Zdo",tasters:{"Ontario":"rKuTxzf5Zdo","Off Disk":"A61fcAFBdl4","Oops All Sixes":"Pl_njZlePy4"},releaseDate:"2026-11-06",dateAdded:"2026-11-06",artists:["hammar"],label:"dirtyhands",type:"EP",count:4,img:"ontario-ep-cover.jpg",
@@ -80,7 +86,7 @@ const UPCOMING=[
  {mention:true,va:true,title:"Pop Ambient 2027",artist:"VA",label:"Kompakt",type:"COMPILATION",releaseDate:"2026-12-04",dateAdded:"2026-11-09",tags:["AMBIENT"],ambient:true,
   img:"https://f4.bcbits.com/img/a3826203060_10.jpg",
   links:[["CRATES","https://crates.co/release/pop-ambient-2027/7628066"],["BANDCAMP","https://kompakt.bandcamp.com/album/pop-ambient-2027"]]},
- {mention:true,va:true,title:"DJ-Kicks: Dam Swindle",artist:"Dam Swindle",label:"!K7",type:"COMPILATION",releaseDate:"2026-11-20",dateAdded:"2026-11-09",
+ {mention:true,noArtist:true,va:true,title:"DJ-Kicks: Dam Swindle",artist:"Dam Swindle",label:"!K7",type:"COMPILATION",releaseDate:"2026-11-20",dateAdded:"2026-11-09",
   img:"https://f4.bcbits.com/img/a2040506614_10.jpg",
   links:[["CRATES","https://crates.co/release/dj-kicks-dam-swindle/7478785"],["BANDCAMP","https://damswindle.bandcamp.com/album/dj-kicks-dam-swindle-2"]]},
  {mention:true,title:"The Hill EP",artist:"Philipp Kolbe",label:"Kompakt",type:"EP",releaseDate:"2026-11-20",dateAdded:"2026-11-09",
@@ -89,9 +95,10 @@ const UPCOMING=[
  {mention:true,title:"Tumbling Cycles",artist:"Billus",label:"Smallville Records",type:"ALBUM",releaseDate:"2026-11-20",dateAdded:"2026-11-09",
   img:"https://f4.bcbits.com/img/a1620741630_10.jpg",
   links:[["CRATES","https://crates.co/release/tumbling-cycles/7632578"],["BANDCAMP","https://smallville-records.bandcamp.com/album/smallville-lp-19-billus-tumbling-cycles"]]},
- {mention:true,title:"Running Back Mastermix: Edward – Edits",artist:"Edward",label:"Running Back",type:"COMPILATION",releaseDate:"2026-11-20",dateAdded:"2026-11-09",
+ {mention:true,noArtist:true,title:"Running Back Mastermix: Edward – Edits",artist:"Edward",label:"Running Back",type:"COMPILATION",releaseDate:"2026-11-20",dateAdded:"2026-11-09",
   img:"https://f4.bcbits.com/img/a2454391620_10.jpg",
   links:[["CRATES","https://crates.co/release/running-back-mastermix-edward-edits/7632803"],["BANDCAMP","https://runningbackrecords.bandcamp.com/album/running-back-mastermix-edward-edits"]]},
+ // noArtist:true = show only the title on the Radar (when the title already names the artist)
  // taster:"YouTubeID" = Leefer's taster video for the release (▶ TASTER pill on the Radar row)
  {mention:true,title:"Greetings Earthlings",artist:"Rebūke",label:"ERA",type:"SINGLE",releaseDate:"2026-11-20",dateAdded:"2026-11-11",taster:"cxxYFC4CyeQ",
   img:"https://i.ytimg.com/vi/cxxYFC4CyeQ/hqdefault.jpg",
@@ -108,7 +115,7 @@ const UPCOMING=[
  {mention:true,downtempo:true,title:"A Window In",artist:"gingembre & KCM",label:"Serafin Audio Imprint",type:"ALBUM",count:8,releaseDate:"2026-11-13",dateAdded:"2026-11-12",
   img:"https://geo-media.beatport.com/image_size/500x500/0681ce4a-9a75-4bca-b60b-e2d6653c51d2.jpg",
   links:[["BANDCAMP","https://serafinaudio.bandcamp.com/album/a-window-in"],["SPOTIFY","https://open.spotify.com/album/7BeZKMBeDtQ3bkIYe3R66N"]]},
- {mention:true,title:"Eyes Wide Open EP",artist:"Toman",label:"HIGH CEILINGS",type:"EP",count:2,releaseDate:"2026-11-13",dateAdded:"2026-11-12",
+ {mention:true,title:"Eyes Wide Open EP",artist:"Toman",label:"HIGH CEILINGS",type:"EP",count:2,releaseDate:"2026-11-13",dateAdded:"2026-11-12",taster:"X4WKCg0sabg",
   img:"https://geo-media.beatport.com/image_size/500x500/6909f19b-ea36-44dc-a216-1f00e68c57f4.jpg",
   links:[["SPOTIFY","https://open.spotify.com/album/5J2m8mZcAhi46eg5SWmfkL"]]},
  {mention:true,title:"A Tiger Never Loses Its Stripes (Part 3)",artist:"Tiger Stripes",label:"Rekids",type:"EP",count:4,releaseDate:"2026-11-13",dateAdded:"2026-11-13",
@@ -120,7 +127,7 @@ const UPCOMING=[
  {mention:true,title:"Mirrorball Sleaze",artist:"Dave Seaman",label:"Selador",type:"ALBUM",count:12,releaseDate:"2026-11-13",dateAdded:"2026-11-13",
   img:"https://geo-media.beatport.com/image_size/500x500/c0454059-a0b5-4936-adfe-1c4b9dca8c43.jpg",
   links:[["BANDCAMP","https://selador-recordings.bandcamp.com/album/dave-seaman-mirrorball-sleaze-digital-mix-individual-downloads-selador"],["SPOTIFY","https://open.spotify.com/album/3udFw9oP8zrADsjMEWLKGr"]]},
- {mention:true,superProject:true,title:"Anjanas 20th Anniversary Reprise",artist:"Pablo Bolivar",label:"Seven Villas Music",type:"ALBUM",count:11,releaseDate:"2026-11-13",dateAdded:"2026-11-13",
+ {mention:true,superProject:true,title:"Anjanas 20th Anniversary Reprise",artist:"Pablo Bolivar",label:"Seven Villas Music",type:"ALBUM",count:11,releaseDate:"2026-11-13",dateAdded:"2026-11-13",taster:"2WlD6j_MTag",
   img:"https://geo-media.beatport.com/image_size/500x500/a8e1e805-26c2-4c9f-8b2e-c03b09f661b8.jpg",
   links:[["BANDCAMP","https://sevenvillas.bandcamp.com/album/anjanas-20th-anniversary-reprise"],["SPOTIFY","https://open.spotify.com/album/3gPffH35DKJQbm7POGo1tZ"]]},
  {mention:true,title:"Forest of Tranquility",artist:"Masayoshi Fujita",label:"Erased Tapes",type:"ALBUM",releaseDate:"2026-11-13",dateAdded:"2026-11-09",tags:["AMBIENT"],ambient:true,
@@ -176,6 +183,20 @@ const NMF=[
 // Daily posts (one track or release, scheduled by date). The newest post dated today or earlier
 // sits at the top of the homepage. "plays" = how many times Leefer has gone back to it (4+ badge).
 const POSTS=[
+  {id:"toman-watch-your-back",date:"2026-11-15",kicker:"TRACK OF THE DAY",full:true,title:"Watch Your Back",artist:"Toman",label:"High Ceilings",video:"X4WKCg0sabg",
+   img:"https://geo-media.beatport.com/image_size/500x500/6909f19b-ea36-44dc-a216-1f00e68c57f4.jpg",sp:"https://open.spotify.com/album/5J2m8mZcAhi46eg5SWmfkL",
+   funfact:"<b>High Ceilings</b> is Toman's own label, launched in 2025.",
+   body:"As I was researching Friday's releases, this groover from Toman got me off the couch and dancing in the kitchen.\n\nNot the first time Toman's got me off my ass and into a groove. If you like this sound, I recommend you check out his catalog."},
+  {id:"ksky-weirdub",date:"2026-11-18",kicker:"TRACK OF THE DAY",full:true,title:"Weirdub",artist:"Ksky",label:"Running Back",video:"4lP2FuPpKGI",img:"collected-works-cover.jpg",
+   bc:"https://runningbackrecords.bandcamp.com/album/collected-works",sp:"https://open.spotify.com/album/3DCc8tUSaFjfIP7dbNbvJH",
+   peek:{kicker:"ON THE RADAR · NEXT ON RUNNING BACK",title:"Running Back Mastermix: Edward – Edits",img:"https://f4.bcbits.com/img/a2454391620_10.jpg",line:"Out Fri, Nov 20.",link:["Preview on Crates","https://crates.co/release/running-back-mastermix-edward-edits/7632803"]},
+   funfact:'Running Back was started by <a href="https://ra.co/dj/gerdjanson" target="_blank" rel="noopener"><b>Gerd Janson</b> ↗</a> and Thorsten Scheu. These days it\'s Gerd\'s ship.',
+   body:"This fun, dubby, bouncy track comes off the recent Ksky release on the Running Back label.\n\nI wasn't familiar with Ksky before this. Turns out Collected Works is a reissue: older tracks from the St. Petersburg producer that flew under the radar the first time around, now resurfaced by Running Back. This one got me groovin' on multiple listens.\n\nThere are some other cool tracks on the album, worth a listen if you like this sound. \"Bad Philly\" is a nice journey of a track that I also connected with. \"Weirdub\" is the one for me though."},
+  {id:"pablo-bolivar-recuerdos",date:"2026-11-16",kicker:"FIRE PROJECT",full:true,title:"Recuerdos de otra edad (Reprise)",artist:"Pablo Bolivar",label:"Seven Villas Music",video:"2WlD6j_MTag",
+   img:"https://geo-media.beatport.com/image_size/500x500/a8e1e805-26c2-4c9f-8b2e-c03b09f661b8.jpg",
+   bc:"https://sevenvillas.bandcamp.com/album/anjanas-20th-anniversary-reprise",sp:"https://open.spotify.com/album/3gPffH35DKJQbm7POGo1tZ",
+   funfact:"<em>Anjanas</em> was Pablo’s debut album, released in 2006. For its 20th anniversary, he reworked every track as a reprise and put it out on his own label, Seven Villas.",
+   body:"The Pablo Bolivar Anjanas Reprise album was an absolute treat for my Friday morning walk. I started out walking through a beautiful city and, 26 minutes in, found myself lost in space.\n\nThe album ranges from deep, dubby, danceable tracks to ambient space floaters like this one. We'll be highlighting more from this album, and we begin with this beauty.\n\nGood headphones. Sit back. Sink in. Enjoy."},
  {date:"2026-11-10",kicker:"TECHNO TUESDAY",title:"Does It Get Easier?",artist:"Holo",label:"Noire & Blanche",video:"dH8c9BBw9To",plays:10,
   img:"techno-tuesday-holo.jpg",imgWide:true,
   sp:"https://open.spotify.com/track/1zmThgFg1hww3UqVouPNRl",artistSp:"https://open.spotify.com/artist/5PrWAhH8BO28ieKNfYYFEX",
