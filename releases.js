@@ -204,7 +204,7 @@ const NMF=[
 // Daily posts (one track or release, scheduled by date). The newest post dated today or earlier
 // sits at the top of the homepage. "plays" = how many times Leefer has gone back to it (4+ badge).
 const POSTS=[
-  {id:"toman-watch-your-back",date:"2026-11-15",kicker:"TRACK OF THE DAY",full:true,title:"Watch Your Back",artist:"Toman",label:"High Ceilings",video:"X4WKCg0sabg",
+  {id:"toman-watch-your-back",date:"2026-11-15",kicker:"GROOVE OF THE DAY",full:true,title:"Watch Your Back",artist:"Toman",label:"High Ceilings",video:"X4WKCg0sabg",
    img:"https://geo-media.beatport.com/image_size/500x500/6909f19b-ea36-44dc-a216-1f00e68c57f4.jpg",sp:"https://open.spotify.com/album/5J2m8mZcAhi46eg5SWmfkL",
    funfact:"<b>High Ceilings</b> is Toman's own label, launched in 2025.",
    body:"As I was researching Friday's releases, this groover from Toman got me off the couch and dancing in the kitchen.\n\nNot the first time Toman's got me off my ass and into a groove. If you like this sound, I recommend you check out his catalog."},
@@ -213,7 +213,7 @@ const POSTS=[
    peek:{kicker:"ON THE RADAR · NEXT ON RUNNING BACK",title:"Running Back Mastermix: Edward – Edits",img:"https://f4.bcbits.com/img/a2454391620_10.jpg",line:"Out Fri, Nov 20.",link:["Preview on Crates","https://crates.co/release/running-back-mastermix-edward-edits/7632803"]},
    funfact:'Running Back was started by <a href="https://ra.co/dj/gerdjanson" target="_blank" rel="noopener"><b>Gerd Janson</b> ↗</a> and Thorsten Scheu. These days it\'s Gerd\'s ship.',
    body:"This fun, dubby, bouncy track comes off the recent Ksky release on the Running Back label.\n\nI wasn't familiar with Ksky before this. Turns out Collected Works is a reissue: older tracks from the St. Petersburg producer that flew under the radar the first time around, now resurfaced by Running Back. This one got me groovin' on multiple listens.\n\nThere are some other cool tracks on the album, worth a listen if you like this sound. \"Bad Philly\" is a nice journey of a track that I also connected with. \"Weirdub\" is the one for me though."},
-  {id:"pablo-bolivar-recuerdos",date:"2026-11-16",kicker:"FIRE PROJECT",full:true,title:"Recuerdos de otra edad (Reprise)",artist:"Pablo Bolivar",label:"Seven Villas Music",video:"2WlD6j_MTag",
+  {id:"pablo-bolivar-recuerdos",date:"2026-11-16",kicker:"NO SKIPPING ALBUM",full:true,title:"Recuerdos de otra edad (Reprise)",artist:"Pablo Bolivar",label:"Seven Villas Music",video:"2WlD6j_MTag",
    img:"https://geo-media.beatport.com/image_size/500x500/a8e1e805-26c2-4c9f-8b2e-c03b09f661b8.jpg",
    bc:"https://sevenvillas.bandcamp.com/album/anjanas-20th-anniversary-reprise",sp:"https://open.spotify.com/album/3gPffH35DKJQbm7POGo1tZ",
    funfact:"<em>Anjanas</em> was Pablo’s debut album, released in 2006. For its 20th anniversary, he reworked every track as a reprise and put it out on his own label, Seven Villas.",
