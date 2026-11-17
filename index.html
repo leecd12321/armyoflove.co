@@ -638,7 +638,7 @@ function wireMore(art){
     links:[r.bc&&["BANDCAMP",r.bc],r.sp&&["SPOTIFY",r.sp]].filter(Boolean)}));
   const every=[...UPCOMING,...past].map(r=>({...r,diff:r.releaseDate?Math.round((dayOf(r.releaseDate)-TODAY)/864e5):-999}));
   const all=every.filter(r=>!r.dbOnly);
-  const up=all.filter(r=>r.diff>=0).sort((a,b)=>a.diff-b.diff||a.artist.localeCompare(b.artist));
+  const up=all.filter(r=>r.diff>=0).sort((a,b)=>a.diff-b.diff||(a.rank||99)-(b.rank||99)||a.artist.localeCompare(b.artist));
   const out=all.filter(r=>r.diff<0).sort((a,b)=>a.diff===b.diff?a.artist.localeCompare(b.artist):b.diff-a.diff);
   if(!up.length&&!out.length)return;
   const dd=d=>dayOf(d).toLocaleDateString("en-GB",{day:"numeric",month:"short"}).toUpperCase();
