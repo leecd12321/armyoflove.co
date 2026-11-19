@@ -252,11 +252,11 @@ const NMF=[
 // Daily posts (one track or release, scheduled by date). The newest post dated today or earlier
 // sits at the top of the homepage. "plays" = how many times Leefer has gone back to it (4+ badge).
 const POSTS=[
-  {id:"be-svendsen-the-open",date:"2026-11-19",kicker:"ON MY LIST",full:true,title:"Crossroad",artist:"Be Svendsen & Kamilla Kovacs",video:"CdMiaJpvv5E",
+  {id:"be-svendsen-the-open",date:"2026-11-19",kicker:"ON MY LIST",full:true,sign:"Lee",linksFirst:true,headline:"I totally missed this release",sub:"Be Svendsen & Kamilla Kovacs – The Open",title:"The Open",artist:"Be Svendsen & Kamilla Kovacs",
    img:"https://f4.bcbits.com/img/a3650411140_10.jpg",
-   bc:"https://besvendsen.bandcamp.com/album/the-open",sp:"https://open.spotify.com/album/4yDb0S3aI4bOkqZyhy0o5y",
-   funfact:"The album is built on a 1923 novel by Be's great-grandfather, the Danish writer <b>J. Anker Larsen</b>. As a child, Larsen had moments where the line between himself and the world dissolved. He called it being in “the open.”",
-   body:"I totally missed this one when it came out last Friday.\n\nBe Svendsen and Kamilla Kovacs released The Open, a 16-track album. My understanding is he's been working on it for a few years and put a ton of intention into it. Every track was scored with electronics, recorded with a chamber ensemble in Copenhagen, then layered with more electronics.\n\nI haven't fully sat with it yet. I'm waiting until I'm in the right headspace to give it the attention it deserves. But I recommend giving it a listen.\n\nHere's Crossroad, one of the singles, to start."},
+   sp:"https://open.spotify.com/album/4yDb0S3aI4bOkqZyhy0o5y",
+   funfact:"The album is inspired by <em>De Vises Sten</em> (<em>The Philosopher’s Stone</em>), a 1923 novel by Svendsen’s great-great-grandfather <b>J. Anker Larsen</b>.",
+   body:"Be Svendsen released his album last Friday and I had no idea. My understanding is he poured his soul into this album over the last few years.\n\nI look forward to listening, but will wait for the right moment when I can truly sink in.\n\nI recommend you check it out."},
   {id:"toman-watch-your-back",date:"2026-11-15",kicker:"GROOVE OF THE DAY",full:true,title:"Watch Your Back",artist:"Toman",label:"High Ceilings",video:"X4WKCg0sabg",
    img:"https://geo-media.beatport.com/image_size/500x500/6909f19b-ea36-44dc-a216-1f00e68c57f4.jpg",sp:"https://open.spotify.com/album/5J2m8mZcAhi46eg5SWmfkL",
    funfact:"<b>High Ceilings</b> is Toman's own label, launched in 2025.",
