@@ -180,7 +180,7 @@ const UPCOMING=[
   links:[["CRATES","https://crates.co/release/home/7345513"],["BANDCAMP","https://marshmusician.bandcamp.com/album/home"]]},
  {mention:true,rank:1,title:"Mystic Meltdown",artist:"Acid Pauli",label:"All Is Acid",type:"ALBUM",count:11,releaseDate:"2026-11-20",dateAdded:"2026-11-17",
   img:"https://geo-media.beatport.com/image_size/500x500/2b15e9d1-0ef9-441c-ae63-f79eb8166398.jpg",
-  links:[["CRATES","https://crates.co/release/mystic-meltdown/7451788"]]},
+  links:[["CRATES","https://crates.co/release/mystic-meltdown/7451788"],["BANDCAMP","https://acidpauli.bandcamp.com/album/mystic-meltdown-2"]]},
  {mention:true,title:"L'essentiel",artist:"Ricardo Villalobos & Roland Leesker",label:"Secret Weapon Records",type:"EP",count:2,releaseDate:"2026-11-20",dateAdded:"2026-11-17",
   img:"https://geo-media.beatport.com/image_size/500x500/e125af6e-739f-4ed1-9379-2db237d0fa91.jpg",
   links:[["CRATES","https://crates.co/release/lessentiel/7606795"]]},
