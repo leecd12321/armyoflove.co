@@ -187,6 +187,7 @@ footer{font-family:var(--type);font-size:15px;border-top:1px solid var(--rule);p
 @media (max-width:420px){.r-choices{grid-template-columns:1fr}.r-opt{flex-direction:row;align-items:center;flex-wrap:wrap;gap:4px 12px}.r-opt small{flex-basis:100%;padding-left:34px}}
 @media (prefers-reduced-motion:reduce){.remind-panel,.r-card,.r-opt{transition:none}}
 .soon .vid{overflow:hidden;min-height:0}
+.art-only{display:block;max-width:440px;border:1px solid var(--ink);margin:4px 0 6px}.art-only img{display:block;width:100%;height:auto}
 .vid-poster{position:absolute;inset:0;overflow:hidden;background:#111;pointer-events:none;transition:opacity .4s}
 .vid-poster .bg{position:absolute;inset:-30px;background-size:cover;background-position:center;filter:blur(24px) brightness(.55)}
 .vid-poster img{position:absolute;top:0;left:50%;height:100%;width:auto;aspect-ratio:1/1;transform:translateX(-50%);object-fit:cover;display:block}
@@ -610,15 +611,15 @@ function wireMore(art){
   const ps=p.body.split(/\n\s*\n/),pre=p.full?p.body:ps.slice(0,2).join("\n\n"),rest=p.full?"":ps.slice(2).join("\n\n"),P=p.playlist;
   const lk=`<div class="links">${p.bc?`<a class="btn" href="${p.bc}" target="_blank" rel="noopener">LISTEN ON BANDCAMP ↗</a>`:""}${p.sp?`<a class="btn${p.bc?" ghost":""}" href="${p.sp}" target="_blank" rel="noopener">${p.bc?"SPOTIFY":"LISTEN ON SPOTIFY"} ↗</a>`:""}${p.artistSp?`<a class="btn ghost" href="${p.artistSp}" target="_blank" rel="noopener">MORE ${esc(p.artist.toUpperCase())} ↗</a>`:""}</div>`;
   art.innerHTML=`<div class="eyebrow"><b>${esc(p.kicker)}</b> · ${shortDate(p.date)}</div>
-    <div class="trow"><h2><a href="#${art.id}" data-open>${esc(p.artist)} – ${esc(p.title)}</a></h2>${ambientBadge(p)}${p.plays>=4?`<span class="plays" title="Listened ${p.plays} times and counting"><span class="tk"><i>✦</i>4 OR MORE</span><span class="st"><b>${p.plays}</b><small>LISTENS</small></span></span>`:""}</div>
-    <p class="by">${esc(p.label||"")}</p>
-    <div class="media">${videoBox(p.img,p.imgWide)}</div>
-    <p class="trackline"><span class="tid">TRACK ID:</span> <b>${esc(p.artist)} – ${esc(p.title)}</b>${p.label?` [${esc(p.label)}]`:""}</p>
+    <div class="trow"><h2><a href="#${art.id}" data-open>${esc(p.headline||`${p.artist} – ${p.title}`)}</a></h2>${ambientBadge(p)}${p.plays>=4?`<span class="plays" title="Listened ${p.plays} times and counting"><span class="tk"><i>✦</i>4 OR MORE</span><span class="st"><b>${p.plays}</b><small>LISTENS</small></span></span>`:""}</div>
+    <p class="by">${esc(p.sub||p.label||"")}</p>
+    <div class="media">${p.video?videoBox(p.img,p.imgWide):`<a class="art-only" href="${p.sp||p.bc||"#"}" target="_blank" rel="noopener"><img src="${p.img}" alt="${esc(p.artist)} – ${esc(p.title)} artwork"></a>`}</div>
+    ${p.video?"":"<!--"}<p class="trackline"><span class="tid">TRACK ID:</span> <b>${esc(p.artist)} – ${esc(p.title)}</b>${p.label?` [${esc(p.label)}]`:""}</p>${p.video?"":"-->"}
     ${paras(pre)}
-    ${p.funfact?`<aside class="funfact"><p>${p.funfact}</p></aside>`:""}
-    ${p.full?`<p class="signoff">Sending you love,<br>Leefer</p>${lk}${p.peek?`<aside class="peek"><div class="hole"><img src="${p.peek.img}" alt="" loading="lazy"></div><div><div class="k"><svg viewBox="0 0 30 18" aria-hidden="true"><g class="lidc"><path class="lid" d="M1.5 9C5.5 2.5 24.5 2.5 28.5 9C24.5 15.5 5.5 15.5 1.5 9Z"/><circle class="pupil" cx="15" cy="9" r="4"/></g></svg>${esc(p.peek.kicker)}</div><div class="t">${esc(p.peek.title)}</div><div class="d">${esc(p.peek.line)} <a href="${p.peek.link[1]}"${p.peek.link[1][0]==="#"?"":` target="_blank" rel="noopener"`}>${esc(p.peek.link[0])}${p.peek.link[1][0]==="#"?"":" ↗"}</a></div></div></aside>`:""}`:`<div class="more-body" hidden>
+    ${p.funfact&&!p.linksFirst?`<aside class="funfact"><p>${p.funfact}</p></aside>`:""}
+    ${p.full?`${p.linksFirst?`${lk}<p class="signoff">Sending you love,<br>${esc(p.sign||"Leefer")}</p>${p.funfact?`<aside class="funfact"><p>${p.funfact}</p></aside>`:""}`:`<p class="signoff">Sending you love,<br>${esc(p.sign||"Leefer")}</p>${lk}`}${p.peek?`<aside class="peek"><div class="hole"><img src="${p.peek.img}" alt="" loading="lazy"></div><div><div class="k"><svg viewBox="0 0 30 18" aria-hidden="true"><g class="lidc"><path class="lid" d="M1.5 9C5.5 2.5 24.5 2.5 28.5 9C24.5 15.5 5.5 15.5 1.5 9Z"/><circle class="pupil" cx="15" cy="9" r="4"/></g></svg>${esc(p.peek.kicker)}</div><div class="t">${esc(p.peek.title)}</div><div class="d">${esc(p.peek.line)} <a href="${p.peek.link[1]}"${p.peek.link[1][0]==="#"?"":` target="_blank" rel="noopener"`}>${esc(p.peek.link[0])}${p.peek.link[1][0]==="#"?"":" ↗"}</a></div></div></aside>`:""}`:`<div class="more-body" hidden>
       ${paras(rest)}
-      <p class="signoff">Sending you love,<br>Leefer</p>
+      <p class="signoff">Sending you love,<br>${esc(p.sign||"Leefer")}</p>
       ${lk}
       ${P?`<section class="pl"><a class="pl-art" href="${P.url}" target="_blank" rel="noopener"><img src="${P.img}" alt="${esc(P.title)} playlist artwork"><span class="pl-cta">click to listen ↗</span></a>
         <div class="pl-text"><div class="meta">SPOTIFY PLAYLIST · ARMY OF LOVE</div><h2>${esc(P.title)}</h2>
@@ -626,7 +627,7 @@ function wireMore(art){
       ${p.plays>=4?`<p class="legend"><b>4 or more</b> &nbsp;Tracks I've gone back to four or more times. The number is how many listens so far.</p>`:""}
     </div>
     <div class="entry-foot"><button class="readmore" type="button" data-more-toggle>READ MORE ↓</button>${P?`<a class="quiet" href="${P.url}" target="_blank" rel="noopener">${esc(P.title)} playlist ↗</a>`:""}</div>`}`;
-  art.hidden=false;mountVideo(art.querySelector(".vid"),p.video);if(!p.full)wireMore(art);
+  art.hidden=false;if(p.video)mountVideo(art.querySelector(".vid"),p.video);if(!p.full)wireMore(art);
   const ff=art.querySelector(".funfact");if(ff){if(!("IntersectionObserver" in window))ff.classList.add("pop");else{const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("pop");io.unobserve(e.target)}}),{threshold:.6});io.observe(ff)}}
   });
 })();
