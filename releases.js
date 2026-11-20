@@ -119,7 +119,7 @@ const UPCOMING=[
   links:[["CRATES","https://crates.co/release/rave-prescriptions/7689888"],["SPOTIFY","https://open.spotify.com/album/2KnRsaUTur22STJE90DOG6"]]},
  {mention:true,rank:8,title:"Rare Ocassion",artist:"Lis Sarroca",label:"Rawax",type:"EP",count:4,releaseDate:"2026-11-20",dateAdded:"2026-11-14",
   img:"https://geo-media.beatport.com/image_size/500x500/f7fa1d36-e53a-44b3-8d7e-57cc92a27cb9.jpg",
-  links:[["CRATES","https://crates.co/release/rare-ocassion/7699631"],["SPOTIFY","https://open.spotify.com/album/4tbq5S2TOUDAY1HeqP6tTR"]]},
+  links:[["CRATES","https://crates.co/release/rare-ocassion/7699631"],["SPOTIFY","https://open.spotify.com/album/4tbq5S2TOUDAY1HeqP6tTR"],["BANDCAMP","https://dbh-music.bandcamp.com/album/rawax030ltd"]]},
  // noArtist:true = show only the title on the Radar (when the title already names the artist)
  // taster:"YouTubeID" = Leefer's taster video for the release (▶ TASTER pill on the Radar row)
  {mention:true,title:"Greetings Earthlings",artist:"Rebūke",label:"ERA",type:"SINGLE",releaseDate:"2026-11-20",dateAdded:"2026-11-11",taster:"cxxYFC4CyeQ",
