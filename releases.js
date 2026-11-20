@@ -1,5 +1,6 @@
 // Army of Love · Radar archive data
 // Set ambient:true on any release or daily post to show the AMBIENT badge.
+// techno:true = TECHNO LEANING badge.
 // superProject:true = SUPER PROJECT badge (black circle, gold star).
 // DATABASS: tracks:[...] = tracks Leefer added to the DATABASS; tasters:{"Track name":"YouTubeID"} = his taster video for that track.
 // One entry per release. Artists (A) and labels (L) are shared, so each is written once
@@ -80,7 +81,7 @@ const UPCOMING=[
   more:"https://felixrosch.bandcamp.com/",
   links:[["WEBSITE","https://felixrosch.com"],["SPOTIFY","https://open.spotify.com/album/1NjOUiBBVueeLMIVZXkJUc"]]},
  // Radar mentions: short, shown only in the Upcoming releases bar (no full post)
- {mention:true,rank:5,title:"Astro",artist:"Donato Dozzy",label:"Tresor Records",type:"ALBUM",releaseDate:"2026-11-20",dateAdded:"2026-11-09",
+ {mention:true,techno:true,rank:5,title:"Astro",artist:"Donato Dozzy",label:"Tresor Records",type:"ALBUM",releaseDate:"2026-11-20",dateAdded:"2026-11-09",
   img:"https://f4.bcbits.com/img/a3622820286_10.jpg",
   links:[["CRATES","https://crates.co/release/astro/7415369"],["BANDCAMP","https://donaotodozzy.bandcamp.com/album/astro"]]},
  {mention:true,va:true,title:"Pop Ambient 2027",artist:"VA",label:"Kompakt",type:"COMPILATION",releaseDate:"2026-12-04",dateAdded:"2026-11-09",tags:["AMBIENT"],ambient:true,
@@ -124,7 +125,7 @@ const UPCOMING=[
  {mention:true,title:"Greetings Earthlings",artist:"Rebūke",label:"ERA",type:"SINGLE",releaseDate:"2026-11-20",dateAdded:"2026-11-11",taster:"cxxYFC4CyeQ",
   img:"https://i.ytimg.com/vi/cxxYFC4CyeQ/hqdefault.jpg",
   links:[]},
- {mention:true,rank:6,title:"Rings of Light",artist:"Sven Väth & Roman Flügel",label:"Time Warp Records",type:"SINGLE",releaseDate:"2026-11-20",dateAdded:"2026-11-09",
+ {mention:true,techno:true,rank:6,title:"Rings of Light",artist:"Sven Väth & Roman Flügel",label:"Time Warp Records",type:"SINGLE",releaseDate:"2026-11-20",dateAdded:"2026-11-09",
   img:"https://f4.bcbits.com/img/a2728950555_10.jpg",
   links:[["CRATES","https://crates.co/release/rings-of-light/7565465"],["BANDCAMP","https://timewarpofficial.bandcamp.com/album/rings-of-light"]]},
  {mention:true,title:"My Definition of House Music Part 3",artist:"Sascha Dive",label:"Phonogramme",type:"EP",count:4,releaseDate:"2026-11-13",dateAdded:"2026-11-12",
@@ -133,6 +134,9 @@ const UPCOMING=[
  {mention:true,title:"Endless / Purge",artist:"Efdemin & .VRIL",label:"CINTH",type:"EP",count:4,releaseDate:"2026-11-13",dateAdded:"2026-11-12",
   img:"https://geo-media.beatport.com/image_size/500x500/e77a7a28-e560-47ec-a737-52d63e30cbb5.jpg",
   links:[["BANDCAMP","https://cinth.bandcamp.com/album/endless-purge"],["SPOTIFY","https://open.spotify.com/album/0JeUjQ3it2kp7kajrYpuwM"]]},
+ {mention:true,techno:true,title:"Me & The Ghost",artist:"Ekkel",label:"Kalahari Oyster Cult",type:"ALBUM",count:6,releaseDate:"2026-11-13",dateAdded:"2026-11-20",
+  img:"https://f4.bcbits.com/img/a3045182940_10.jpg",
+  links:[["BANDCAMP","https://kalaharioystercult.bandcamp.com/album/me-the-ghost"]]},
  {mention:true,downtempo:true,title:"A Window In",artist:"gingembre & KCM",label:"Serafin Audio Imprint",type:"ALBUM",count:8,releaseDate:"2026-11-13",dateAdded:"2026-11-12",
   img:"https://geo-media.beatport.com/image_size/500x500/0681ce4a-9a75-4bca-b60b-e2d6653c51d2.jpg",
   links:[["BANDCAMP","https://serafinaudio.bandcamp.com/album/a-window-in"],["SPOTIFY","https://open.spotify.com/album/7BeZKMBeDtQ3bkIYe3R66N"]]},
