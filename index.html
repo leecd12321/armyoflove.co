@@ -383,6 +383,7 @@ nav .links a[aria-current]{color:var(--ink);font-weight:700}
 .ib.va{background:#eee5d6;border-color:#8c7c64}
 .ib.ambient{background:#e2eadf;border-color:#6c8769}
 .ib.downtempo{background:#E2E9ED;border-color:#566B78}
+.ib.techno{background:#e0dfdd;border-color:#3b3a38}
 .ib:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 .ib .tip{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1c1b19;color:#f1ece3;font:500 12px/1 var(--sans);letter-spacing:.01em;padding:6px 9px;border-radius:3px;white-space:nowrap;opacity:0;visibility:hidden;pointer-events:none;z-index:20}
 .ib .tip::after{content:"";position:absolute;top:100%;left:50%;margin-left:-5px;border:5px solid transparent;border-top-color:#1c1b19}
@@ -579,14 +580,15 @@ const shortDate=d=>dayOf(d).toLocaleDateString("en-US",{weekday:"short",month:"s
 const LINK_ORDER={BANDCAMP:0,WEBSITE:0,SPOTIFY:1};
 const relLinks=(links,out)=>(links||[]).filter(l=>!(out&&l[0]==="CRATES")).map((l,i)=>[l,i]).sort((a,b)=>((LINK_ORDER[a[0][0]]??9)-(LINK_ORDER[b[0][0]]??9))||a[1]-b[1]).map(x=>x[0]);
 const paras=t=>t.split(/\n\s*\n/).map(p=>`<p class="blurb">${esc(p.trim())}</p>`).join("");
-// Icon badges: album, various artists, ambient, downtempo (EPs get none)
+// Icon badges: album, various artists, ambient, downtempo, techno leaning (EPs get none)
 const IB={album:["Album",'<circle cx="7" cy="7" r="5.75"/><circle cx="7" cy="7" r="1.4"/>'],
  va:["Various artists",'<circle cx="5" cy="4.6" r="2.1"/><path d="M1.2 12.4c0-2.3 1.7-4.2 3.8-4.2s3.8 1.9 3.8 4.2"/><circle cx="10.2" cy="5.4" r="1.7"/><path d="M9.1 8.8c.35-.2.7-.3 1.1-.3 1.6 0 2.7 1.6 2.7 3.9"/>'],
  ambient:["Ambient",'<path d="M1.3 5.6c1.9-1.9 3.8-1.9 5.7 0s3.8 1.9 5.7 0"/><path d="M1.3 9.4c1.9-1.9 3.8-1.9 5.7 0s3.8 1.9 5.7 0"/>'],
- downtempo:["Downtempo",'<g fill="#566B78" stroke="none"><path d="M.5 9.1A5.15 6.3 0 0 1 10.8 9.1Z"/><circle cx="11.85" cy="6.35" r="1.75"/><rect x="2.1" y="9.35" width="2.7" height="2.1" rx="1.05"/><rect x="6.6" y="9.35" width="2.7" height="2.1" rx="1.05"/></g>']};
+ downtempo:["Downtempo",'<g fill="#566B78" stroke="none"><path d="M.5 9.1A5.15 6.3 0 0 1 10.8 9.1Z"/><circle cx="11.85" cy="6.35" r="1.75"/><rect x="2.1" y="9.35" width="2.7" height="2.1" rx="1.05"/><rect x="6.6" y="9.35" width="2.7" height="2.1" rx="1.05"/></g>'],
+ techno:["Techno leaning",'<path d="M1 9.5h2.4V4.5h2.4v5h2.4V4.5h2.4v5H13"/>']};
 const ib=k=>`<span class="ib ${k}" data-k="${k}" tabindex="0" aria-label="${IB[k][0]}"><svg viewBox="0 0 14 14" aria-hidden="true">${IB[k][1]}</svg>${k==="album"?'<span class="lbl" aria-hidden="true">Album</span>':""}<span class="tip" aria-hidden="true">${IB[k][0]}</span></span>`;
 const typeBadges=r=>(r.type==="ALBUM"?ib("album"):"")+((r.va||r.artist==="VA")?ib("va"):"");
-const ambientBadge=r=>(r.ambient===true?ib("ambient"):"")+(r.downtempo===true?ib("downtempo"):"");
+const ambientBadge=r=>(r.ambient===true?ib("ambient"):"")+(r.downtempo===true?ib("downtempo"):"")+(r.techno===true?ib("techno"):"");
 // Touch: tap shows the label, tap anywhere else hides it
 document.addEventListener("pointerdown",e=>{const t=e.target.closest&&e.target.closest(".ib");document.querySelectorAll(".ib.open").forEach(b=>{if(b!==t)b.classList.remove("open")});if(t)t._pt=e.pointerType},true);
 document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest(".ib");if(!t||t.dataset.f)return;if(t._pt&&t._pt!=="mouse")t.classList.toggle("open")});
@@ -660,7 +662,7 @@ function wireMore(art){
   const dfull=d=>dayOf(d).toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"}).toUpperCase();
   const superB=r=>r.superProject?`<span class="super-badge" data-tip="FIRE PROJECT" aria-label="Fire project">★</span>`:"";
   const dbDrawer=(r,i)=>`<div class="db-drawer" id="db-${i}" hidden><div class="db-head"><span>▣ ADDED TO THE DATABASS</span><button type="button" class="db-all">SEE ALL DATABASS TRACKS →</button></div><ol class="db-list">${r.tracks.map(t=>`<li><span class="db-name">${esc(t)}</span>${tst(r,t)?`<button type="button" class="db-play" data-v="${tst(r,t)}">▶ TASTER</button>`:""}<div class="db-vid" hidden></div></li>`).join("")}</ol></div>`;
-  const RM={};let n=0;const row=r=>{const i=n++;r._i=i;RM[i]=r;const f=[r.type==="ALBUM"&&"album",(r.va||r.artist==="VA")&&"va",r.ambient&&"ambient",r.downtempo&&"downtempo",(r.tracks&&r.tracks.length)&&"databass",r.superProject&&"super"].filter(Boolean).join(" ");return `<div class="up-row" data-i="${i}" data-f="${f}"><img src="${r.img}" alt="${esc(r.title)} cover" loading="lazy"><div class="tx"><div class="tl"><div class="t">${r.noArtist?"":esc(r.artist)+" – "}${esc(r.title)}</div>${r.label?`<div class="lab">on <span class="lbn">${esc(r.label)}</span></div>`:""}</div><div class="d">${dd(r.releaseDate)} ${st(r)} ${superB(r)}${typeBadges(r)}${ambientBadge(r)}${r.taster?`<button type="button" class="tst-badge" data-tv="${r.taster}" aria-expanded="false" title="Watch my taster">▶ TASTER</button>`:""}</div></div>
+  const RM={};let n=0;const row=r=>{const i=n++;r._i=i;RM[i]=r;const f=[r.type==="ALBUM"&&"album",(r.va||r.artist==="VA")&&"va",r.ambient&&"ambient",r.downtempo&&"downtempo",r.techno&&"techno",(r.tracks&&r.tracks.length)&&"databass",r.superProject&&"super"].filter(Boolean).join(" ");return `<div class="up-row" data-i="${i}" data-f="${f}"><img src="${r.img}" alt="${esc(r.title)} cover" loading="lazy"><div class="tx"><div class="tl"><div class="t">${r.noArtist?"":esc(r.artist)+" – "}${esc(r.title)}</div>${r.label?`<div class="lab">on <span class="lbn">${esc(r.label)}</span></div>`:""}</div><div class="d">${dd(r.releaseDate)} ${st(r)} ${superB(r)}${typeBadges(r)}${ambientBadge(r)}${r.taster?`<button type="button" class="tst-badge" data-tv="${r.taster}" aria-expanded="false" title="Watch my taster">▶ TASTER</button>`:""}</div></div>
     <div class="up-links">${relLinks(r.links,r.diff<=0).map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener">${esc(n)} ↗</a>`).join("")}${r.diff>0?`<button type="button" data-rm>REMIND ME →</button>`:""}</div>
     ${r.taster?`<div class="tst-vid" hidden></div>`:""}
     ${r.diff>0?`<form class="up-form" hidden novalidate><div class="r-row"><input type="email" id="up-email-${i}" autocomplete="email" inputmode="email" placeholder="you@example.com" aria-label="Your email" required><button class="r-go" type="submit" aria-label="Remind me">→</button></div><p class="r-msg" aria-live="polite">One email the morning of ${dd(r.releaseDate)}. Nothing else.</p></form>`:""}</div>`};
