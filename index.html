@@ -216,6 +216,34 @@ footer{font-family:var(--type);font-size:15px;border-top:1px solid var(--rule);p
 .legend{margin:6px 0 0;padding-top:10px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--muted)}
 .legend b{font-family:"EB Garamond",Garamond,Georgia,serif;font-size:15px;font-weight:400;color:var(--ink)}
 .signoff{margin:2px 0 0;font-family:var(--type);font-size:15.5px;line-height:1.6}
+/* Audio taster player */
+.tp[hidden]{display:none}
+.tp{display:flex;align-items:center;gap:12px;border:1px solid var(--ink);background:var(--card);padding:10px 14px 10px 10px;margin:4px 0 2px;max-width:560px;box-sizing:border-box}
+.tp .pb{flex:none;width:38px;height:38px;border-radius:50%;border:0;background:var(--ink);color:var(--paper);display:grid;place-items:center;cursor:pointer;padding:0}
+.tp .pb svg{width:14px;height:14px;fill:currentColor}
+.tp .mid{flex:1;min-width:0}
+.tp .top{display:flex;gap:10px;font:700 10.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px}
+.tp .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tp .row{display:flex;align-items:center;gap:10px}
+.tp .row .bar{flex:1}
+.tp .tm{color:var(--muted);flex:none;font:700 10.5px var(--mono);letter-spacing:.04em;font-variant-numeric:tabular-nums}
+.tp .bar{position:relative;height:16px;cursor:pointer;display:flex;align-items:center;touch-action:none}
+.tp .bar::before{content:"";position:absolute;left:0;right:0;height:2px;background:var(--rule)}
+.tp .fill{position:absolute;left:0;height:2px;background:var(--ink);width:0}
+.tp .knob{position:absolute;width:10px;height:10px;border-radius:50%;background:var(--ink);left:0;transform:translateX(-50%);opacity:0;transition:opacity .2s}
+.tp.on .knob,.tp .bar:hover .knob{opacity:1}
+.tp .eq{flex:none;display:flex;gap:2px;align-items:flex-end;height:14px;width:14px}
+.tp .eq i{flex:1;background:var(--ink);height:3px}
+.tp.on .eq i{animation:tpeq .9s ease-in-out infinite alternate}
+.tp.on .eq i:nth-child(2){animation-delay:-.3s}.tp.on .eq i:nth-child(3){animation-delay:-.6s}
+@keyframes tpeq{0%{height:3px}100%{height:14px}}
+@media (prefers-reduced-motion:reduce){.tp.on .eq i{animation:none;height:9px}}
+.nmf-stack{display:flex;flex-direction:column;gap:34px;margin-top:10px}
+.nmf-stack .nmf-wall.solo .feat{grid-template-rows:repeat(4,auto) 1fr}
+.nmf-stack .nmf-wall.solo .feat .nmf-art{grid-row:1/span 5}
+@media (max-width:700px){.nmf-stack .nmf-wall.solo .feat{grid-template-rows:none}.nmf-stack .nmf-wall.solo .feat .nmf-art{grid-row:auto}}
+.nmf-out{margin-top:30px}
+.nmf-out .blurb{margin:0 0 12px}
 /* ---------- blog feed ---------- */
 .feed{width:100%;max-width:780px;margin:0 auto;display:flex;flex-direction:column}
 .entry{padding:46px 0 44px;border-top:1px solid var(--ink);display:flex;flex-direction:column;gap:12px}
@@ -746,19 +774,39 @@ function wireMore(art){
   const art=document.querySelector("[data-nmf]");if(!art||typeof NMF==="undefined"||typeof UPCOMING==="undefined")return;
   const p=NMF[0];if(!p||(qsPreview?dayOf(p.date)>TODAY:new Date()<berlinAt(p.date,GO_LIVE)))return;
   const list=p.picks.map(t=>UPCOMING.find(r=>r.title===t)).filter(Boolean);
-  const pad=n=>(n<10?"0":"")+n,top=p.top||6;
+  const pad=n=>(n<10?"0":"")+n,top=p.stack||p.top||6;
   const tile=(r,i)=>{const links=relLinks((r.links&&r.links.length)?r.links:[r.sp&&["SPOTIFY",r.sp]].filter(Boolean),true);
     return `<div class="nmf-t${i===0?" feat":""}"><a class="nmf-art" href="${(links[0]||[])[1]||"#"}" target="_blank" rel="noopener"><img src="${r.img}" alt="${esc(r.artist)} – ${esc(r.title)} cover" loading="lazy"><span class="nmf-no">${pad(i+1)}</span></a>
     <div class="ln"><b>${esc(r.artist)}</b> – ${esc(r.title)} <span class="lab">[${esc(r.label)}]</span></div>
     ${p.notes&&p.notes[r.title]?`<div class="nmf-note">${paras(p.notes[r.title])}</div>`:""}
+    ${p.audio&&p.audio[r.title]?`<div class="tp" data-src="${p.audio[r.title].src}" data-name="${esc(p.audio[r.title].name)}"></div>`:""}
     <div class="nmf-lk">${links.map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener">${esc(n)} ↗</a>`).join("")}</div></div>`};
   art.id=p.id;
   art.innerHTML=`<h2><a href="#${p.id}">${esc(p.title)}</a> <span class="nmf-date">· ${dayOf(p.date).toLocaleDateString("en-GB",{day:"numeric",month:"short"})}</span></h2>
     ${p.note?paras(p.note):""}
-    <div class="nmf-wall${top===1?" solo":""}">${list.slice(0,top).map(tile).join("")}</div>
+    ${p.stack?`<div class="nmf-stack">${list.slice(0,top).map((r,i)=>`<div class="nmf-wall solo">${tile(r,0).replace('<span class="nmf-no">01</span>',`<span class="nmf-no">${pad(i+1)}</span>`)}</div>`).join("")}</div>`:`<div class="nmf-wall${top===1?" solo":""}">${list.slice(0,top).map(tile).join("")}</div>`}
+    ${p.outro?`<div class="nmf-out">${paras(p.outro)}${p.sign?`<p class="signoff">${esc(p.sign).replace(/\n/g,"<br>")}</p>`:""}</div>`:""}
     ${list.length>top?`<div class="nmf-sec">ALSO OUT TODAY</div><div class="nmf-rest">${list.slice(top).map((r,i)=>tile(r,i+top)).join("")}</div>`:""}
     <div class="entry-foot"><a class="readmore" href="#upcoming" data-radar>SEE THE FULL RADAR ↑</a><a class="readmore" href="https://open.spotify.com/playlist/4XHIWAkY2OPglDJkUmSBRC" target="_blank" rel="noopener">NEW RELEASES PLAYLIST ↗</a></div>`;
   art.hidden=false;
+  // Audio tasters: one plays at a time, short fades in and out
+  const PLAY='<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.5v11l9.5-5.5z"/></svg>',PAUSE='<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2.5 1.5h3.2v11H2.5zM8.3 1.5h3.2v11H8.3z"/></svg>';
+  const fmt=s=>{s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")};const tps=[];
+  art.querySelectorAll(".tp[data-src]").forEach(el=>{el.hidden=true;fetch(el.dataset.src,{method:"HEAD"}).then(r=>{if(r.ok)el.hidden=false}).catch(()=>{});const a=new Audio();a.preload="none";a.src=el.dataset.src;const nm=el.dataset.name;
+    el.innerHTML=`<button class="pb" type="button" aria-label="Play taster: ${nm}">${PLAY}</button><div class="mid"><div class="top"><span class="nm">Taster · ${nm}</span></div><div class="row"><div class="bar" role="slider" tabindex="0" aria-label="Seek taster" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span class="fill"></span><span class="knob"></span></div><span class="tm">0:00</span></div></div><span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>`;
+    const pb=el.querySelector(".pb"),tm=el.querySelector(".tm"),bar=el.querySelector(".bar"),fill=el.querySelector(".fill"),knob=el.querySelector(".knob");
+    let ft;const fade=(to,ms,done)=>{clearInterval(ft);const from=a.volume,t0=performance.now();ft=setInterval(()=>{const k=Math.min(1,(performance.now()-t0)/ms);a.volume=from+(to-from)*k;if(k===1){clearInterval(ft);done&&done()}},30)};
+    const me={a,stop(){fade(0,250,()=>a.pause())}};tps.push(me);
+    const sync=()=>{const d=a.duration||0,k=d?a.currentTime/d*100:0;fill.style.width=k+"%";knob.style.left=k+"%";tm.textContent=fmt(a.currentTime)+(d?" / "+fmt(d):"");bar.setAttribute("aria-valuenow",Math.round(k))};
+    a.addEventListener("loadedmetadata",sync);a.addEventListener("timeupdate",()=>{sync();const left=(a.duration||0)-a.currentTime;if(left>0&&left<1.5)a.volume=Math.min(a.volume,left/1.5)});
+    a.addEventListener("play",()=>{el.classList.add("on");pb.innerHTML=PAUSE;pb.setAttribute("aria-label","Pause taster")});
+    a.addEventListener("pause",()=>{el.classList.remove("on");pb.innerHTML=PLAY;pb.setAttribute("aria-label","Play taster: "+nm)});
+    a.addEventListener("ended",()=>{a.currentTime=0;sync()});
+    pb.addEventListener("click",()=>{if(a.paused){tps.forEach(o=>{if(o!==me&&!o.a.paused)o.stop()});a.volume=0;a.play().then(()=>fade(1,400)).catch(()=>{})}else me.stop()});
+    const seek=e=>{if(!a.duration)return;const r=bar.getBoundingClientRect();a.currentTime=Math.min(1,Math.max(0,(e.clientX-r.left)/r.width))*a.duration;sync()};
+    bar.addEventListener("pointerdown",e=>{if(!a.duration){a.load();return}seek(e);bar.setPointerCapture(e.pointerId);bar.onpointermove=seek});
+    bar.addEventListener("pointerup",()=>bar.onpointermove=null);
+    bar.addEventListener("keydown",e=>{if(e.key==="ArrowRight")a.currentTime+=5;else if(e.key==="ArrowLeft")a.currentTime-=5;else return;e.preventDefault();sync()})});
   art.querySelector("[data-radar]").addEventListener("click",()=>{const tg=document.querySelector(".up-tg");if(tg&&tg.getAttribute("aria-expanded")!=="true")tg.click()});
 })();
 
