@@ -635,9 +635,11 @@ function wireMore(art){
 (function(){
   if(typeof POSTS==="undefined")return;
   const anchor=document.querySelector("[data-nmf]");
+  // New Music Friday leads on its day: posts older than the NMF date go below it
+  const nmfD=(typeof NMF!=="undefined"&&NMF[0])?NMF[0].date:"";let below=anchor;
   [...POSTS].sort((a,b)=>b.date.localeCompare(a.date)).filter(p=>!(qsPreview?dayOf(p.date)>TODAY:new Date()<berlinAt(p.date,GO_LIVE))).forEach(p=>{
   let art=document.getElementById(p.id||"techno-tuesday-holo");
-  if(!art){art=document.createElement("article");art.className="entry";art.id=p.id;anchor.before(art)}
+  if(!art){art=document.createElement("article");art.className="entry";art.id=p.id;if(nmfD&&p.date<nmfD){below.after(art);below=art}else anchor.before(art)}
   const ps=p.body.split(/\n\s*\n/),pre=p.full?p.body:ps.slice(0,2).join("\n\n"),rest=p.full?"":ps.slice(2).join("\n\n"),P=p.playlist;
   const lk=`<div class="links">${p.bc?`<a class="btn" href="${p.bc}" target="_blank" rel="noopener">LISTEN ON BANDCAMP ↗</a>`:""}${p.sp?`<a class="btn${p.bc?" ghost":""}" href="${p.sp}" target="_blank" rel="noopener">${p.bc?"SPOTIFY":"LISTEN ON SPOTIFY"} ↗</a>`:""}${p.artistSp?`<a class="btn ghost" href="${p.artistSp}" target="_blank" rel="noopener">MORE ${esc(p.artist.toUpperCase())} ↗</a>`:""}</div>`;
   art.innerHTML=`<div class="eyebrow"><b>${esc(p.kicker)}</b> · ${shortDate(p.date)}</div>
