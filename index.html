@@ -433,6 +433,8 @@ nav .links a[aria-current]{color:var(--ink);font-weight:700}
 .nmf-art{position:relative;display:block;aspect-ratio:1/1;background:#d8d0c2;border:1px solid var(--ink);overflow:hidden}
 .nmf-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease}
 .nmf-art:hover img{transform:scale(1.03)}
+.nmf-bd{position:absolute;left:9px;bottom:9px;right:9px;display:flex;flex-wrap:wrap;align-items:flex-end;gap:5px;pointer-events:none;z-index:1}
+.nmf-bd .ib{margin:0;box-shadow:0 1px 2px rgba(0,0,0,.18)}
 .nmf-no{position:absolute;top:9px;right:9px;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.07em;color:#f1ece3;background:rgba(28,27,25,.6);padding:3px 6px}
 .nmf-t .ln{font-size:15px;line-height:1.3;margin-top:3px}
 .nmf-t.feat .ln{font-size:22px;letter-spacing:-.01em}
@@ -780,7 +782,7 @@ function wireMore(art){
   const list=p.picks.map(t=>UPCOMING.find(r=>r.title===t)).filter(Boolean);
   const pad=n=>(n<10?"0":"")+n,top=p.stack||p.top||6;
   const tile=(r,i)=>{const links=relLinks((r.links&&r.links.length)?r.links:[r.sp&&["SPOTIFY",r.sp]].filter(Boolean),true);
-    return `<div class="nmf-t${i===0?" feat":""}"><a class="nmf-art" href="${(links[0]||[])[1]||"#"}" target="_blank" rel="noopener"><img src="${r.img}" alt="${esc(r.artist)} – ${esc(r.title)} cover" loading="lazy"><span class="nmf-no">${pad(i+1)}</span></a>
+    return `<div class="nmf-t${i===0?" feat":""}"><a class="nmf-art" href="${(links[0]||[])[1]||"#"}" target="_blank" rel="noopener"><img src="${r.img}" alt="${esc(r.artist)} – ${esc(r.title)} cover" loading="lazy"><span class="nmf-no">${pad(i+1)}</span>${(typeBadges(r)+ambientBadge(r))?`<span class="nmf-bd">${(typeBadges(r)+ambientBadge(r)).replace(/tabindex="0" /g,"")}</span>`:""}</a>
     <div class="ln"><b>${esc(r.artist)}</b> – ${esc(r.title)} <span class="lab">[${esc(r.label)}]</span></div>
     ${p.notes&&p.notes[r.title]?`<div class="nmf-note">${paras(p.notes[r.title])}</div>`:""}
     ${p.audio&&p.audio[r.title]?`<div class="tp" data-src="${p.audio[r.title].src}" data-name="${esc(p.audio[r.title].name)}"></div>`:""}
