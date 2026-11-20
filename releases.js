@@ -123,7 +123,7 @@ const UPCOMING=[
  // noArtist:true = show only the title on the Radar (when the title already names the artist)
  // taster:"YouTubeID" = Leefer's taster video for the release (▶ TASTER pill on the Radar row)
  {mention:true,title:"Greetings Earthlings",artist:"Rebūke",label:"ERA",type:"SINGLE",releaseDate:"2026-11-20",dateAdded:"2026-11-11",taster:"cxxYFC4CyeQ",
-  img:"https://i.ytimg.com/vi/cxxYFC4CyeQ/hqdefault.jpg",
+  img:"https://i.scdn.co/image/ab67616d0000b2734cc438bc6ceeb7f7a8a423f4",
   links:[["SPOTIFY","https://open.spotify.com/album/7oevdOW07Rf6vC7jCGeuGL"]]},
  {mention:true,techno:true,rank:6,title:"Rings of Light",artist:"Sven Väth & Roman Flügel",label:"Time Warp Records",type:"SINGLE",releaseDate:"2026-11-20",dateAdded:"2026-11-09",
   img:"https://f4.bcbits.com/img/a2728950555_10.jpg",
