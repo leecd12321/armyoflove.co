@@ -250,6 +250,16 @@ const UPCOMING=[
 // New Music Friday posts (cover wall at the top of the homepage). picks = release titles from UPCOMING, in order;
 // the first is the big tile, the first 6 are the big covers, the rest go under ALSO OUT TODAY.
 const NMF=[
+ {date:"2026-11-20",id:"new-music-friday-nov-20",title:"New Music Friday",stack:2,
+  note:"A beautiful Friday of releases, once again.\n\nNew Acid Pauli album, an album from Donato Dozzy, dope EP from Sam Goku, a compilation of Edward productions and edits, a project from my new favorite label 'Smallville', and more...\n\nThis morning I connected most deeply with the Sam Goku EP and the Billus project with Smallville.",
+  notes:{"Explorations 04":"This is my favorite project after my morning walk + basketball shoot around. A nice range of sounds, x-plor14 (gardens) was my top track on first listen. Have a listen to the taster here.",
+         "Tumbling Cycles":"Smallville has become one of my favorite new label discoveries. First of all, the artwork is insane. I instantly felt connected with the vibration of the label through the artwork, I want to give a shout out to that. Secondly, the music is tasty delicious and smooth. Have a little taster listen here and dive into the full project if you feel it."},
+  audio:{"Explorations 04":{src:"audio/sam-goku-x-plor14.mp3",name:"x-plor14 (gardens)"},
+         "Tumbling Cycles":{src:"audio/billus-its-floating.mp3",name:"It's Floating"}},
+  outro:"It will take me a few days to go through all the new releases. I'll be posting updates here throughout the week with tracks and projects that move me.\n\nBig thank you to all the producers and record labels, we love the music you're feeding us – it changes our lives.",
+  sign:"with love,\nLee",
+  picks:["Explorations 04","Tumbling Cycles","Mystic Meltdown","Astro","Running Back Mastermix: Edward – Edits","Rings of Light",
+         "The Hill EP","Rare Ocassion","Rave Prescriptions","DJ-Kicks: Dam Swindle","Pulse Works","Greetings Earthlings","L'essentiel"]},
  {date:"2026-11-13",id:"new-music-friday-nov-13",title:"New Music Friday",top:1,
   notes:{"Anjanas 20th Anniversary Reprise":"I just took this album for a morning walk and I absolutely love it.\n\nThis is the 20-year anniversary of Pablo's debut album. He went back, revisited each track and made a new version for the 20th anniversary. What a cool concept.\n\n5/5 I recommend you sink in and give this album a listen.\n\nThis plays so smoothly from start to finish, the arrangement feels very intentional... Bravo Pablo."},
   picks:["Anjanas 20th Anniversary Reprise","Eyes Wide Open EP","A Tiger Never Loses Its Stripes (Part 3)","A Window In","ARP","My Own Shadow",
