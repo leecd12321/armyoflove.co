@@ -251,7 +251,7 @@ const UPCOMING=[
 // the first is the big tile, the first 6 are the big covers, the rest go under ALSO OUT TODAY.
 const NMF=[
  {date:"2026-11-20",id:"new-music-friday-nov-20",title:"New Music Friday",stack:2,
-  note:"A beautiful Friday of releases, once again.\n\nNew Acid Pauli album, an album from Donato Dozzy, dope EP from Sam Goku, a compilation of Edward productions and edits, a project from my new favorite label 'Smallville', and more...\n\nThis morning I connected most deeply with the Sam Goku EP and the Billus project with Smallville.",
+  note:"A beautiful Friday of releases, once again.\n\nA new Acid Pauli album, an album from Donato Dozzy, dope EP from Sam Goku, a compilation of Edward productions and edits, a project from my new favorite label 'Smallville', and more...\n\nThis morning I connected most deeply with the Sam Goku EP and the Billus project with Smallville. Here's a little taster of each.",
   notes:{"Explorations 04":"This is my favorite project after my morning walk + basketball shoot around. A nice range of sounds, x-plor14 (gardens) was my top track on first listen. Have a listen to the taster here.",
          "Tumbling Cycles":"Smallville has become one of my favorite new label discoveries. First of all, the artwork is insane. I instantly felt connected with the vibration of the label through the artwork, I want to give a shout out to that. Secondly, the music is tasty delicious and smooth. Have a little taster listen here and dive into the full project if you feel it."},
   audio:{"Explorations 04":{src:"audio/sam-goku-x-plor14.mp3",name:"x-plor14 (gardens)"},
