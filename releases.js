@@ -290,6 +290,10 @@ const NMF=[
 // Daily posts (one track or release, scheduled by date). The newest post dated today or earlier
 // sits at the top of the homepage. "plays" = how many times Leefer has gone back to it (4+ badge).
 const POSTS=[
+  {id:"pablo-bolivar-wax-environnement",date:"2026-11-23",kicker:"DAILY DOSE",full:true,title:"Wax Environnement (Reprise)",artist:"Pablo Bolivar",label:"Seven Villas Music",video:"Uznl3NUrD68",
+   img:"https://geo-media.beatport.com/image_size/500x500/a8e1e805-26c2-4c9f-8b2e-c03b09f661b8.jpg",
+   bc:"https://sevenvillas.bandcamp.com/album/anjanas-20th-anniversary-reprise",sp:"https://open.spotify.com/album/3gPffH35DKJQbm7POGo1tZ",
+   body:"Here's a taster of Pablo Bolivar's Wax Environnement (Reprise), coming off his recent release, the Anjanas 20th anniversary album.\n\nI believe this album is best absorbed in its entirety. Start it on track 1, let it rock, no skipping.\n\nIt's a beautiful and deep ride with lots of ebbs and flows."},
   {id:"be-svendsen-the-open",date:"2026-11-19",kicker:"ON MY LIST",full:true,sign:"Lee",linksFirst:true,headline:"I totally missed this release",sub:"Be Svendsen & Kamilla Kovacs – The Open",title:"The Open",artist:"Be Svendsen & Kamilla Kovacs",
    img:"https://f4.bcbits.com/img/a3650411140_10.jpg",
    sp:"https://open.spotify.com/album/4yDb0S3aI4bOkqZyhy0o5y",
