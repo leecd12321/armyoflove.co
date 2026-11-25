@@ -104,7 +104,7 @@ const UPCOMING=[
   links:[["CRATES","https://crates.co/release/constant-output-ep/7584917"]]},
  {mention:true,rank:1,title:"Red Box",artist:"Red Axes",label:"20/20 Vision Recordings",type:"EP",count:4,releaseDate:"2026-11-27",dateAdded:"2026-11-14",
   img:"https://geo-media.beatport.com/image_size/500x500/6420e205-ed61-4944-8f1d-a69cc6489e45.jpg",
-  links:[["CRATES","https://crates.co/release/red-box/7622737"]]},
+  links:[["CRATES","https://crates.co/release/red-box/7622737"],["BANDCAMP","https://2020vision.bandcamp.com/album/red-box"]]},
  {mention:true,title:"Blisterknistern",artist:"Hal & Perm",label:"KANN",type:"EP",count:5,releaseDate:"2026-11-27",dateAdded:"2026-11-14",
   img:"https://geo-media.beatport.com/image_size/500x500/500e97dd-7109-4144-8039-2297ca3dc9f1.jpg",
   links:[["CRATES","https://crates.co/release/blisterknistern/7658069"]]},
