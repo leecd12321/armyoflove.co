@@ -292,7 +292,14 @@ const NMF=[
 
 // Daily posts (one track or release, scheduled by date). The newest post dated today or earlier
 // sits at the top of the homepage. "plays" = how many times Leefer has gone back to it (4+ badge).
+// Front-door stage: shows this post full-screen on entry, then "ENTER ARMY OF LOVE". Delete STAGE to turn it off.
+const STAGE={post:"kali-malone-fastened-maze",kicker:"THE AMBIENT STAGE",bg:"https://images.pexels.com/photos/8937434/pexels-photo-8937434.jpeg?auto=compress&cs=tinysrgb&w=1600",credit:["Photo · Vera Silkina / Pexels","https://www.pexels.com/photo/foggy-forest-8937434/"]};
 const POSTS=[
+  {id:"kali-malone-fastened-maze",date:"2026-11-25",kicker:"TRACK OF THE DAY",full:true,noSign:true,forest:"https://images.pexels.com/photos/8937434/pexels-photo-8937434.jpeg?auto=compress&cs=tinysrgb&w=1600",ambient:true,title:"Fastened Maze",artist:"Kali Malone",label:"Ideologic Organ",bcEmbed:"track=127421812",
+   img:"https://f4.bcbits.com/img/a0449736864_10.jpg",
+   bc:"https://kalimalone.bandcamp.com/track/fastened-maze",
+   links:[["KALI'S INSTAGRAM","https://www.instagram.com/hotscorpions/"],["KALI ON BANDCAMP","https://kalimalone.bandcamp.com/"],["ALL LIFE LONG ON BANDCAMP","https://kalimalone.bandcamp.com/album/all-life-long"]],
+   body:"This song brought me to tears this morning.\n\nBeyond comprehension of the mind, it touched my heart in a profound way.\n\nAn instant portal to feel grief and let it flow through me. It didn't help me think of my mom, it allowed me to feel how much I miss her.\n\nThis isn't possible if I bury my face into the screens upon waking.\n\nMorning walks with beautiful, deep emotional music is a portal within. Thank you Kali."},
   {id:"pablo-bolivar-wax-environnement",date:"2026-11-23",kicker:"DAILY DOSE",full:true,title:"Wax Environnement (Reprise)",artist:"Pablo Bolivar",label:"Seven Villas Music",video:"Uznl3NUrD68",
    img:"https://geo-media.beatport.com/image_size/500x500/a8e1e805-26c2-4c9f-8b2e-c03b09f661b8.jpg",
    bc:"https://sevenvillas.bandcamp.com/album/anjanas-20th-anniversary-reprise",sp:"https://open.spotify.com/album/3gPffH35DKJQbm7POGo1tZ",
