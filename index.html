@@ -188,6 +188,31 @@ footer{font-family:var(--type);font-size:15px;border-top:1px solid var(--rule);p
 @media (prefers-reduced-motion:reduce){.remind-panel,.r-card,.r-opt{transition:none}}
 .soon .vid{overflow:hidden;min-height:0}
 .art-only{display:block;max-width:440px;border:1px solid var(--ink);margin:4px 0 6px}.art-only img{display:block;width:100%;height:auto}
+.bc-embed{display:block;width:100%;max-width:350px;height:470px;border:1px solid var(--ink);margin:4px 0 6px}
+.bc-embed.slim{max-width:420px;height:42px;border:1px solid rgba(30,37,35,.25);background:#e6ebec}
+/* forest-post: a post that keeps the Ambient Stage look inside the feed, full width */
+.entry.forest-post{position:relative;isolation:isolate;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:70px calc(50vw - 50%) 90px;color:#1e2523;border:0}
+.entry.forest-post::before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(rgba(228,233,235,.72),rgba(228,233,235,.72)),#d9e0e2 var(--fbg) center 30%/cover no-repeat}
+.entry.forest-post+.entry{border-top:0}
+.entry.forest-post h2{font-family:"EB Garamond",Georgia,serif;font-weight:400;letter-spacing:-.01em}
+.entry.forest-post h2 a{color:#1e2523}
+.entry.forest-post .eyebrow,.entry.forest-post .by{color:#56615d}
+.entry.forest-post p:not(.by):not(.trackline){color:#111614;-webkit-text-stroke:.4px #111614}
+.entry.forest-post .links .btn{background:#1e2523;border-color:#1e2523;color:#eef1f1}
+.entry.forest-post .links .btn.ghost{background:rgba(240,244,245,.5);color:#1e2523;border-color:rgba(30,37,35,.35)}
+/* flow into the next post (FOREST_FLOW): fade | mist | torn | treeline */
+.flow-fade::before{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 60px,#000 calc(100% - 180px),transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 60px,#000 calc(100% - 180px),transparent 100%)}
+.flow-mist::after{content:"";position:absolute;left:0;right:0;bottom:-60px;height:260px;z-index:-1;pointer-events:none;
+  background:radial-gradient(40% 60% at 20% 60%,var(--paper),transparent 70%),radial-gradient(35% 55% at 60% 50%,var(--paper),transparent 70%),radial-gradient(40% 60% at 90% 65%,var(--paper),transparent 70%),linear-gradient(to bottom,transparent,var(--paper) 75%);
+  filter:blur(14px)}
+.flow-mist::before{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 50px,#000 calc(100% - 120px),transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 50px,#000 calc(100% - 120px),transparent 100%)}
+.flow-torn::before{-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1200V22L1180 30 1150 19 1122 33 1090 21 1062 35 1031 18 1002 29 970 16 941 34 910 23 880 36 851 20 820 31 792 17 761 33 730 22 702 37 671 19 640 30 611 15 580 32 552 24 521 36 490 18 462 29 431 16 400 34 371 21 340 35 311 19 280 31 251 17 220 33 191 22 160 36 131 20 100 30 71 16 40 33 18 23 0 31Z' fill='%23000'/%3E%3C/svg%3E") bottom/100% 34px no-repeat,linear-gradient(#000,#000) top/100% calc(100% - 33px) no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40' preserveAspectRatio='none'%3E%3Cpath d='M0 0H1200V22L1180 30 1150 19 1122 33 1090 21 1062 35 1031 18 1002 29 970 16 941 34 910 23 880 36 851 20 820 31 792 17 761 33 730 22 702 37 671 19 640 30 611 15 580 32 552 24 521 36 490 18 462 29 431 16 400 34 371 21 340 35 311 19 280 31 251 17 220 33 191 22 160 36 131 20 100 30 71 16 40 33 18 23 0 31Z' fill='%23000'/%3E%3C/svg%3E") bottom/100% 34px no-repeat,linear-gradient(#000,#000) top/100% calc(100% - 33px) no-repeat}
+.flow-treeline::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:130px;z-index:-1;pointer-events:none;background:var(--paper);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 130' preserveAspectRatio='none'%3E%3Cpath d='M0 130V70L18 52 30 66 44 30 58 62 70 48 86 74 100 40 112 60 126 22 140 58 152 46 168 72 182 36 196 64 210 50 226 78 240 28 254 62 268 44 284 70 298 34 312 60 326 48 342 76 356 20 370 58 384 44 400 72 414 38 428 64 442 50 458 80 472 30 486 62 500 46 516 74 530 26 544 60 558 42 574 70 588 36 602 66 616 50 632 78 646 24 660 58 674 44 690 72 704 32 718 64 732 48 748 76 762 18 776 56 790 42 806 70 820 34 834 62 848 46 864 74 878 28 892 60 906 44 922 72 936 38 950 64 964 50 980 78 994 22 1008 58 1022 42 1038 70 1052 30 1066 62 1080 46 1096 76 1110 26 1124 60 1138 44 1154 72 1168 36 1182 66 1196 50 1212 78 1226 20 1240 56 1254 42 1270 70 1284 32 1298 62 1312 46 1328 74 1342 28 1356 60 1370 44 1386 72 1400 38 1414 64 1428 52 1440 66V130Z' fill='%23000'/%3E%3C/svg%3E") bottom/100% 100% no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 130' preserveAspectRatio='none'%3E%3Cpath d='M0 130V70L18 52 30 66 44 30 58 62 70 48 86 74 100 40 112 60 126 22 140 58 152 46 168 72 182 36 196 64 210 50 226 78 240 28 254 62 268 44 284 70 298 34 312 60 326 48 342 76 356 20 370 58 384 44 400 72 414 38 428 64 442 50 458 80 472 30 486 62 500 46 516 74 530 26 544 60 558 42 574 70 588 36 602 66 616 50 632 78 646 24 660 58 674 44 690 72 704 32 718 64 732 48 748 76 762 18 776 56 790 42 806 70 820 34 834 62 848 46 864 74 878 28 892 60 906 44 922 72 936 38 950 64 964 50 980 78 994 22 1008 58 1022 42 1038 70 1052 30 1066 62 1080 46 1096 76 1110 26 1124 60 1138 44 1154 72 1168 36 1182 66 1196 50 1212 78 1226 20 1240 56 1254 42 1270 70 1284 32 1298 62 1312 46 1328 74 1342 28 1356 60 1370 44 1386 72 1400 38 1414 64 1428 52 1440 66V130Z' fill='%23000'/%3E%3C/svg%3E") bottom/100% 100% no-repeat}
+.flow-treeline::before{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 50px);mask-image:linear-gradient(to bottom,transparent 0,#000 50px)}
+@media (max-width:700px){.entry.forest-post{padding:50px 16px 80px}}
 .vid-poster{position:absolute;inset:0;overflow:hidden;background:#111;pointer-events:none;transition:opacity .4s}
 .vid-poster .bg{position:absolute;inset:-30px;background-size:cover;background-position:center;filter:blur(24px) brightness(.55)}
 .vid-poster img{position:absolute;top:0;left:50%;height:100%;width:auto;aspect-ratio:1/1;transform:translateX(-50%);object-fit:cover;display:block}
@@ -469,6 +494,50 @@ nav .links a[aria-current]{color:var(--ink);font-weight:700}
 .peek .lidc{animation:blink 4.5s infinite;transform-origin:15px 9px}@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.08)}}
 @media (max-width:560px){.peek{gap:14px;padding:14px}.peek .hole{width:70px;height:70px}.peek .t{font-size:16px}}
 @media (prefers-reduced-motion:reduce){.peek .lidc{animation:none}}
+
+/* ---------- Ambient stage: misty pine forest front door (STAGE in releases.js) ---------- */
+html.on-stage,html.on-stage body{overflow:hidden}
+.stage{--fog:#dfe5e7;--ink2:#1e2523;--mute2:#56615d;position:fixed;inset:0;z-index:9999;overflow-y:auto;color:var(--ink2);background:var(--fog);color-scheme:light;transition:opacity 1.6s ease,filter 1.6s ease}
+.stage.leaving{opacity:0;filter:blur(6px);pointer-events:none}
+.stage .sky{position:fixed;inset:-2%;background:#d9e0e2 center 28%/cover no-repeat;animation:breathe 40s ease-in-out infinite alternate}
+@keyframes breathe{from{transform:scale(1)}to{transform:scale(1.05)}}
+.stage .credit{position:fixed;right:12px;bottom:10px;font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;color:rgba(240,244,245,.75);text-decoration:none}
+.stage .credit:hover{color:#fff}
+.stage .forest{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}
+.stage .fog{position:fixed;left:-50%;width:200%;height:55%;pointer-events:none;
+  background:radial-gradient(38% 50% at 20% 50%,rgba(240,244,245,.75),transparent 70%),radial-gradient(34% 45% at 58% 42%,rgba(240,244,245,.6),transparent 70%),radial-gradient(30% 42% at 86% 58%,rgba(240,244,245,.7),transparent 70%);
+  filter:blur(22px);animation:fogdrift 80s linear infinite alternate}
+.stage .fog.f1{top:8%;opacity:.55}.stage .fog.f2{top:40%;opacity:.7;animation-duration:110s;animation-direction:alternate-reverse}.stage .fog.f3{bottom:-10%;height:50%;opacity:.55;animation-duration:140s}
+@keyframes fogdrift{from{transform:translateX(-10%)}to{transform:translateX(10%)}}
+.stage .veil{position:fixed;inset:0;pointer-events:none;background:linear-gradient(90deg,transparent 0%,rgba(226,232,234,.55) 22%,rgba(229,234,236,.82) 50%,rgba(226,232,234,.55) 78%,transparent 100%)}
+@media (max-width:700px){.stage .veil{background:rgba(228,233,235,.72)}.stage .credit{bottom:auto;top:10px;color:rgba(30,37,35,.55)}}
+.stage .grain{position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;opacity:.06;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain 1.2s steps(4) infinite}
+@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}}
+.stage .inner{position:relative;max-width:560px;margin:0 auto;padding:9vh 22px 22vh;opacity:0;animation:stagein 2.4s ease .3s forwards}
+@keyframes stagein{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.stage .k{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--mute2)}
+.stage h1{margin:14px 0 4px;font-family:"EB Garamond",Georgia,serif;font-weight:400;font-size:clamp(30px,6vw,44px);line-height:1.1;color:var(--ink2)}
+.stage .by{margin:0 0 22px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--mute2)}
+.stage .player{display:block;background:#e6ebec;width:100%;max-width:420px;height:42px;border:1px solid rgba(30,37,35,.25)}
+.stage .note{margin:30px 0 0;font-family:var(--type);font-size:16.5px;line-height:1.75;color:#111614;-webkit-text-stroke:.45px #111614;text-shadow:0 0 1px rgba(17,22,20,.25)}
+.stage .note p{margin:0 0 14px}
+.stage .note+.btns{margin-top:28px}
+.stage .sign{font-family:var(--type);font-size:15px;color:#3d4744;-webkit-text-stroke:.3px #3d4744;margin:6px 0 30px}
+.stage .enter{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:#eef1f1;background:var(--ink2);border:1px solid var(--ink2);padding:13px 18px;cursor:pointer;transition:background .4s,border-color .4s,color .4s}
+.stage .enter:hover,.stage .enter:focus-visible{background:#38433f;border-color:#38433f}
+.stage .btns{display:flex;flex-wrap:wrap;gap:10px}.stage a.enter{text-decoration:none;display:inline-block}
+.stage .enter.ghost{font-size:10.5px;padding:10px 13px;background:rgba(240,244,245,.45);border-color:rgba(30,37,35,.35);color:var(--ink2)}
+.stage .enter.ghost:hover,.stage .enter.ghost:focus-visible{background:rgba(240,244,245,.85);border-color:var(--ink2)}
+.stage .go-row{margin-top:26px}
+.stage .dockbar{display:none}
+.stage.docked{inset:auto 16px 16px auto;width:350px;max-width:calc(100vw - 32px);height:auto;overflow:hidden;background:#e6ebec;border:1px solid rgba(30,37,35,.3);box-shadow:0 14px 40px rgba(0,0,0,.18);opacity:1;filter:none}
+.stage.docked .sky,.stage.docked .credit,.stage.docked .fog,.stage.docked .veil,.stage.docked .grain,.stage.docked .inner>:not(.clip):not(.dockbar){display:none}
+.stage.docked .inner{padding:0;animation:none;opacity:1;transform:none}
+.stage.docked .player{max-width:none;border:0}
+.stage.docked .dockbar{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 10px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:var(--mute2);border-bottom:1px solid rgba(30,37,35,.15)}
+.stage .dockbar button{font:inherit;letter-spacing:inherit;color:var(--ink2);background:none;border:0;cursor:pointer;padding:2px 4px}
+@media (prefers-reduced-motion:reduce){.stage .fog,.stage .grain,.stage .sky{animation:none}.stage .inner{animation:none;opacity:1}.stage{transition:none}}
 </style>
 </head>
 <body>
@@ -645,15 +714,15 @@ function wireMore(art){
   let art=document.getElementById(p.id||"techno-tuesday-holo");
   if(!art){art=document.createElement("article");art.className="entry";art.id=p.id;if(nmfD&&p.date<nmfD){below.after(art);below=art}else anchor.before(art)}
   const ps=p.body.split(/\n\s*\n/),pre=p.full?p.body:ps.slice(0,2).join("\n\n"),rest=p.full?"":ps.slice(2).join("\n\n"),P=p.playlist;
-  const lk=`<div class="links">${p.bc?`<a class="btn" href="${p.bc}" target="_blank" rel="noopener">LISTEN ON BANDCAMP ↗</a>`:""}${p.sp?`<a class="btn${p.bc?" ghost":""}" href="${p.sp}" target="_blank" rel="noopener">${p.bc?"SPOTIFY":"LISTEN ON SPOTIFY"} ↗</a>`:""}${p.artistSp?`<a class="btn ghost" href="${p.artistSp}" target="_blank" rel="noopener">MORE ${esc(p.artist.toUpperCase())} ↗</a>`:""}</div>`;
+  const lk=p.links?`<div class="links">${p.links.map(([n,u],i)=>`<a class="btn${i?" ghost":""}" href="${u}" target="_blank" rel="noopener">${esc(n)} ↗</a>`).join("")}</div>`:`<div class="links">${p.bc?`<a class="btn" href="${p.bc}" target="_blank" rel="noopener">LISTEN ON BANDCAMP ↗</a>`:""}${p.sp?`<a class="btn${p.bc?" ghost":""}" href="${p.sp}" target="_blank" rel="noopener">${p.bc?"SPOTIFY":"LISTEN ON SPOTIFY"} ↗</a>`:""}${p.artistSp?`<a class="btn ghost" href="${p.artistSp}" target="_blank" rel="noopener">MORE ${esc(p.artist.toUpperCase())} ↗</a>`:""}</div>`;
   art.innerHTML=`<div class="eyebrow"><b>${esc(p.kicker)}</b> · ${shortDate(p.date)}</div>
     <div class="trow"><h2><a href="#${art.id}" data-open>${esc(p.headline||`${p.artist} – ${p.title}`)}</a></h2>${ambientBadge(p)}${p.plays>=4?`<span class="plays" title="Listened ${p.plays} times and counting"><span class="tk"><i>✦</i>4 OR MORE</span><span class="st"><b>${p.plays}</b><small>LISTENS</small></span></span>`:""}</div>
     <p class="by">${esc(p.sub||p.label||"")}</p>
-    <div class="media">${p.video?videoBox(p.img,p.imgWide):`<a class="art-only" href="${p.sp||p.bc||"#"}" target="_blank" rel="noopener"><img src="${p.img}" alt="${esc(p.artist)} – ${esc(p.title)} artwork"></a>`}</div>
+    <div class="media">${p.video?videoBox(p.img,p.imgWide):p.bcEmbed?`<iframe class="bc-embed${p.forest?" slim":""}" src="https://bandcamp.com/EmbeddedPlayer/${p.bcEmbed}${p.forest?"/size=small/bgcol=e6ebec/linkcol=2c3532/transparent=true/":"/size=large/bgcol=faf7f1/linkcol=1c1b19/tracklist=false/transparent=true/"}" title="${esc(p.artist)} – ${esc(p.title)} on Bandcamp" seamless loading="lazy"></iframe>`:`<a class="art-only" href="${p.sp||p.bc||"#"}" target="_blank" rel="noopener"><img src="${p.img}" alt="${esc(p.artist)} – ${esc(p.title)} artwork"></a>`}</div>
     ${p.video?"":"<!--"}<p class="trackline"><span class="tid">TRACK ID:</span> <b>${esc(p.artist)} – ${esc(p.title)}</b>${p.label?` [${esc(p.label)}]`:""}</p>${p.video?"":"-->"}
     ${paras(pre)}
     ${p.funfact&&!p.linksFirst?`<aside class="funfact"><p>${p.funfact}</p></aside>`:""}
-    ${p.full?`${p.linksFirst?`${lk}<p class="signoff">Sending you love,<br>${esc(p.sign||"Leefer")}</p>${p.funfact?`<aside class="funfact"><p>${p.funfact}</p></aside>`:""}`:`<p class="signoff">Sending you love,<br>${esc(p.sign||"Leefer")}</p>${lk}`}${p.peek?`<aside class="peek"><div class="hole"><img src="${p.peek.img}" alt="" loading="lazy"></div><div><div class="k"><svg viewBox="0 0 30 18" aria-hidden="true"><g class="lidc"><path class="lid" d="M1.5 9C5.5 2.5 24.5 2.5 28.5 9C24.5 15.5 5.5 15.5 1.5 9Z"/><circle class="pupil" cx="15" cy="9" r="4"/></g></svg>${esc(p.peek.kicker)}</div><div class="t">${esc(p.peek.title)}</div><div class="d">${esc(p.peek.line)} <a href="${p.peek.link[1]}"${p.peek.link[1][0]==="#"?"":` target="_blank" rel="noopener"`}>${esc(p.peek.link[0])}${p.peek.link[1][0]==="#"?"":" ↗"}</a></div></div></aside>`:""}`:`<div class="more-body" hidden>
+    ${p.full?`${p.linksFirst?`${lk}${p.noSign?"":`<p class="signoff">Sending you love,<br>${esc(p.sign||"Leefer")}</p>`}${p.funfact?`<aside class="funfact"><p>${p.funfact}</p></aside>`:""}`:`${p.noSign?"":`<p class="signoff">Sending you love,<br>${esc(p.sign||"Leefer")}</p>`}${lk}`}${p.peek?`<aside class="peek"><div class="hole"><img src="${p.peek.img}" alt="" loading="lazy"></div><div><div class="k"><svg viewBox="0 0 30 18" aria-hidden="true"><g class="lidc"><path class="lid" d="M1.5 9C5.5 2.5 24.5 2.5 28.5 9C24.5 15.5 5.5 15.5 1.5 9Z"/><circle class="pupil" cx="15" cy="9" r="4"/></g></svg>${esc(p.peek.kicker)}</div><div class="t">${esc(p.peek.title)}</div><div class="d">${esc(p.peek.line)} <a href="${p.peek.link[1]}"${p.peek.link[1][0]==="#"?"":` target="_blank" rel="noopener"`}>${esc(p.peek.link[0])}${p.peek.link[1][0]==="#"?"":" ↗"}</a></div></div></aside>`:""}`:`<div class="more-body" hidden>
       ${paras(rest)}
       <p class="signoff">Sending you love,<br>${esc(p.sign||"Leefer")}</p>
       ${lk}
@@ -663,6 +732,7 @@ function wireMore(art){
       ${p.plays>=4?`<p class="legend"><b>4 or more</b> &nbsp;Tracks I've gone back to four or more times. The number is how many listens so far.</p>`:""}
     </div>
     <div class="entry-foot"><button class="readmore" type="button" data-more-toggle>READ MORE ↓</button>${P?`<a class="quiet" href="${P.url}" target="_blank" rel="noopener">${esc(P.title)} playlist ↗</a>`:""}</div>`}`;
+  if(p.forest){const fl=(new URLSearchParams(location.search).get("flow"))||(typeof FOREST_FLOW!=="undefined"?FOREST_FLOW:"treeline");art.classList.add("forest-post","flow-"+fl);art.style.setProperty("--fbg",`url("${p.forest}")`)}
   art.hidden=false;if(p.video)mountVideo(art.querySelector(".vid"),p.video);if(!p.full)wireMore(art);
   const ff=art.querySelector(".funfact");if(ff){if(!("IntersectionObserver" in window))ff.classList.add("pop");else{const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("pop");io.unobserve(e.target)}}),{threshold:.6});io.observe(ff)}}
   });
@@ -891,6 +961,37 @@ function wireMore(art){
   const s=art.querySelector(".strip");
   if(s&&typeof SETS!=="undefined")s.innerHTML=SETS.albums.concat(SETS.other).slice(0,10).map(r=>`<img src="${r.img}" alt="" loading="lazy">`).join("");
   wireMore(art);
+})();
+</script>
+
+<!-- ---------- Ambient stage (front door). Turn off: remove STAGE from releases.js ---------- -->
+<script>
+(function(){
+  if(typeof STAGE==="undefined"||!STAGE||typeof POSTS==="undefined")return;
+  const p=POSTS.find(x=>x.id===STAGE.post);if(!p)return;
+  if(/[?&]enter\b/.test(location.search)||location.hash)return; // deep links skip the stage
+  const e=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const d=document.createElement("div");d.className="stage";d.setAttribute("role","dialog");d.setAttribute("aria-label","The Ambient Stage");
+  d.innerHTML=`<div class="sky"${STAGE.bg?` style="background-image:url(${STAGE.bg})"`:""}></div><div class="fog f1"></div><div class="fog f2"></div><div class="fog f3"></div><div class="veil"></div><div class="grain"></div>${STAGE.credit?`<a class="credit" href="${STAGE.credit[1]}" target="_blank" rel="noopener">${e(STAGE.credit[0])}</a>`:""}
+  <div class="inner">
+    <div class="k">${e(STAGE.kicker||"THE AMBIENT STAGE")}</div>
+    <h1>${e(p.artist)} – ${e(p.title)}</h1>
+    <p class="by">${e(p.label||"")}</p>
+    <div class="dockbar"><button type="button" class="back">✦ BACK TO THE FOREST ↑</button><button type="button" class="close" aria-label="Stop and close the player">✕</button></div>
+    ${p.bcEmbed?`<div class="clip"><iframe class="player" src="https://bandcamp.com/EmbeddedPlayer/${p.bcEmbed}/size=small/bgcol=e6ebec/linkcol=2c3532/transparent=true/" title="${e(p.artist)} – ${e(p.title)} on Bandcamp" seamless></iframe></div>`:""}
+    <div class="note">${p.body.split(/\n\s*\n/).map(t=>`<p>${e(t)}</p>`).join("")}</div>
+    ${p.noSign?"":`<p class="sign">Sending you love,<br>${e(p.sign||"Leefer")}</p>`}
+    ${(p.links||(p.bc?[["VISIT BANDCAMP",p.bc]]:[])).length?`<div class="btns">${(p.links||[["VISIT BANDCAMP",p.bc]]).map(([n,u])=>`<a class="enter ghost" href="${u}" target="_blank" rel="noopener">${e(n)} ↗</a>`).join("")}</div>`:""}
+    <div class="btns go-row"><button class="enter go" type="button">ENTER ARMY OF LOVE →</button></div>
+  </div>`;
+  document.documentElement.classList.add("on-stage");document.body.appendChild(d);
+  // Enter: the forest fades, the Bandcamp player stays mounted (so the music keeps playing) and docks in the corner
+  const go=()=>{d.classList.add("leaving");document.documentElement.classList.remove("on-stage");
+    setTimeout(()=>{d.classList.add("docked");d.scrollTop=0;d.classList.remove("leaving")},1600)};
+  d.querySelector(".enter.go").addEventListener("click",go);
+  d.querySelector(".back").addEventListener("click",()=>{d.classList.remove("docked");document.documentElement.classList.add("on-stage")});
+  d.querySelector(".close").addEventListener("click",()=>{d.classList.add("leaving");setTimeout(()=>d.remove(),1600)});
+  d.querySelector(".enter.go").focus({preventScroll:true});
 })();
 </script>
 </body>
