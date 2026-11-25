@@ -302,7 +302,7 @@ const NMF=[
 // Daily posts (one track or release, scheduled by date). The newest post dated today or earlier
 // sits at the top of the homepage. "plays" = how many times Leefer has gone back to it (4+ badge).
 // Front-door stage: shows this post full-screen on entry, then "ENTER ARMY OF LOVE". Delete STAGE to turn it off.
-const STAGE={post:"kali-malone-fastened-maze",kicker:"THE AMBIENT STAGE",bg:"https://images.pexels.com/photos/8937434/pexels-photo-8937434.jpeg?auto=compress&cs=tinysrgb&w=1600",credit:["Photo · Vera Silkina / Pexels","https://www.pexels.com/photo/foggy-forest-8937434/"]};
+const STAGE={post:"kali-malone-fastened-maze",kicker:"The Ambient Stage",logo:"ambient-stage-logo.webp",bg:"https://images.pexels.com/photos/8937434/pexels-photo-8937434.jpeg?auto=compress&cs=tinysrgb&w=1600",credit:["Photo · Vera Silkina / Pexels","https://www.pexels.com/photo/foggy-forest-8937434/"]};
 const POSTS=[
   {id:"kali-malone-fastened-maze",date:"2026-11-25",kicker:"TRACK OF THE DAY",full:true,noSign:true,forest:"https://images.pexels.com/photos/8937434/pexels-photo-8937434.jpeg?auto=compress&cs=tinysrgb&w=1600",ambient:true,title:"Fastened Maze",artist:"Kali Malone",label:"Ideologic Organ",bcEmbed:"track=127421812",
    img:"https://f4.bcbits.com/img/a0449736864_10.jpg",
