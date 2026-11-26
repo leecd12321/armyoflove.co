@@ -808,6 +808,8 @@ function wireMore(art){
   box.hidden=false;
   const tg=box.querySelector(".up-tg"),ul=box.querySelector(".up-list"),ar=tg.querySelector(".arrow");
   tg.addEventListener("click",()=>{const o=ul.hidden;ul.hidden=!o;tg.setAttribute("aria-expanded",o);ar.textContent=o?"CLOSE ↑":"SEE ALL ↓"});
+  // armyoflove.co/radar (or #radar): open the Radar and scroll to it
+  if(/^\/radar\/?$/.test(location.pathname)||location.hash==="#radar"){ul.hidden=false;tg.setAttribute("aria-expanded",true);ar.textContent="CLOSE ↑";setTimeout(()=>box.scrollIntoView({block:"start"}),80)}
   box.querySelectorAll("[data-t]").forEach(b=>b.addEventListener("click",()=>{box.querySelectorAll("[data-t]").forEach(x=>x.setAttribute("aria-selected",x===b));box.querySelectorAll("[data-p]").forEach(p=>p.hidden=p.dataset.p!==b.dataset.t)}));
   box.querySelectorAll(".db-sort button").forEach(b=>b.addEventListener("click",()=>{box.querySelectorAll(".db-sort button").forEach(x=>{const on=x===b;x.classList.toggle("on",on);x.setAttribute("aria-pressed",on)});box.querySelectorAll("[data-s-list]").forEach(l=>l.hidden=l.dataset.sList!==b.dataset.s);
     box.querySelectorAll(".db-vid:not([hidden])").forEach(v=>{v.hidden=true;v.innerHTML="";const pb=v.parentElement.querySelector(".db-play");if(pb)pb.textContent="▶ TASTER"})}));
@@ -985,7 +987,7 @@ function wireMore(art){
 (function(){
   if(typeof STAGE==="undefined"||!STAGE||typeof POSTS==="undefined")return;
   const p=POSTS.find(x=>x.id===STAGE.post);if(!p)return;
-  if(/[?&]enter\b/.test(location.search)||location.hash)return; // deep links skip the stage
+  if(/[?&]enter\b/.test(location.search)||location.hash||/^\/radar\/?$/.test(location.pathname))return; // deep links skip the stage
   const e=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
   const d=document.createElement("div");d.className="stage";d.setAttribute("role","dialog");d.setAttribute("aria-label","The Ambient Stage");
   d.innerHTML=`<div class="sky"${STAGE.bg?` style="background-image:url(${STAGE.bg})"`:""}></div><div class="fog f1"></div><div class="fog f2"></div><div class="fog f3"></div><div class="veil"></div><div class="grain"></div>${STAGE.credit?`<a class="credit" href="${STAGE.credit[1]}" target="_blank" rel="noopener">${e(STAGE.credit[0])}</a>`:""}
