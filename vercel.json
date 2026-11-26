@@ -1,0 +1,8 @@
+{
+  "redirects": [
+    { "source": "/radar/", "destination": "/radar", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/radar", "destination": "/index.html" }
+  ]
+}
