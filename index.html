@@ -1060,6 +1060,7 @@ html.on-fri,html.on-fri body{overflow:hidden}
 .entry.fri-inline .f-in{padding:36px 16px 44px}
 .entry.fri-inline.dark::after{content:"";position:absolute;left:0;right:0;bottom:-220px;height:220px;background:linear-gradient(#161616,rgba(22,22,22,.55) 45%,rgba(22,22,22,0));pointer-events:none;z-index:1}
 .entry.fri-inline+.entry{border-top:0}
+.entry.fri-inline+.fri-inline .f-in{padding-top:56px;border-top:1px solid #34302b}
 .entry.fri-inline+.forest-post{padding-top:250px}
 .entry.fri-inline+.forest-post::before{-webkit-mask-image:linear-gradient(to bottom,#000 0,#000 calc(100% - 240px),transparent 100%);mask-image:linear-gradient(to bottom,#000 0,#000 calc(100% - 240px),transparent 100%)}
 @media(prefers-reduced-motion:reduce){.fri{transition:none}}
@@ -1071,13 +1072,16 @@ html.on-fri,html.on-fri body{overflow:hidden}
   const bp=Object.fromEntries(new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Berlin",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).formatToParts(new Date()).map(p=>[p.type,p.value]));
   const nowB=`${bp.year}-${bp.month}-${bp.day}T${bp.hour}:${bp.minute}`,preview=new URLSearchParams(location.search).get("dose");
   const all=(typeof DOSES!=="undefined"&&Array.isArray(DOSES)?DOSES.slice():[]).concat(typeof FRIDAY!=="undefined"&&FRIDAY?[FRIDAY]:[]).filter(x=>x&&x.date&&x.yt);
-  const F=preview?all.find(x=>x.date===preview):all.filter(x=>`${x.date}T06:45`<=nowB||x.date===all.map(y=>y.date).sort()[0]).sort((a,b)=>a.date<b.date?-1:1).pop();
-  if(!F)return;
+  const live=all.filter(x=>`${x.date}T06:45`<=nowB||x.date===all.map(y=>y.date).sort()[0]).sort((a,b)=>a.date<b.date?1:-1); // newest first
+  const F0=preview?all.find(x=>x.date===preview):live[0];
+  if(!F0)return;
   const e=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const touch=matchMedia("(hover: none), (pointer: coarse)").matches;
+  const make=F=>{
   const sd=F.shelfDate||(F.shelf?F.date:null);
   const rel=sd&&typeof UPCOMING!=="undefined"?UPCOMING.filter(r=>r.releaseDate===sd).sort((a,b)=>((a.rank??50)-(b.rank??50))||String(a.artist).localeCompare(String(b.artist))):[];
   const lk=(r,n)=>((r.links||[]).find(x=>x[0]===n)||[])[1];
-  const dt=new Date((sd||F.date)+"T12:00:00"),today=nowB.slice(0,10)>=(sd||F.date);
+  const dt=new Date((sd||F.date)+"T12:00:00"),today=nowB.slice(0,10)===(sd||F.date);
   const day=dt.toLocaleDateString("en-US",{weekday:"long",month:"short",day:"numeric"}).toUpperCase().replace(",", "");
   const kick=F.kicker!=null?F.kicker:("DAILY DOSE · "+new Date(F.date+"T12:00:00").toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"}).toUpperCase().replace(",", ""));
   const card=(r,i)=>{const bc=lk(r,"BANDCAMP"),sp=lk(r,"SPOTIFY");
@@ -1100,7 +1104,6 @@ html.on-fri,html.on-fri body{overflow:hidden}
     <div class="f-shelf">${rel.map(card).join("")}</div>`:""}
 `;
   const yt=a=>`<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(F.yt)}?rel=0&playsinline=1&modestbranding=1&cc_load_policy=0${a?"&autoplay=1":""}" title="${e(F.artist)} – ${e(F.title)}" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
-  const touch=matchMedia("(hover: none), (pointer: coarse)").matches;
   const wire=root=>{
     const th=root.querySelector(".f-vid img");if(th)th.addEventListener("load",()=>{if(th.naturalWidth<=120)th.src=`https://i.ytimg.com/vi/${F.yt}/hqdefault.jpg`});
     if(touch)root.querySelector(".f-vid").innerHTML=yt(false); // phones: YouTube's own play button = one tap
@@ -1108,9 +1111,12 @@ html.on-fri,html.on-fri body{overflow:hidden}
     const sh=root.querySelector(".f-shelf");
     root.querySelectorAll("[data-s]").forEach(b=>b.addEventListener("click",()=>sh.scrollBy({left:(+b.dataset.s)*sh.clientWidth*0.9,behavior:"smooth"})));
   };
-  // the dose is also the first post in the feed, blending into the next post
+  return {F,inner,wire};
+  };
+  // every live dose is a post on the timeline (newest first, right under the Radar bar); the current one is on top
   const upb=document.getElementById("upcoming");
-  if(upb){const art=document.createElement("article");art.className="entry fri fri-inline"+(F.theme==="dark"?" dark":"");art.id="dose-"+F.date;art.innerHTML=`<div class="f-in">${inner}</div>`;upb.after(art);wire(art)}
+  if(upb){let after=upb;[F0,...live.filter(x=>x!==F0)].forEach(x=>{const m=make(x);const art=document.createElement("article");art.className="entry fri fri-inline"+(x.theme==="dark"?" dark":"");art.id="dose-"+x.date;art.innerHTML=`<div class="f-in">${m.inner}</div>`;after.after(art);after=art;m.wire(art)})}
+  const {F,inner,wire}=make(F0);
   if(deep)return;
   window.AOL_DOOR=true;
   const d=document.createElement("div");d.className="fri";d.setAttribute("role","dialog");d.setAttribute("aria-label",F.artist+" – "+F.title);
