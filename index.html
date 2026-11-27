@@ -1051,6 +1051,9 @@ html.on-fri,html.on-fri body{overflow:hidden}
 .fri .f-btns a:hover,.fri .f-btns a:focus-visible{background:#fff}
 .fri.dark{background:#161616;--paper:#161616;--ink:#e8e1d5;--muted:#afa89e}
 .fri.dark .f-hero{padding-bottom:6px}
+.fri.dark .f-pl{outline:1px solid #3a352f}
+.fri .f-note p:empty{min-height:.9em}
+.fri .f-vid+h1{margin-top:24px}
 .fri.dark .f-vid{border:0}
 .fri.dark .f-top img{filter:invert(1) sepia(.15) brightness(1.55)}
 @media(prefers-reduced-motion:reduce){.fri{transition:none}}
@@ -1071,7 +1074,7 @@ html.on-fri,html.on-fri body{overflow:hidden}
   const lk=(r,n)=>((r.links||[]).find(x=>x[0]===n)||[])[1];
   const dt=new Date((sd||F.date)+"T12:00:00"),today=nowB.slice(0,10)>=(sd||F.date);
   const day=dt.toLocaleDateString("en-US",{weekday:"long",month:"short",day:"numeric"}).toUpperCase().replace(",", "");
-  const kick=F.kicker||("DAILY DOSE · "+new Date(F.date+"T12:00:00").toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"}).toUpperCase().replace(",", ""));
+  const kick=F.kicker!=null?F.kicker:("DAILY DOSE · "+new Date(F.date+"T12:00:00").toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"}).toUpperCase().replace(",", ""));
   const card=(r,i)=>{const bc=lk(r,"BANDCAMP"),sp=lk(r,"SPOTIFY");
     return `<div class="f-card"><div class="f-cov"><img src="${e(r.img)}" alt="" loading="lazy">${r.rank&&r.rank<=5?`<span class="f-n">${r.rank}</span>`:""}</div>
     <div class="f-art">${e(r.noArtist?r.title:r.artist)}</div>${r.noArtist?"":`<div class="f-tit">${e(r.title)}</div>`}
@@ -1084,10 +1087,10 @@ html.on-fri,html.on-fri body{overflow:hidden}
     <div class="f-top"><img src="army-of-love-wordmark.png" alt="Army of Love" width="640" height="135"><button class="f-skip" type="button">ENTER →</button></div>
     <div class="f-hero">
       <div class="f-vid"><img src="https://i.ytimg.com/vi/${e(F.yt)}/maxresdefault.jpg" alt=""><button class="f-play" type="button" aria-label="Play ${e(F.artist)} – ${e(F.title)}"><span>▶ PLAY</span></button></div>
-      <div class="f-k">${e(kick)}</div>
-      <h1>${e(F.artist)} – ${e(F.title)}</h1>
-      <div class="f-lab">${e(String(F.sub||"").toUpperCase())}</div>
-      <div class="f-note">${F.body.split(/\n\s*\n/).map(t=>`<p>${e(t).replace(/\n/g,"<br>")}</p>`).join("")}</div>
+      ${kick?`<div class="f-k">${e(kick)}</div>`:""}
+      <h1>${e(F.heading||(F.artist+" – "+F.title))}</h1>
+      ${F.sub?`<div class="f-lab">${e(String(F.sub).toUpperCase())}</div>`:""}
+      <div class="f-note">${F.body.split(/\n\n/).map(t=>`<p>${e(t).replace(/\n/g,"<br>")}</p>`).join("")}</div>
       ${(F.links||[]).length?`<div class="f-btns">${F.links.map(([n,u])=>`<a href="${e(u)}" target="_blank" rel="noopener">${e(n)} ↗</a>`).join("")}</div>`:""}
       ${F.also?`<div class="f-also"><div class="f-k">${e(F.also.kicker||"ALSO ON THE EP")}</div><div class="f-at">${e(F.also.title)}</div><div class="f-v2"><iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(F.also.yt)}?rel=0&playsinline=1&modestbranding=1" title="${e(F.also.title)}" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div></div>`:""}
     </div>
