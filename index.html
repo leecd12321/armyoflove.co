@@ -1049,6 +1049,10 @@ html.on-fri,html.on-fri body{overflow:hidden}
 .fri .f-btns{display:flex;flex-wrap:wrap;gap:10px;margin:22px 18px 0}
 .fri .f-btns a{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;color:#161616;background:#e8e1d5;text-decoration:none;padding:13px 16px}
 .fri .f-btns a:hover,.fri .f-btns a:focus-visible{background:#fff}
+.fri.dark{background:#161616;--paper:#161616;--ink:#e8e1d5;--muted:#afa89e}
+.fri.dark .f-hero{padding-bottom:6px}
+.fri.dark .f-vid{border:0}
+.fri.dark .f-top img{filter:invert(1) sepia(.15) brightness(1.55)}
 @media(prefers-reduced-motion:reduce){.fri{transition:none}}
 </style>
 <script>
@@ -1075,6 +1079,7 @@ html.on-fri,html.on-fri body{overflow:hidden}
     ${bc||sp?`<div class="f-links">${bc?`<a class="f-bc" href="${e(bc)}" target="_blank" rel="noopener">BANDCAMP</a>`:""}${sp?`<a href="${e(sp)}" target="_blank" rel="noopener">SPOTIFY</a>`:""}</div>`:""}</div>`};
   const d=document.createElement("div");d.className="fri";d.setAttribute("role","dialog");d.setAttribute("aria-label",F.artist+" – "+F.title);
   if(F.bg)d.classList.add("has-bg");
+  if(F.theme==="dark")d.classList.add("dark");
   d.innerHTML=`${F.bg?`<div class="f-bgl" aria-hidden="true"><div class="ph" style="background-image:url('${e(F.bg)}')"></div><div class="vl"></div><div class="gr"></div></div>`:""}<div class="f-in">
     <div class="f-top"><img src="army-of-love-wordmark.png" alt="Army of Love" width="640" height="135"><button class="f-skip" type="button">ENTER →</button></div>
     <div class="f-hero">
