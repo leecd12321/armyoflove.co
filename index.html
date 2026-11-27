@@ -982,9 +982,98 @@ function wireMore(art){
 })();
 </script>
 
+<!-- ---------- Friday front door (FRIDAY in releases.js). Turn off: remove FRIDAY from releases.js; the Ambient Stage comes back ---------- -->
+<style>
+html.on-fri,html.on-fri body{overflow:hidden}
+.fri{position:fixed;inset:0;z-index:9999;overflow-y:auto;background:var(--paper);color:var(--ink);transition:opacity 1s ease}
+.fri.leaving{opacity:0;pointer-events:none}
+.fri .f-in{max-width:980px;margin:0 auto;padding:16px 16px 70px}
+.fri .f-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:4px 0 16px}
+.fri .f-top img{height:30px;width:auto}
+.fri .f-skip{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--ink);background:none;border:1px solid var(--ink);padding:9px 11px;cursor:pointer}
+.fri .f-hero{background:#161616;color:#e8e1d5;padding:0 0 24px}
+.fri .f-vid{position:relative;aspect-ratio:16/9;background:#0b0b0b;overflow:hidden}
+.fri .f-vid img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.fri .f-vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.fri .f-play{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(transparent 55%,rgba(0,0,0,.45));border:0;cursor:pointer;padding:0}
+.fri .f-play span{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;color:#161616;background:#e8e1d5;padding:13px 18px}
+.fri .f-play:hover span,.fri .f-play:focus-visible span{background:#fff}
+.fri .f-k{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:#afa89e;margin:20px 18px 0}
+.fri h1{font-family:"EB Garamond",Georgia,serif;font-weight:700;font-size:clamp(30px,5vw,46px);line-height:1.05;margin:8px 18px 4px;color:#e8e1d5}
+.fri .f-lab{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:#afa89e;margin:0 18px}
+.fri .f-note{font-family:"EB Garamond",Georgia,serif;font-size:19px;line-height:1.55;margin:18px 18px 0;max-width:640px}
+.fri .f-note p{margin:0 0 12px}
+.fri .f-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:34px 0 12px;border-bottom:1px solid var(--ink);padding-bottom:8px}
+.fri .f-head h2{margin:0;font-family:var(--mono);font-size:13px;letter-spacing:.07em}
+.fri .f-arrows{display:flex;gap:8px}
+.fri .f-arrows button{font-family:var(--mono);font-size:13px;width:44px;height:44px;border:1px solid var(--ink);background:transparent;cursor:pointer;color:var(--ink)}
+.fri .f-shelf{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:12px;scrollbar-width:thin}
+.fri .f-card{flex:0 0 172px;scroll-snap-align:start;min-width:0}
+.fri .f-cov{position:relative;aspect-ratio:1;background:#ddd5c7;overflow:hidden}
+.fri .f-cov img{width:100%;height:100%;object-fit:cover;display:block}
+.fri .f-n{position:absolute;right:6px;top:6px;font-family:var(--mono);font-size:10px;font-weight:700;background:var(--ink);color:var(--paper);padding:3px 6px}
+.fri .f-art{font-weight:700;font-size:14px;line-height:1.25;margin-top:8px}
+.fri .f-tit{font-size:13.5px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.fri .f-lb{font-family:var(--mono);font-size:10px;letter-spacing:.04em;color:var(--muted);margin-top:3px}
+.fri .f-links{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.fri .f-links a{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.05em;padding:6px 8px;border:1px solid var(--ink);text-decoration:none;color:var(--ink)}
+.fri .f-links a.f-bc{background:var(--ink);color:var(--paper)}
+.fri .f-count{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--muted)}
+.fri .f-go{margin-top:34px;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--paper);background:var(--ink);border:1px solid var(--ink);padding:14px 18px;cursor:pointer}
+@media(max-width:600px){.fri .f-card{flex-basis:150px}.fri .f-note{font-size:18px}}
+.fri .f-pl{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center;margin-top:26px;padding:14px;background:#161616;color:#e8e1d5;text-decoration:none}
+.fri .f-pl img{width:120px;height:120px;object-fit:cover;display:block}
+.fri .f-pl .f-t{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.08em}
+.fri .f-pl .f-d{font-family:"EB Garamond",Georgia,serif;font-size:19px;line-height:1.35;margin:6px 0 10px}
+.fri .f-pl .f-b{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.08em;background:#1ed760;color:#111;padding:9px 12px}
+.fri .f-pl:hover .b,.fri .f-pl:focus-visible .b{background:#3be477}
+@media(max-width:420px){.fri .f-pl{grid-template-columns:92px 1fr;gap:12px}.fri .f-pl img{width:92px;height:92px}.fri .f-pl .f-d{font-size:17px}}
+@media(prefers-reduced-motion:reduce){.fri{transition:none}}
+</style>
+<script>
+(function(){
+  if(typeof FRIDAY==="undefined"||!FRIDAY||typeof UPCOMING==="undefined")return;
+  if(/[?&]enter\b/.test(location.search)||location.hash||/^\/radar\/?$/.test(location.pathname))return; // deep links skip it
+  const F=FRIDAY,e=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const rel=UPCOMING.filter(r=>r.releaseDate===F.date).sort((a,b)=>((a.rank??50)-(b.rank??50))||String(a.artist).localeCompare(String(b.artist)));
+  const lk=(r,n)=>((r.links||[]).find(x=>x[0]===n)||[])[1];
+  const dt=new Date(F.date+"T12:00:00"),today=new Date().toISOString().slice(0,10)>=F.date;
+  const day=dt.toLocaleDateString("en-US",{weekday:"long",month:"short",day:"numeric"}).toUpperCase().replace(",", "");
+  const card=(r,i)=>{const bc=lk(r,"BANDCAMP"),sp=lk(r,"SPOTIFY");
+    return `<div class="f-card"><div class="f-cov"><img src="${e(r.img)}" alt="" loading="lazy">${r.rank&&r.rank<=5?`<span class="f-n">${r.rank}</span>`:""}</div>
+    <div class="f-art">${e(r.noArtist?r.title:r.artist)}</div>${r.noArtist?"":`<div class="f-tit">${e(r.title)}</div>`}
+    <div class="f-lb">${e(String(r.label||"").toUpperCase())}${r.type?" · "+e(r.type):""}</div>
+    ${bc||sp?`<div class="f-links">${bc?`<a class="f-bc" href="${e(bc)}" target="_blank" rel="noopener">BANDCAMP</a>`:""}${sp?`<a href="${e(sp)}" target="_blank" rel="noopener">SPOTIFY</a>`:""}</div>`:""}</div>`};
+  const d=document.createElement("div");d.className="fri";d.setAttribute("role","dialog");d.setAttribute("aria-label",F.artist+" – "+F.title);
+  d.innerHTML=`<div class="f-in">
+    <div class="f-top"><img src="army-of-love-wordmark.png" alt="Army of Love" width="640" height="135"><button class="f-skip" type="button">ENTER →</button></div>
+    <div class="f-hero">
+      <div class="f-vid"><img src="https://i.ytimg.com/vi/${e(F.yt)}/maxresdefault.jpg" alt=""><button class="f-play" type="button" aria-label="Play ${e(F.artist)} – ${e(F.title)}"><span>▶ PLAY</span></button></div>
+      ${F.kicker?`<div class="f-k">${e(F.kicker)}</div>`:""}
+      <h1>${e(F.artist)} – ${e(F.title)}</h1>
+      <div class="f-lab">${e(String(F.sub||"").toUpperCase())}</div>
+      <div class="f-note">${F.body.split(/\n\s*\n/).map(t=>`<p>${e(t).replace(/\n/g,"<br>")}</p>`).join("")}</div>
+    </div>
+    ${F.playlist?`<a class="f-pl" href="${e(F.playlist)}" target="_blank" rel="noopener"><img src="new-releases-playlist.jpg" alt=""><div><div class="f-t">NEW RELEASES PLAYLIST</div><div class="f-d">${e(F.playlistText||"All projects available here. Sort by recently added.")}</div><span class="f-b">LISTEN ON SPOTIFY ↗</span></div></a>`:""}
+    <div class="f-head"><h2>${today?"OUT TODAY":"OUT"} · ${e(day)}</h2><div class="f-arrows"><button type="button" data-s="-1" aria-label="Scroll back">←</button><button type="button" data-s="1" aria-label="Scroll forward">→</button></div></div>
+    <div class="f-shelf">${rel.map(card).join("")}</div>
+    <div class="f-count">${rel.length} RELEASES · SWIPE →</div>
+    <button class="f-go" type="button">ENTER ARMY OF LOVE →</button>
+  </div>`;
+  document.documentElement.classList.add("on-fri");document.body.appendChild(d);
+  const th=d.querySelector(".f-vid img");th.addEventListener("load",()=>{if(th.naturalWidth<=120)th.src=`https://i.ytimg.com/vi/${F.yt}/hqdefault.jpg`});
+  d.querySelector(".f-play").addEventListener("click",()=>{d.querySelector(".f-vid").innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(F.yt)}?autoplay=1&rel=0&playsinline=1&modestbranding=1" title="${e(F.artist)} – ${e(F.title)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`});
+  const sh=d.querySelector(".f-shelf");
+  d.querySelectorAll("[data-s]").forEach(b=>b.addEventListener("click",()=>sh.scrollBy({left:(+b.dataset.s)*sh.clientWidth*0.9,behavior:"smooth"})));
+  const go=()=>{d.classList.add("leaving");document.documentElement.classList.remove("on-fri");setTimeout(()=>d.remove(),1000)};
+  d.querySelectorAll(".f-go,.f-skip").forEach(b=>b.addEventListener("click",go));
+})();
+</script>
+
 <!-- ---------- Ambient stage (front door). Turn off: remove STAGE from releases.js ---------- -->
 <script>
 (function(){
+  if(typeof FRIDAY!=="undefined"&&FRIDAY)return; // the Friday front door takes the slot
   if(typeof STAGE==="undefined"||!STAGE||typeof POSTS==="undefined")return;
   const p=POSTS.find(x=>x.id===STAGE.post);if(!p)return;
   if(/[?&]enter\b/.test(location.search)||location.hash||/^\/radar\/?$/.test(location.pathname))return; // deep links skip the stage
