@@ -1006,7 +1006,10 @@ html.on-fri,html.on-fri body{overflow:hidden}
 .fri .f-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:34px 0 12px;border-bottom:1px solid var(--ink);padding-bottom:8px}
 .fri .f-head h2{margin:0;font-family:var(--mono);font-size:13px;letter-spacing:.07em}
 .fri .f-arrows{display:flex;gap:8px}
-.fri .f-arrows button{font-family:var(--mono);font-size:13px;width:44px;height:44px;border:1px solid var(--ink);background:transparent;cursor:pointer;color:var(--ink)}
+.fri .f-arrows button{width:64px;height:36px;padding:0;border:0;background:none;cursor:pointer;color:var(--ink);transition:transform .15s}
+.fri .f-arrows button:hover,.fri .f-arrows button:focus-visible{transform:scale(1.12)}
+.fri .f-arrows svg{width:100%;height:100%;display:block}
+.fri .f-hl{display:flex;align-items:baseline;gap:6px 14px;flex-wrap:wrap}
 .fri .f-shelf{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:12px;scrollbar-width:thin}
 .fri .f-card{flex:0 0 172px;scroll-snap-align:start;min-width:0}
 .fri .f-cov{position:relative;aspect-ratio:1;background:#ddd5c7;overflow:hidden}
@@ -1018,15 +1021,15 @@ html.on-fri,html.on-fri body{overflow:hidden}
 .fri .f-links{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
 .fri .f-links a{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.05em;padding:6px 8px;border:1px solid var(--ink);text-decoration:none;color:var(--ink)}
 .fri .f-links a.f-bc{background:var(--ink);color:var(--paper)}
-.fri .f-count{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--muted)}
+.fri .f-count{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--muted);white-space:nowrap}
 .fri .f-go{margin-top:34px;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--paper);background:var(--ink);border:1px solid var(--ink);padding:14px 18px;cursor:pointer}
-@media(max-width:600px){.fri .f-card{flex-basis:150px}.fri .f-note{font-size:18px}}
+@media(max-width:600px){.fri .f-card{flex-basis:150px}.fri .f-note{font-size:18px}.fri .f-hl{flex-direction:column;gap:4px}.fri .f-arrows button{width:52px;height:30px}}
 .fri .f-pl{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center;margin-top:26px;padding:14px;background:#161616;color:#e8e1d5;text-decoration:none}
 .fri .f-pl img{width:120px;height:120px;object-fit:cover;display:block}
 .fri .f-pl .f-t{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.08em}
 .fri .f-pl .f-d{font-family:"EB Garamond",Georgia,serif;font-size:19px;line-height:1.35;margin:6px 0 10px}
 .fri .f-pl .f-b{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.08em;background:#1ed760;color:#111;padding:9px 12px}
-.fri .f-pl:hover .b,.fri .f-pl:focus-visible .b{background:#3be477}
+.fri .f-pl:hover .f-b,.fri .f-pl:focus-visible .f-b{background:#3be477}
 @media(max-width:420px){.fri .f-pl{grid-template-columns:92px 1fr;gap:12px}.fri .f-pl img{width:92px;height:92px}.fri .f-pl .f-d{font-size:17px}}
 @media(prefers-reduced-motion:reduce){.fri{transition:none}}
 </style>
@@ -1055,14 +1058,15 @@ html.on-fri,html.on-fri body{overflow:hidden}
       <div class="f-note">${F.body.split(/\n\s*\n/).map(t=>`<p>${e(t).replace(/\n/g,"<br>")}</p>`).join("")}</div>
     </div>
     ${F.playlist?`<a class="f-pl" href="${e(F.playlist)}" target="_blank" rel="noopener"><img src="new-releases-playlist.jpg" alt=""><div><div class="f-t">NEW RELEASES PLAYLIST</div><div class="f-d">${e(F.playlistText||"All projects available here. Sort by recently added.")}</div><span class="f-b">LISTEN ON SPOTIFY ↗</span></div></a>`:""}
-    <div class="f-head"><h2>${today?"OUT TODAY":"OUT"} · ${e(day)}</h2><div class="f-arrows"><button type="button" data-s="-1" aria-label="Scroll back">←</button><button type="button" data-s="1" aria-label="Scroll forward">→</button></div></div>
+    <div class="f-head"><div class="f-hl"><h2>${today?"OUT TODAY":"OUT"} · ${e(day)}</h2><span class="f-count">${rel.length} RELEASES · SWIPE →</span></div><div class="f-arrows"><button type="button" data-s="-1" aria-label="Scroll back"><svg viewBox="0 0 64 32" aria-hidden="true" style="transform:scaleX(-1)"><rect x="2" y="10" width="38" height="12" rx="2" fill="currentColor"/><path d="M8 12v8M13 12v8M18 12v8M23 12v8M28 12v8M33 12v8" stroke="var(--paper)" stroke-width="1.8"/><path d="M36 2 62 16 36 30Z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></button><button type="button" data-s="1" aria-label="Scroll forward"><svg viewBox="0 0 64 32" aria-hidden="true"><rect x="2" y="10" width="38" height="12" rx="2" fill="currentColor"/><path d="M8 12v8M13 12v8M18 12v8M23 12v8M28 12v8M33 12v8" stroke="var(--paper)" stroke-width="1.8"/><path d="M36 2 62 16 36 30Z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></button></div></div>
     <div class="f-shelf">${rel.map(card).join("")}</div>
-    <div class="f-count">${rel.length} RELEASES · SWIPE →</div>
     <button class="f-go" type="button">ENTER ARMY OF LOVE →</button>
   </div>`;
   document.documentElement.classList.add("on-fri");document.body.appendChild(d);
   const th=d.querySelector(".f-vid img");th.addEventListener("load",()=>{if(th.naturalWidth<=120)th.src=`https://i.ytimg.com/vi/${F.yt}/hqdefault.jpg`});
-  d.querySelector(".f-play").addEventListener("click",()=>{d.querySelector(".f-vid").innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(F.yt)}?autoplay=1&rel=0&playsinline=1&modestbranding=1" title="${e(F.artist)} – ${e(F.title)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`});
+  const yt=a=>`<iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(F.yt)}?rel=0&playsinline=1&modestbranding=1${a?"&autoplay=1":""}" title="${e(F.artist)} – ${e(F.title)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+  if(matchMedia("(hover: none), (pointer: coarse)").matches)d.querySelector(".f-vid").innerHTML=yt(false); // phones: YouTube's own play button = one tap
+  else d.querySelector(".f-play").addEventListener("click",()=>{d.querySelector(".f-vid").innerHTML=yt(true)});
   const sh=d.querySelector(".f-shelf");
   d.querySelectorAll("[data-s]").forEach(b=>b.addEventListener("click",()=>sh.scrollBy({left:(+b.dataset.s)*sh.clientWidth*0.9,behavior:"smooth"})));
   const go=()=>{d.classList.add("leaving");document.documentElement.classList.remove("on-fri");setTimeout(()=>d.remove(),1000)};
