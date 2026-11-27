@@ -1036,6 +1036,16 @@ html.on-fri,html.on-fri body{overflow:hidden}
 .fri .f-at{font-family:"EB Garamond",Georgia,serif;font-weight:700;font-size:26px;line-height:1.1;margin:6px 0 12px;color:#e8e1d5}
 .fri .f-v2{position:relative;aspect-ratio:16/9;background:#0b0b0b}
 .fri .f-v2 iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.fri.has-bg{background:#2a1c16}
+.fri .f-bgl{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.fri .f-bgl .ph{position:absolute;inset:-6%;background:center/cover no-repeat;filter:blur(18px) saturate(1.15) brightness(.85);animation:fbr 40s ease-in-out infinite alternate}
+.fri .f-bgl .vl{position:absolute;inset:0;background:linear-gradient(90deg,rgba(241,236,227,0) 0%,rgba(241,236,227,.66) 20%,rgba(241,236,227,.78) 50%,rgba(241,236,227,.66) 80%,rgba(241,236,227,0) 100%)}
+.fri .f-bgl .gr{position:absolute;inset:-50%;opacity:.08;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");animation:fgr 1s steps(4) infinite}
+@keyframes fbr{to{transform:scale(1.08)}}
+@keyframes fgr{0%{transform:translate(0,0)}25%{transform:translate(-5%,3%)}50%{transform:translate(4%,-4%)}75%{transform:translate(-3%,-2%)}}
+.fri.has-bg .f-in{position:relative}
+@media(max-width:700px){.fri .f-bgl .vl{background:rgba(241,236,227,.72)}}
+@media(prefers-reduced-motion:reduce){.fri .f-bgl .ph,.fri .f-bgl .gr{animation:none}}
 @media(prefers-reduced-motion:reduce){.fri{transition:none}}
 </style>
 <script>
@@ -1053,7 +1063,8 @@ html.on-fri,html.on-fri body{overflow:hidden}
     <div class="f-lb">${e(String(r.label||"").toUpperCase())}${r.type?" · "+e(r.type):""}</div>
     ${bc||sp?`<div class="f-links">${bc?`<a class="f-bc" href="${e(bc)}" target="_blank" rel="noopener">BANDCAMP</a>`:""}${sp?`<a href="${e(sp)}" target="_blank" rel="noopener">SPOTIFY</a>`:""}</div>`:""}</div>`};
   const d=document.createElement("div");d.className="fri";d.setAttribute("role","dialog");d.setAttribute("aria-label",F.artist+" – "+F.title);
-  d.innerHTML=`<div class="f-in">
+  if(F.bg)d.classList.add("has-bg");
+  d.innerHTML=`${F.bg?`<div class="f-bgl" aria-hidden="true"><div class="ph" style="background-image:url('${e(F.bg)}')"></div><div class="vl"></div><div class="gr"></div></div>`:""}<div class="f-in">
     <div class="f-top"><img src="army-of-love-wordmark.png" alt="Army of Love" width="640" height="135"><button class="f-skip" type="button">ENTER →</button></div>
     <div class="f-hero">
       <div class="f-vid"><img src="https://i.ytimg.com/vi/${e(F.yt)}/maxresdefault.jpg" alt=""><button class="f-play" type="button" aria-label="Play ${e(F.artist)} – ${e(F.title)}"><span>▶ PLAY</span></button></div>
