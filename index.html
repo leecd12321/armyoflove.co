@@ -982,7 +982,7 @@ function wireMore(art){
 })();
 </script>
 
-<!-- ---------- Friday front door (FRIDAY in releases.js). Turn off: remove FRIDAY from releases.js; the Ambient Stage comes back ---------- -->
+<!-- ---------- Daily Dose front door (DOSES in releases.js; FRIDAY still works). Each dose goes live 6:45 AM Berlin on its date and stays up until the next one. No dose = the Ambient Stage ---------- -->
 <style>
 html.on-fri,html.on-fri body{overflow:hidden}
 .fri{position:fixed;inset:0;z-index:9999;overflow-y:auto;background:var(--paper);color:var(--ink);transition:opacity 1s ease}
@@ -1046,17 +1046,28 @@ html.on-fri,html.on-fri body{overflow:hidden}
 .fri.has-bg .f-in{position:relative}
 @media(max-width:700px){.fri .f-bgl .vl{background:rgba(241,236,227,.72)}}
 @media(prefers-reduced-motion:reduce){.fri .f-bgl .ph,.fri .f-bgl .gr{animation:none}}
+.fri .f-btns{display:flex;flex-wrap:wrap;gap:10px;margin:22px 18px 0}
+.fri .f-btns a{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;color:#161616;background:#e8e1d5;text-decoration:none;padding:13px 16px}
+.fri .f-btns a:hover,.fri .f-btns a:focus-visible{background:#fff}
 @media(prefers-reduced-motion:reduce){.fri{transition:none}}
 </style>
 <script>
 (function(){
-  if(typeof FRIDAY==="undefined"||!FRIDAY||typeof UPCOMING==="undefined")return;
   if(/[?&]enter\b/.test(location.search)||location.hash||/^\/radar\/?$/.test(location.pathname))return; // deep links skip it
-  const F=FRIDAY,e=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-  const rel=UPCOMING.filter(r=>r.releaseDate===F.date).sort((a,b)=>((a.rank??50)-(b.rank??50))||String(a.artist).localeCompare(String(b.artist)));
+  // Berlin clock: a dose dated D is live from D 06:45 Berlin until the next dose starts. ?dose=YYYY-MM-DD previews one.
+  const bp=Object.fromEntries(new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Berlin",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).formatToParts(new Date()).map(p=>[p.type,p.value]));
+  const nowB=`${bp.year}-${bp.month}-${bp.day}T${bp.hour}:${bp.minute}`,preview=new URLSearchParams(location.search).get("dose");
+  const all=(typeof DOSES!=="undefined"&&Array.isArray(DOSES)?DOSES.slice():[]).concat(typeof FRIDAY!=="undefined"&&FRIDAY?[FRIDAY]:[]).filter(x=>x&&x.date&&x.yt);
+  const F=preview?all.find(x=>x.date===preview):all.filter(x=>`${x.date}T06:45`<=nowB||x.date===all.map(y=>y.date).sort()[0]).sort((a,b)=>a.date<b.date?-1:1).pop();
+  if(!F)return;
+  window.AOL_DOOR=true;
+  const e=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const sd=F.shelfDate||(F.shelf?F.date:null);
+  const rel=sd&&typeof UPCOMING!=="undefined"?UPCOMING.filter(r=>r.releaseDate===sd).sort((a,b)=>((a.rank??50)-(b.rank??50))||String(a.artist).localeCompare(String(b.artist))):[];
   const lk=(r,n)=>((r.links||[]).find(x=>x[0]===n)||[])[1];
-  const dt=new Date(F.date+"T12:00:00"),today=new Date().toISOString().slice(0,10)>=F.date;
+  const dt=new Date((sd||F.date)+"T12:00:00"),today=nowB.slice(0,10)>=(sd||F.date);
   const day=dt.toLocaleDateString("en-US",{weekday:"long",month:"short",day:"numeric"}).toUpperCase().replace(",", "");
+  const kick=F.kicker||("DAILY DOSE · "+new Date(F.date+"T12:00:00").toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"}).toUpperCase().replace(",", ""));
   const card=(r,i)=>{const bc=lk(r,"BANDCAMP"),sp=lk(r,"SPOTIFY");
     return `<div class="f-card"><div class="f-cov"><img src="${e(r.img)}" alt="" loading="lazy">${r.rank&&r.rank<=5?`<span class="f-n">${r.rank}</span>`:""}</div>
     <div class="f-art">${e(r.noArtist?r.title:r.artist)}</div>${r.noArtist?"":`<div class="f-tit">${e(r.title)}</div>`}
@@ -1068,15 +1079,16 @@ html.on-fri,html.on-fri body{overflow:hidden}
     <div class="f-top"><img src="army-of-love-wordmark.png" alt="Army of Love" width="640" height="135"><button class="f-skip" type="button">ENTER →</button></div>
     <div class="f-hero">
       <div class="f-vid"><img src="https://i.ytimg.com/vi/${e(F.yt)}/maxresdefault.jpg" alt=""><button class="f-play" type="button" aria-label="Play ${e(F.artist)} – ${e(F.title)}"><span>▶ PLAY</span></button></div>
-      ${F.kicker?`<div class="f-k">${e(F.kicker)}</div>`:""}
+      <div class="f-k">${e(kick)}</div>
       <h1>${e(F.artist)} – ${e(F.title)}</h1>
       <div class="f-lab">${e(String(F.sub||"").toUpperCase())}</div>
       <div class="f-note">${F.body.split(/\n\s*\n/).map(t=>`<p>${e(t).replace(/\n/g,"<br>")}</p>`).join("")}</div>
+      ${(F.links||[]).length?`<div class="f-btns">${F.links.map(([n,u])=>`<a href="${e(u)}" target="_blank" rel="noopener">${e(n)} ↗</a>`).join("")}</div>`:""}
       ${F.also?`<div class="f-also"><div class="f-k">${e(F.also.kicker||"ALSO ON THE EP")}</div><div class="f-at">${e(F.also.title)}</div><div class="f-v2"><iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(F.also.yt)}?rel=0&playsinline=1&modestbranding=1" title="${e(F.also.title)}" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div></div>`:""}
     </div>
     ${F.playlist?`<a class="f-pl" href="${e(F.playlist)}" target="_blank" rel="noopener"><img src="new-releases-playlist.jpg" alt=""><div><div class="f-t">NEW RELEASES PLAYLIST</div><div class="f-d">${e(F.playlistText||"All projects available here. Sort by recently added.")}</div><span class="f-b">LISTEN ON SPOTIFY ↗</span></div></a>`:""}
-    <div class="f-head"><div class="f-hl"><h2>${today?"OUT TODAY":"OUT"} · ${e(day)}</h2><span class="f-count">${rel.length} RELEASES · SWIPE →</span></div><div class="f-arrows"><button type="button" data-s="-1" aria-label="Scroll back"><svg viewBox="0 0 64 32" aria-hidden="true" style="transform:scaleX(-1)"><rect x="2" y="10" width="38" height="12" rx="2" fill="currentColor"/><path d="M8 12v8M13 12v8M18 12v8M23 12v8M28 12v8M33 12v8" stroke="var(--paper)" stroke-width="1.8"/><path d="M36 2 62 16 36 30Z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></button><button type="button" data-s="1" aria-label="Scroll forward"><svg viewBox="0 0 64 32" aria-hidden="true"><rect x="2" y="10" width="38" height="12" rx="2" fill="currentColor"/><path d="M8 12v8M13 12v8M18 12v8M23 12v8M28 12v8M33 12v8" stroke="var(--paper)" stroke-width="1.8"/><path d="M36 2 62 16 36 30Z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></button></div></div>
-    <div class="f-shelf">${rel.map(card).join("")}</div>
+    ${rel.length?`    <div class="f-head"><div class="f-hl"><h2>${today?"OUT TODAY":"OUT"} · ${e(day)}</h2><span class="f-count">${rel.length} RELEASES · SWIPE →</span></div><div class="f-arrows"><button type="button" data-s="-1" aria-label="Scroll back"><svg viewBox="0 0 64 32" aria-hidden="true" style="transform:scaleX(-1)"><rect x="2" y="10" width="38" height="12" rx="2" fill="currentColor"/><path d="M8 12v8M13 12v8M18 12v8M23 12v8M28 12v8M33 12v8" stroke="var(--paper)" stroke-width="1.8"/><path d="M36 2 62 16 36 30Z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></button><button type="button" data-s="1" aria-label="Scroll forward"><svg viewBox="0 0 64 32" aria-hidden="true"><rect x="2" y="10" width="38" height="12" rx="2" fill="currentColor"/><path d="M8 12v8M13 12v8M18 12v8M23 12v8M28 12v8M33 12v8" stroke="var(--paper)" stroke-width="1.8"/><path d="M36 2 62 16 36 30Z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></button></div></div>
+    <div class="f-shelf">${rel.map(card).join("")}</div>`:""}
     <button class="f-go" type="button">ENTER ARMY OF LOVE →</button>
   </div>`;
   document.documentElement.classList.add("on-fri");document.body.appendChild(d);
@@ -1094,7 +1106,7 @@ html.on-fri,html.on-fri body{overflow:hidden}
 <!-- ---------- Ambient stage (front door). Turn off: remove STAGE from releases.js ---------- -->
 <script>
 (function(){
-  if(typeof FRIDAY!=="undefined"&&FRIDAY)return; // the Friday front door takes the slot
+  if(window.AOL_DOOR)return; // a Daily Dose door is showing
   if(typeof STAGE==="undefined"||!STAGE||typeof POSTS==="undefined")return;
   const p=POSTS.find(x=>x.id===STAGE.post);if(!p)return;
   if(/[?&]enter\b/.test(location.search)||location.hash||/^\/radar\/?$/.test(location.pathname))return; // deep links skip the stage
