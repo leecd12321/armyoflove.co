@@ -393,6 +393,9 @@ nav .links a[aria-current]{color:var(--ink);font-weight:700}
 .tst-badge{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:5px;vertical-align:middle;margin-left:4px;padding:5px 10px;border-radius:999px;background:#e7d9a8;border:1px solid var(--ink);color:var(--ink);font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.1em;line-height:1;transition:transform .15s}
 .tst-badge:hover{transform:translateY(-1px)}
 .tst-badge.is-open{background:var(--ink);color:#e7d9a8}
+.tst-badge:not(.is-open){animation:tstPulse 2.6s ease-in-out infinite}
+@keyframes tstPulse{0%,100%{box-shadow:0 0 0 0 rgba(231,217,168,.55)}50%{box-shadow:0 0 0 6px rgba(231,217,168,0)}}
+@media (prefers-reduced-motion:reduce){.tst-badge{animation:none!important}}
 .tst-badge:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 .tst-vid{grid-column:2/-1;aspect-ratio:16/9;max-width:520px;width:100%;background:#000}
 .tst-vid[hidden]{display:none}
@@ -763,8 +766,9 @@ function wireMore(art){
     links:[r.bc&&["BANDCAMP",r.bc],r.sp&&["SPOTIFY",r.sp]].filter(Boolean)}));
   const every=[...UPCOMING,...past].map(r=>({...r,diff:r.releaseDate?Math.round((dayOf(r.releaseDate)-TODAY)/864e5):-999}));
   const all=every.filter(r=>!r.dbOnly);
-  const up=all.filter(r=>r.diff>=0).sort((a,b)=>a.diff-b.diff||(a.rank||99)-(b.rank||99)||a.artist.localeCompare(b.artist));
-  const out=all.filter(r=>r.diff<0).sort((a,b)=>a.diff===b.diff?a.artist.localeCompare(b.artist):b.diff-a.diff);
+  const tf=r=>r.taster?0:1; // releases with a taster go first within their day
+  const up=all.filter(r=>r.diff>=0).sort((a,b)=>a.diff-b.diff||tf(a)-tf(b)||(a.rank||99)-(b.rank||99)||a.artist.localeCompare(b.artist));
+  const out=all.filter(r=>r.diff<0).sort((a,b)=>a.diff===b.diff?(tf(a)-tf(b)||(a.rank||99)-(b.rank||99)||a.artist.localeCompare(b.artist)):b.diff-a.diff);
   if(!up.length&&!out.length)return;
   const dd=d=>dayOf(d).toLocaleDateString("en-GB",{day:"numeric",month:"short"}).toUpperCase();
   const st=r=>{const n=r.diff;
